@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 3.2 · Code Review com IA | Eng. de Software com IA</title>
+
+  <script src="../../assets/boot.js"></script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/curso.css">
+  <link rel="stylesheet" href="../../assets/learn.css">
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a><span>/</span>
+      <span class="text-purple-400">Módulo 3.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="3-2" data-inema-track="3">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔍 Code Review com IA</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        A revisão com IA pode analisar muito mais do que o diff. Mas só funciona sob uma condição: quem revisa não pode
+        depender das conclusões de quem implementou.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:3-2" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 3.2">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-purple-400">1. Além do diff</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-purple-400">2. Revisor independente</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-purple-400">3. Revisão arquitetural</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-purple-400">4. Segurança e perf.</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-purple-400">5. Limites e ruído</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-purple-400">6. Revisão humana</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-3-2#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">🔍 Revise além do diff</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-2-t1-p1">
+          Um agente revisor pode explorar arquivos relacionados, verificar contratos, analisar testes, encontrar
+          duplicações, identificar riscos, comparar com os padrões do repositório, revisar arquitetura, procurar falhas
+          de segurança, avaliar desempenho e verificar compatibilidade. O diff é o ponto de partida, não o limite.
+        </p>
+
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🎯</span> O que o code review deve avaliar</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-300 text-sm">
+            <div>• legibilidade</div><div>• simplicidade</div>
+            <div>• aderência ao escopo</div><div>• segurança</div>
+            <div>• desempenho</div><div>• cobertura de testes</div>
+            <div>• compatibilidade</div><div>• consistência arquitetural</div>
+            <div>• tratamento de erros</div><div>• impacto operacional</div>
+            <div>• manutenção futura</div>
+          </div>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+          <p class="text-neutral-300 text-sm">
+            <strong>Diff</strong> é o conjunto de linhas adicionadas e removidas por uma mudança. <strong>Duplicação semântica</strong>
+            é quando duas partes do sistema fazem a mesma coisa escrita de formas diferentes — invisível para busca de texto, mas
+            achável por um agente que lê o repositório. <strong>Aderência ao escopo</strong> é conferir se a mudança fez só o que foi pedido.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Contexto</p><p class="text-xs text-neutral-400">O repo inteiro, se preciso</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Contrato</p><p class="text-xs text-neutral-400">Quem consome não pode quebrar</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Duplicação</p><p class="text-xs text-neutral-400">Semântica, não textual</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Escopo</p><p class="text-xs text-neutral-400">Fez só o que foi pedido?</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-3-2#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">👥 Separe implementador e revisor</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-2-t2-p1">
+          O agente que revisa não deve depender totalmente das conclusões do agente que implementou.
+          <strong class="text-purple-400">A separação reduz o risco de ambos repetirem a mesma suposição incorreta</strong> —
+          e é a diferença entre revisão de verdade e um segundo carimbo.
+        </p>
+
+        <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 200" class="w-full h-auto" role="img" aria-label="Comparação: à esquerda, o mesmo agente implementa e revisa e propaga a mesma suposição; à direita, revisor independente recebe apenas a especificação e o diff">
+            <defs>
+              <linearGradient id="m32-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+              <filter id="m32-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m32-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#a855f7" opacity="0.12"/></pattern>
+              <marker id="m32-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"/></marker>
+              <marker id="m32-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="200" fill="url(#m32-grid)"/>
+            <path d="M500,16 L500,184" stroke="#9ca3af" stroke-width="1.6" stroke-dasharray="9 9" opacity="0.5"/>
+            <text x="40" y="34" fill="#f87171" font-family="Inter,sans-serif" font-weight="600" font-size="14">✗ mesmo agente revisa a si mesmo</text>
+            <text x="540" y="34" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="14">✓ revisor independente</text>
+            <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+              <rect x="40" y="60" width="180" height="40" rx="10" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="130" y="85" text-anchor="middle" fill="#e9d5ff">implementa</text>
+              <rect x="40" y="124" width="180" height="40" rx="10" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="130" y="149" text-anchor="middle" fill="#e9d5ff">"revisa"</text>
+              <path d="M230,80 C300,80 300,144 230,144" fill="none" stroke="#f87171" stroke-width="1.8" opacity="0.7" marker-end="url(#m32-ah)"/>
+              <text x="250" y="118" fill="#fca5a5" font-family="Inter,sans-serif" font-size="12" font-weight="400">carrega a mesma suposição</text>
+
+              <rect x="540" y="60" width="170" height="40" rx="10" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="625" y="85" text-anchor="middle" fill="#e9d5ff">implementador</text>
+              <rect x="540" y="124" width="170" height="40" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="625" y="149" text-anchor="middle" fill="#bfe6ff">spec + diff</text>
+              <path d="M625,100 L625,124" fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.6" marker-end="url(#m32-ahc)"/>
+              <path d="M710,144 L770,144" fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.6" marker-end="url(#m32-ahc)"/>
+            </g>
+            <g filter="url(#m32-glow)"><rect x="770" y="102" width="200" height="62" rx="14" fill="#1a1230" stroke="url(#m32-grad)" stroke-width="2"/></g>
+            <text x="870" y="128" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="15">revisor</text>
+            <text x="870" y="148" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12">contexto limpo</text>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-purple-400">Como ler:</strong> à esquerda, a seta volta para o mesmo agente — ele revisa carregando o
+            raciocínio que produziu o erro. À direita, o revisor recebe só <em>especificação + diff</em>, sem o histórico do autor:
+            é isso que o torna capaz de discordar.
+          </p>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — revisor independente</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-purple-400">Objetivo:</strong> rodar uma revisão de verdade sobre uma mudança sua. Abra uma <em>sessão nova</em> do agente (contexto limpo, sem o histórico da implementação) e cole:</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Você é o revisor independente. Não implementou nada disto e não deve confiar
+em nenhuma afirmação de quem implementou.
+
+Especificação da tarefa:
+&lt;cole a spec&gt;
+
+Diff a revisar:
+&lt;cole a saída de: git diff origin/main...HEAD&gt;
+
+Revise nesta ordem e leia os arquivos relacionados antes de concluir:
+1. a mudança cumpre a spec? o que ficou faltando?
+2. algo FORA do escopo foi alterado?
+3. algum contrato/comportamento existente muda para quem consome?
+4. o tratamento de erro cobre timeout, duplicidade e permissão negada?
+5. existe duplicação semântica com algo que já existe no repositório?
+6. os testes provam o comportamento novo ou só executam o código?
+
+Formato da resposta: lista de achados, cada um com
+[severidade: bloqueante | importante | menor] · arquivo:linha · por que é problema · como verificar.
+No máximo 7 achados — priorize. Se não houver bloqueante, diga isso explicitamente.</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-purple-400">Como verificar:</strong> pegue cada achado "bloqueante" e tente reproduzi-lo. Se dois de três não se sustentam, seu revisor está gerando ruído — aperte o prompt (menos achados, mais evidência exigida) antes de plugar isso no fluxo do time.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Contexto limpo</p><p class="text-xs text-neutral-400">Sessão nova, sempre</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Spec + diff</p><p class="text-xs text-neutral-400">Não o raciocínio do autor</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Severidade</p><p class="text-xs text-neutral-400">Achado sem ela é ruído</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Teto de achados</p><p class="text-xs text-neutral-400">Força priorização</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-3-2#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">🏛️ Faça revisão arquitetural</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-2-t3-p1">
+          É o tipo de defeito que nenhum teste pega: a mudança funciona perfeitamente e mesmo assim está errada — porque
+          fura uma fronteira, duplica uma capacidade ou cria um acoplamento que vai cobrar juros depois.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Perguntas que revelam problema real</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Esta camada deveria conhecer aquela?</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Já existe algo no repositório que faz isso?</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Quantos módulos precisam mudar juntos por causa disto?</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Essa abstração tem mais de um caso de uso hoje?</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Sinais de violação arquitetural</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Import atravessando fronteira de domínio</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Regra de negócio dentro do controlador/handler</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Terceira implementação da mesma coisa, com outro nome</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Módulo novo que só um lugar usa e ninguém pediu</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Regra arquitetural repetida três vezes na revisão deve virar teste: uma verificação de dependências que falha o build quando alguém importa através da fronteira. É o tema do módulo 3.3 — regra em texto vira gate.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Fronteira</p><p class="text-xs text-neutral-400">Import é evidência</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Acoplamento</p><p class="text-xs text-neutral-400">Conte quem muda junto</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Abstração</p><p class="text-xs text-neutral-400">Precisa de 2+ usos</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Regra 3x</p><p class="text-xs text-neutral-400">Vira teste</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-3-2#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">🔐 Cubra segurança, desempenho e manutenção</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-2-t4-p1">
+          Um revisor genérico encontra estilo. Um revisor com <strong class="text-purple-400">uma lente por passagem</strong>
+          encontra o que dói. Rode a mesma mudança três vezes, cada uma com um foco.
+        </p>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Lente de segurança</h4>
+              <p class="text-neutral-300 text-sm">Entrada não validada, injeção, autorização ausente, segredo no código, dado sensível em log, permissão ampla demais, dependência com CVE conhecida.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Lente de desempenho</h4>
+              <p class="text-neutral-300 text-sm">Consulta dentro de laço (N+1), ausência de índice, carga de coleção inteira em memória, chamada externa sem timeout, retentativa sem espera crescente.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-purple-500/30">
+              <h4 class="font-semibold text-white mb-2">Lente de manutenção</h4>
+              <p class="text-neutral-300 text-sm">Nome que não diz o que faz, condicional aninhada demais, configuração espalhada, teste que testa a implementação em vez do comportamento, documentação que já nasceu desatualizada.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Uma lente</p><p class="text-xs text-neutral-400">Por passagem</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Segredo</p><p class="text-xs text-neutral-400">Bloqueio, não sugestão</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">N+1</p><p class="text-xs text-neutral-400">Clássico e caro</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Manutenção</p><p class="text-xs text-neutral-400">Custo que chega depois</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-3-2#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">🚧 Conheça os limites da revisão automática</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-2-t5-p1">
+          O revisor automático não conhece a intenção de negócio, o acordo feito na reunião nem a razão histórica de uma
+          gambiarra. E tem um vício: <strong class="text-purple-400">gerar volume</strong>. Trinta comentários de
+          ninharia por PR ensinam o time a ignorar revisão — inclusive a boa.
+        </p>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Na revisão automática, <strong>precisão vale mais que abrangência</strong>. É melhor um revisor que aponta três coisas certas do que um que aponta trinta, das quais cinco são reais. O custo do falso positivo não é o tempo de ler — é a confiança perdida.</p>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Como calibrar o ruído</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• Limite o número de achados por revisão (5 a 7).</li>
+            <li>• Exija severidade e "como verificar" em cada achado.</li>
+            <li>• Proíba comentários de estilo — isso é trabalho do lint, automático e silencioso.</li>
+            <li>• Meça: de cada dez achados, quantos viraram mudança? Abaixo de metade, aperte o prompt.</li>
+          </ul>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Precisão</p><p class="text-xs text-neutral-400">Acima de abrangência</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Estilo</p><p class="text-xs text-neutral-400">É lint, não revisão</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Falso positivo</p><p class="text-xs text-neutral-400">Custa confiança</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Medir</p><p class="text-xs text-neutral-400">Achado → mudança</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-3-2#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">🧑‍⚖️ Preserve o papel da revisão humana</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-2-t6-p1">
+          A IA filtra, explora e prepara. A decisão continua humana — não por formalidade, mas porque intenção,
+          prioridade e aceitação de risco não são propriedades do código; são escolhas de quem responde pelo sistema.
+        </p>
+
+        <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">👤</span> O que só o humano decide</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Se o problema resolvido era mesmo o problema certo.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Se o risco residual é aceitável para este negócio, neste momento.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Se vale pagar dívida agora ou registrar e seguir.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Quem responde se der errado.</span></li>
+          </ul>
+        </div>
+
+        <div data-inema-check="modulo-3-2#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
+          <p class="font-medium mb-4">Checagem rápida: qual arranjo produz a revisão mais confiável?</p>
+          <div class="inema-check-options space-y-2">
+            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">O mesmo agente implementa e depois revisa o próprio trabalho na mesma sessão.</button>
+            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Um revisor em sessão nova, recebendo só spec e diff, com achados priorizados — e humano decidindo.</button>
+            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Um revisor automático que comenta tudo que encontrar, sem limite de achados.</button>
+          </div>
+          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Intenção</p><p class="text-xs text-neutral-400">Só o humano sabe</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Risco</p><p class="text-xs text-neutral-400">Aceitar é decisão</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">PR pequeno</p><p class="text-xs text-neutral-400">Torna revisão possível</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Responsabilidade</p><p class="text-xs text-neutral-400">Não se delega</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">O diff é o começo</strong><span class="text-neutral-400"> - o revisor lê arquivos relacionados, contratos e testes.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Revisor independente</strong><span class="text-neutral-400"> - sessão nova, só spec + diff; senão repete a suposição do autor.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Arquitetura não tem teste</strong><span class="text-neutral-400"> - fronteira furada e duplicação semântica são achados de revisão.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Uma lente por passagem</strong><span class="text-neutral-400"> - segurança, desempenho, manutenção.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Ruído destrói revisão</strong><span class="text-neutral-400"> - limite achados, exija severidade, deixe estilo para o lint.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">A decisão é humana</strong><span class="text-neutral-400"> - intenção, prioridade e risco não estão no código.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-purple-400 mb-2">Próximo Módulo:</h3>
+            <p class="text-neutral-300">3.3 - Quality Gates: transformar regra escrita em verificação obrigatória.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="modulo-3-3.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo Módulo →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../assets/curso.js"></script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-3-2#q1', {
+          answer: 1,
+          explain: {
+            0: 'Ele revisa carregando o raciocínio que produziu o erro — tende a confirmar, não a discordar.',
+            1: 'Isso. Independência de contexto + priorização + decisão humana é o arranjo que encontra defeito de verdade.',
+            2: 'Volume sem priorização treina o time a ignorar a revisão inteira, inclusive os achados bons.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

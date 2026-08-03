@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 4.1 · Modernização segura de legado | Eng. de Software com IA</title>
+
+  <script src="../../assets/boot.js"></script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/curso.css">
+  <link rel="stylesheet" href="../../assets/learn.css">
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.1</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="4-1" data-inema-track="4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🏚️ Modernização segura de sistemas legados</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        A IA ajuda muito a entender e converter sistemas antigos. Mas reescrever tudo de uma vez continua sendo
+        arriscado. Este módulo é o processo que troca risco por evidência.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:4-1" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 4.1">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-amber-400">1. Inventário</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-amber-400">2. Regras escondidas</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-amber-400">3. Caracterização</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-amber-400">4. Integrações ocultas</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-amber-400">5. Fronteira e adaptador</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-amber-400">6. Paralelo e comparação</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-4-1#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">🗺️ Mapeie dependências e faça o inventário</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-1-t1-p1">
+          A IA pode mapear dependências, explicar código, documentar interfaces e encontrar código morto — ler muito
+          código e resumir estrutura é onde ela mais rende. Comece por aí:
+          <strong class="text-amber-400">saber o tamanho real do problema antes de propor solução</strong>.
+        </p>
+
+        <div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 180" class="w-full h-auto" role="img" aria-label="Processo recomendado: inventário, mapa de dependências, testes de caracterização, fronteiras, alteração pequena, execução paralela, comparação e migração gradual">
+            <defs>
+              <linearGradient id="m41-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+              <filter id="m41-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m41-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#f59e0b" opacity="0.12"/></pattern>
+              <marker id="m41-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fbbf24"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="180" fill="url(#m41-grid)"/>
+            <g fill="none" stroke="#fbbf24" stroke-width="1.8" opacity="0.5">
+              <path d="M138,54 L152,54" marker-end="url(#m41-ah)"/><path d="M298,54 L312,54" marker-end="url(#m41-ah)"/>
+              <path d="M478,54 L492,54" marker-end="url(#m41-ah)"/><path d="M638,54 L652,54" marker-end="url(#m41-ah)"/>
+              <path d="M760,78 L760,100 L200,100 L200,120" marker-end="url(#m41-ah)"/>
+              <path d="M288,140 L302,140" marker-end="url(#m41-ah)"/><path d="M448,140 L462,140" marker-end="url(#m41-ah)"/>
+            </g>
+            <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+              <rect x="16" y="32" width="122" height="44" rx="11" fill="#1f1604" stroke="#fbbf24" stroke-width="2"/><text x="77" y="59" text-anchor="middle" fill="#fcd9a0">inventário</text>
+              <rect x="152" y="32" width="146" height="44" rx="11" fill="#1f1604" stroke="#fbbf24" stroke-width="2"/><text x="225" y="59" text-anchor="middle" fill="#fcd9a0">dependências</text>
+              <rect x="312" y="32" width="166" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="395" y="59" text-anchor="middle" fill="#bfe6ff">caracterização</text>
+              <rect x="492" y="32" width="146" height="44" rx="11" fill="#1f1604" stroke="#fbbf24" stroke-width="2"/><text x="565" y="59" text-anchor="middle" fill="#fcd9a0">fronteiras</text>
+              <rect x="652" y="32" width="216" height="44" rx="11" fill="#1f1604" stroke="#fbbf24" stroke-width="2"/><text x="760" y="59" text-anchor="middle" fill="#fcd9a0">alteração pequena</text>
+              <rect x="120" y="118" width="168" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="204" y="145" text-anchor="middle" fill="#bfe6ff">execução paralela</text>
+              <rect x="302" y="118" width="160" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="382" y="145" text-anchor="middle" fill="#bfe6ff">comparação</text>
+            </g>
+            <g filter="url(#m41-glow)"><rect x="462" y="112" width="220" height="56" rx="13" fill="#1f1604" stroke="url(#m41-grad)" stroke-width="2"/></g>
+            <text x="572" y="145" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="600" font-size="15">migração gradual</text>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-amber-400">Como ler:</strong> o processo inteiro em uma imagem. As caixas em ciano são as etapas de
+            evidência — caracterizar, rodar em paralelo, comparar. São elas que transformam "acho que está igual" em prova, e por isso
+            nenhuma delas é opcional.
+          </p>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+          <p class="text-neutral-300 text-sm">
+            <strong>Legado</strong> aqui não significa "velho": significa código em produção que ninguém entende por inteiro e que não
+            tem testes suficientes para ser mudado com segurança. <strong>Teste de caracterização</strong> é um teste que descreve o que
+            o sistema faz hoje (não o que deveria fazer). <strong>Adaptador</strong> é uma camada fina que traduz entre o mundo antigo e o novo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Inventário</p><p class="text-xs text-neutral-400">Antes do plano</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Código morto</p><p class="text-xs text-neutral-400">Corte mais barato</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Quem chama quem</p><p class="text-xs text-neutral-400">Define a fronteira</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Risco</p><p class="text-xs text-neutral-400">Diminui, não aumenta</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-4-1#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">🔎 Identifique as regras de negócio escondidas</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-1-t2-p1">
+          Todo sistema antigo carrega regras que nunca foram escritas em lugar nenhum: exceções históricas, casos
+          especiais de clientes grandes, arredondamentos com motivo fiscal, prazos herdados de um contrato de 2014.
+          <strong class="text-amber-400">São elas que quebram na reescrita.</strong>
+        </p>
+
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">⚠️</span> Riscos típicos do legado</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-300 text-sm">
+            <div>• regras não documentadas</div><div>• integrações ocultas</div>
+            <div>• comportamentos usados por outros sistemas</div><div>• dependências antigas</div>
+            <div>• conhecimento em poucas pessoas</div><div>• exceções históricas</div>
+            <div>• requisitos regulatórios</div><div>• processos operacionais manuais</div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — extrair as regras do código</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-amber-400">Objetivo:</strong> transformar código legado em uma lista de regras auditável. Escolha um módulo que você precisa modernizar.</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Leia &lt;caminho do módulo legado&gt; inteiro. Não altere nada.
+
+Produza uma tabela de REGRAS DE NEGÓCIO observadas no código, com colunas:
+regra (em português, uma frase) | onde está (arquivo:linha) | condição que a
+dispara | o que acontece quando não vale | parece intencional ou acidental?
+
+Regras:
+- descreva o que o código FAZ, não o que deveria fazer;
+- inclua casos especiais, exceções, valores mágicos e datas fixas;
+- não invente justificativa de negócio — se não souber, escreva "desconhecido";
+- ao final, liste em "PERGUNTAR AO NEGÓCIO" as regras que parecem acidentais
+  ou que você não consegue explicar.</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-amber-400">Como verificar:</strong> leve a lista "PERGUNTAR AO NEGÓCIO" para quem opera o sistema. Toda regra que alguém reconhecer vira teste de caracterização no próximo tópico; toda regra que ninguém reconhecer é candidata a remoção — mas só depois de confirmada.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Código = verdade</p><p class="text-xs text-neutral-400">Doc é intenção antiga</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Valor mágico</p><p class="text-xs text-neutral-400">Costuma ser regra</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Regulatório</p><p class="text-xs text-neutral-400">Não se "simplifica"</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Perguntar</p><p class="text-xs text-neutral-400">Antes de remover</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-4-1#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">🧪 Escreva testes de caracterização</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-1-t3-p1">
+          Teste de caracterização registra o comportamento atual — <strong class="text-amber-400">inclusive o que parece
+          errado</strong>. Ele não julga; ele fotografa. É a rede de segurança que torna a modernização possível.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Caracterização bem feita</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Registra a saída atual, mesmo a esquisita, com um comentário "comportamento atual, não validado"</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Cobre entradas reais colhidas de produção (anonimizadas)</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Inclui bordas: nulo, vazio, negativo, data limite, valor máximo</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Roda contra o sistema antigo <em>antes</em> de qualquer mudança</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Armadilhas</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Corrigir" o comportamento estranho enquanto escreve o teste</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Testar só o caminho feliz — o legado vive nos casos especiais</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Escrever a expectativa a partir da documentação, não da execução</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Usar dado de produção sem anonimizar</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Gerar caracterização em volume é uma das melhores aplicações de IA que existem: peça ao agente para produzir dezenas de casos a partir de entradas reais, rodá-los contra o sistema atual e gravar a saída como expectativa. Você revisa a lista, não escreve os testes um a um.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Fotografa</p><p class="text-xs text-neutral-400">Não julga</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Bug incluso</p><p class="text-xs text-neutral-400">Também é comportamento</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Entrada real</p><p class="text-xs text-neutral-400">Anonimizada</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Volume</p><p class="text-xs text-neutral-400">Onde a IA brilha</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-4-1#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">🕵️ Descubra integrações ocultas</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-1-t4-p1">
+          O maior gerador de incidente pós-migração é simples: você desligou algo que "ninguém usava" — e alguém usava.
+          Um script, uma planilha, um relatório que lê o banco direto, um job de outro time.
+        </p>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Olhe os acessos, não o código</h4>
+              <p class="text-neutral-300 text-sm">Logs de API, conexões ao banco, chamadas ao endpoint, leituras do arquivo. Quem consome aparece no tráfego, não no repositório.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Observe por um ciclo completo</h4>
+              <p class="text-neutral-300 text-sm">Uma semana não basta se existe fechamento mensal, relatório trimestral ou rotina anual. O consumidor mais perigoso é o que só aparece no dia 1º.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-amber-500/30">
+              <h4 class="font-semibold text-white mb-2">Desligue em etapas</h4>
+              <p class="text-neutral-300 text-sm">Avisar → depreciar (com alerta a cada uso) → degradar → remover. Cada etapa dá chance de alguém aparecer dizendo "isso é meu".</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Tráfego</p><p class="text-xs text-neutral-400">Revela consumidor</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Ciclo completo</p><p class="text-xs text-neutral-400">Mensal, trimestral, anual</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Depreciar</p><p class="text-xs text-neutral-400">Antes de remover</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Silêncio</p><p class="text-xs text-neutral-400">Não prova desuso</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-4-1#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">🧱 Isole fronteiras e crie adaptadores</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-1-t5-p1">
+          Antes de trocar qualquer coisa, crie o ponto de costura: uma interface entre quem consome e a implementação.
+          Com o adaptador no lugar, você troca o motor sem tocar em quem dirige — e pode voltar atrás com uma linha.
+        </p>
+
+        <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📐</span> Como escolher a fronteira certa</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Poucos consumidores (você consegue avisar todos).</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Contrato estreito: poucas operações, dados simples.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Comportamento já coberto por testes de caracterização.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Valor claro em migrar primeiro (dor conhecida, não só "é feio").</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Sem fronteira definida, a migração vira reescrita: cada pedaço puxa outro, o escopo estoura e o projeto entra naquele estado em que o sistema novo não está pronto e o antigo já não recebe manutenção. Esse é o pior lugar possível.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Costura</p><p class="text-xs text-neutral-400">Antes da troca</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Contrato estreito</p><p class="text-xs text-neutral-400">Facilita a troca</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Estrangulamento</p><p class="text-xs text-neutral-400">Pedaço a pedaço</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Volta fácil</p><p class="text-xs text-neutral-400">Troca a implementação</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-4-1#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">⚖️ Rode em paralelo e compare</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-1-t6-p1">
+          As duas implementações recebem a mesma entrada; a antiga continua respondendo; a nova só registra o que
+          responderia. Cada divergência vira um caso para investigar. É a prova mais forte que existe.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Painel de comparação <span class="text-xs text-neutral-500 font-normal">(recriação ilustrativa, não é screenshot real)</span></h3>
+          <div class="rounded-lg border border-dark-600 overflow-hidden">
+            <div class="flex items-center gap-2 px-3 py-2 bg-dark-700 border-b border-dark-600">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-neutral-400 ml-2 font-mono">cálculo-de-tarifa · antigo × novo · 24h</span>
+            </div>
+            <div class="p-4 font-mono text-xs text-neutral-300 space-y-1 bg-dark-900/60">
+              <p>requisições comparadas .......... 148.302</p>
+              <p><span class="text-emerald-400">idênticas</span> ...................... 148.061 (99,84%)</p>
+              <p><span class="text-yellow-400">divergentes</span> .................... 241</p>
+              <p>  ├─ arredondamento centavo ..... 233 &lt;- regra fiscal esquecida</p>
+              <p>  ├─ cliente com contrato 2014 ...   7 &lt;- exceção histórica</p>
+              <p>  └─ data 29/02 .................    1 &lt;- ano bissexto</p>
+              <p class="text-neutral-500">nenhuma resposta ao cliente foi alterada (modo sombra)</p>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 mt-3"><strong class="text-amber-400">Como ler:</strong> 99,84% de igualdade não é aprovação — as 241 divergências são o conteúdo real do relatório. Cada uma delas é uma regra que a caracterização não pegou. É por isso que se roda em sombra antes de trocar.</p>
+        </div>
+
+        <div data-inema-check="modulo-4-1#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
+          <p class="font-medium mb-4">Checagem rápida: você vai modernizar um módulo antigo sem testes. Qual é o primeiro passo?</p>
+          <div class="inema-check-options space-y-2">
+            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Pedir ao agente para reescrever o módulo em uma arquitetura melhor.</button>
+            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Mapear dependências e gerar testes de caracterização do comportamento atual.</button>
+            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Corrigir primeiro os bugs evidentes, para não migrar defeito.</button>
+          </div>
+          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Modo sombra</p><p class="text-xs text-neutral-400">Novo só observa</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Divergência</p><p class="text-xs text-neutral-400">É informação valiosa</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Gradual</p><p class="text-xs text-neutral-400">1%, 10%, 50%, 100%</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Volta</p><p class="text-xs text-neutral-400">Disponível até o fim</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Inventário antes do plano</strong><span class="text-neutral-400"> - a IA é ótima em mapear dependências e achar código morto.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">O código é a verdade</strong><span class="text-neutral-400"> - regras escondidas quebram reescritas.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Caracterizar antes de mudar</strong><span class="text-neutral-400"> - fotografa o comportamento, inclusive o esquisito.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Consumidor oculto aparece no tráfego</strong><span class="text-neutral-400"> - observe um ciclo completo e deprecie em etapas.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Fronteira e adaptador</strong><span class="text-neutral-400"> - sem eles, migração vira reescrita.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Paralelo e comparação</strong><span class="text-neutral-400"> - as divergências são o conteúdo do relatório.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+            <p class="text-neutral-300">4.2 - Arquitetura legível para agentes: estrutura previsível, AGENTS.md e fontes únicas de verdade.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../assets/curso.js"></script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-4-1#q1', {
+          answer: 1,
+          explain: {
+            0: 'Reescrever sem rede de segurança é justamente o movimento que perde as regras não documentadas.',
+            1: 'Isso. Primeiro entender e travar o comportamento atual; só depois mudar, comparando contra essa base.',
+            2: 'Corrigir antes de caracterizar apaga a referência: você deixa de saber o que era comportamento original.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

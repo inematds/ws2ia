@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 3.3 · Quality Gates | Eng. de Software com IA</title>
+
+  <script src="../../assets/boot.js"></script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/curso.css">
+  <link rel="stylesheet" href="../../assets/learn.css">
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a><span>/</span>
+      <span class="text-purple-400">Módulo 3.3</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="3-3" data-inema-track="3">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚦 Quality Gates</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Quality Gates são condições obrigatórias antes de uma mudança avançar. O princípio é curto: uma regra escrita em
+        texto é útil; a mesma regra transformada em teste automático é muito mais confiável.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:3-3" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 3.3">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-purple-400">1. Regra vira teste</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-purple-400">2. Build, lint, testes</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-purple-400">3. Contrato e cobertura</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-purple-400">4. Estática e segurança</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-purple-400">5. Perf. e reversão</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-purple-400">6. Critério de liberar</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-3-3#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">🚦 Transforme regra escrita em verificação</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t1-p1">
+          Toda equipe tem regras combinadas: "não commitar segredo", "manter compatibilidade", "cobrir com teste". Elas
+          funcionam enquanto todo mundo lembra. Com IA gerando volume, lembrar deixa de ser suficiente —
+          <strong class="text-purple-400">a regra precisa executar sozinha</strong>.
+        </p>
+
+        <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 170" class="w-full h-auto" role="img" aria-label="Pipeline de gates: build, lint, testes, cobertura, análise estática, segurança, revisão, aprovação e deploy">
+            <defs>
+              <linearGradient id="m33-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+              <filter id="m33-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m33-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#a855f7" opacity="0.12"/></pattern>
+              <marker id="m33-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="170" fill="url(#m33-grid)"/>
+            <g fill="none" stroke="#c084fc" stroke-width="1.8" opacity="0.5">
+              <path d="M112,64 L124,64" marker-end="url(#m33-ah)"/><path d="M222,64 L234,64" marker-end="url(#m33-ah)"/>
+              <path d="M332,64 L344,64" marker-end="url(#m33-ah)"/><path d="M452,64 L464,64" marker-end="url(#m33-ah)"/>
+              <path d="M584,64 L596,64" marker-end="url(#m33-ah)"/><path d="M704,64 L716,64" marker-end="url(#m33-ah)"/>
+              <path d="M814,64 L826,64" marker-end="url(#m33-ah)"/>
+            </g>
+            <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+              <rect x="16" y="42" width="96" height="44" rx="11" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="64" y="69" text-anchor="middle" fill="#e9d5ff">build</text>
+              <rect x="124" y="42" width="98" height="44" rx="11" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="173" y="69" text-anchor="middle" fill="#e9d5ff">lint</text>
+              <rect x="234" y="42" width="98" height="44" rx="11" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="283" y="69" text-anchor="middle" fill="#e9d5ff">testes</text>
+              <rect x="344" y="42" width="108" height="44" rx="11" fill="#1a1230" stroke="#c084fc" stroke-width="2"/><text x="398" y="69" text-anchor="middle" fill="#e9d5ff">cobertura</text>
+              <rect x="464" y="42" width="120" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="524" y="69" text-anchor="middle" fill="#bfe6ff">estática</text>
+              <rect x="596" y="42" width="108" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="650" y="69" text-anchor="middle" fill="#bfe6ff">segurança</text>
+              <rect x="716" y="42" width="98" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="765" y="69" text-anchor="middle" fill="#bfe6ff">revisão</text>
+            </g>
+            <g filter="url(#m33-glow)"><rect x="826" y="36" width="158" height="56" rx="13" fill="#1a1230" stroke="url(#m33-grad)" stroke-width="2"/></g>
+            <text x="905" y="60" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="14">aprovação</text>
+            <text x="905" y="80" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12">→ deploy</text>
+            <text x="500" y="128" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12.5">falhou em qualquer caixa? o código não avança — não existe "só desta vez"</text>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-purple-400">Como ler:</strong> é uma fila, não um menu. Cada caixa é uma condição obrigatória; a última
+            (aprovação humana) só recebe o que já passou por tudo. O valor do desenho está na frase de baixo: um gate que pode ser pulado
+            deixou de ser gate.
+          </p>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+          <p class="text-neutral-300 text-sm">
+            <strong>Quality gate</strong> é uma checagem automática que impede a mudança de avançar quando falha. <strong>Análise
+            estática</strong> examina o código sem executá-lo, procurando padrões perigosos. <strong>Teste de contrato</strong> verifica
+            que a interface que outros sistemas consomem continua se comportando como antes.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Obrigatório</p><p class="text-xs text-neutral-400">Não é recomendação</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Automático</p><p class="text-xs text-neutral-400">Não depende de lembrar</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Objetivo</p><p class="text-xs text-neutral-400">Passa ou não passa</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Igual para todos</p><p class="text-xs text-neutral-400">Humano e agente</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-3-3#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">🏗️ Monte a base: build, lint e testes</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t2-p1">
+          Estes três são os gates que o próprio agente usa dentro do loop. Por isso a característica mais importante
+          deles não é rigor — é <strong class="text-purple-400">velocidade e determinismo</strong>.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Gate que serve ao loop</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Roda em segundos, não em dezenas de minutos</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mesma entrada, mesmo resultado — sempre</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mensagem de erro que diz onde e por quê</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Um comando único, documentado no AGENTS.md</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Gate que atrapalha</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Suíte de 40 minutos — o loop não pode usá-la</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Teste instável que falha uma vez a cada cinco</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Erro genérico ("failed") sem contexto</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sequência de sete comandos que só o veterano sabe</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Divida a suíte: um alvo rápido para o loop (unitários dos módulos afetados, poucos segundos) e um alvo completo para o merge. Sem essa separação, ou o loop fica lento demais para servir, ou você corta verificação onde não devia.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Rápido</p><p class="text-xs text-neutral-400">Loop depende disso</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Determinístico</p><p class="text-xs text-neutral-400">Instável mata confiança</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Dois alvos</p><p class="text-xs text-neutral-400">Loop e merge</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Lint</p><p class="text-xs text-neutral-400">Encerra debate de estilo</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-3-3#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">📜 Adicione testes de contrato e cobertura mínima</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t3-p1">
+          Quando o volume de mudanças cresce, o contrato é a primeira vítima silenciosa — e quem descobre a quebra é
+          quem consome sua API. Um teste de contrato transforma esse acordo tácito em gate.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — gerar os gates que faltam</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-purple-400">Objetivo:</strong> descobrir quais regras do seu time ainda são "combinado" e não gate. Rode no repositório real.</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Leia a configuração de CI em &lt;caminho do workflow/pipeline&gt; e o AGENTS.md.
+
+1. liste os gates que JÁ existem hoje (o que bloqueia o merge de verdade);
+2. liste as regras que estão escritas em texto mas NÃO são verificadas
+   automaticamente (ex.: "não commitar segredo", "manter compatibilidade");
+3. para cada regra do item 2, proponha a verificação automática
+   correspondente e diga o custo (baixo/médio/alto) de implementá-la;
+4. ordene por (impacto se violada) ÷ (custo de implementar);
+5. implemente APENAS a primeira da lista e me mostre o diff.
+
+Não altere gates existentes. Não desative nada.</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-purple-400">Como verificar:</strong> abra um PR de teste que viola de propósito a regra recém-automatizada (por exemplo, um arquivo com um segredo falso). Se o pipeline não ficar vermelho, o gate não existe — existe só a configuração dele.</p>
+        </div>
+
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📐</span> Sobre cobertura</h3>
+          <p class="text-neutral-300 text-sm">Cobertura mínima serve como <strong>piso que impede queda</strong>, não como meta a perseguir. Um agente que precisa "bater 90%" gera testes que executam o código sem afirmar nada. Prefira: não pode cair em relação à base, e o código novo precisa vir coberto.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Contrato</p><p class="text-xs text-neutral-400">Acordo virou teste</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Piso</p><p class="text-xs text-neutral-400">Cobertura não cai</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Código novo</p><p class="text-xs text-neutral-400">Chega coberto</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Meta de %</p><p class="text-xs text-neutral-400">Gera teste vazio</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-3-3#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">🛡️ Inclua análise estática e segurança</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t4-p1">
+          São achados objetivos e caros — o perfil perfeito para bloqueio automático. Nenhuma dessas verificações deveria
+          depender de um revisor atento numa sexta-feira à tarde.
+        </p>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-red-500/30">
+              <h4 class="font-semibold text-white mb-2">Segredo no repositório — bloqueio absoluto</h4>
+              <p class="text-neutral-300 text-sm">Chave, token ou senha comitada é incidente, não achado. E lembre: apagar no commit seguinte não resolve — o segredo já está no histórico e precisa ser rotacionado.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Vulnerabilidade crítica em dependência</h4>
+              <p class="text-neutral-300 text-sm">Bloqueia o merge quando é crítica e explorável no seu contexto. Calibre a severidade — scanner barulhento demais acaba sendo desligado por todo mundo.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Padrões perigosos e regras de arquitetura</h4>
+              <p class="text-neutral-300 text-sm">Concatenação de SQL, desserialização insegura, import atravessando fronteira de domínio. Aqui a análise estática vira o gate arquitetural do módulo 3.2.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Segredo</p><p class="text-xs text-neutral-400">Bloqueio + rotação</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">CVE crítica</p><p class="text-xs text-neutral-400">Barra o merge</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Calibrar</p><p class="text-xs text-neutral-400">Barulho vira desligamento</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Fronteira</p><p class="text-xs text-neutral-400">Vira regra estática</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-3-3#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">⚡ Controle desempenho e reversibilidade</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t5-p1">
+          Degradação de desempenho entra devagar, uma mudança pequena de cada vez, até virar incidente. E migração
+          irreversível é o item que transforma um erro de dez minutos em uma noite inteira.
+        </p>
+
+        <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">📊</span> Gates que valem a pena</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Orçamento de desempenho:</strong> tempo de resposta e consultas por requisição não podem piorar além de X% da base.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Migração reversível:</strong> toda migração vem com o caminho de volta — e ele é executado no ambiente de teste.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Compatibilidade:</strong> nenhuma quebra de contrato público sem versionamento e aviso.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Tamanho da mudança:</strong> diffs acima do limite acordado exigem justificativa explícita.</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Rollback que nunca foi executado não é rollback — é intenção. Se a sua migração tem um script de volta que ninguém rodou, considere que ele não existe.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Orçamento</p><p class="text-xs text-neutral-400">Desempenho tem teto</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Reversível</p><p class="text-xs text-neutral-400">E testado</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Compatível</p><p class="text-xs text-neutral-400">Ou versionado</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Tamanho</p><p class="text-xs text-neutral-400">Diff também é gate</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-3-3#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">✅ Defina o critério para liberar a mudança</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t6-p1">
+          O código só avança quando todos os gates obrigatórios são atendidos. Gate que pode ser pulado "só desta vez"
+          não é gate — é sugestão. E a exceção vira regra em duas semanas.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Checklist de liberação</h3>
+          <div class="space-y-2 text-neutral-300 text-sm">
+            <p>☐ build concluído · ☐ lint aprovado</p>
+            <p>☐ testes unitários, de integração e de contrato aprovados</p>
+            <p>☐ cobertura mínima alcançada (não caiu)</p>
+            <p>☐ nenhuma vulnerabilidade crítica · ☐ nenhum segredo exposto</p>
+            <p>☐ contratos preservados · ☐ migrações reversíveis</p>
+            <p>☐ desempenho dentro do limite</p>
+            <p>☐ revisão concluída (agente + humano)</p>
+            <p>☐ aprovação humana registrada quando a ação é irreversível</p>
+          </div>
+        </div>
+
+        <div data-inema-check="modulo-3-3#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
+          <p class="font-medium mb-4">Checagem rápida: a entrega é hoje e o gate de cobertura falhou por 0,4%. O que fazer?</p>
+          <div class="inema-check-options space-y-2">
+            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Baixar o limite de cobertura no pipeline e seguir com o merge.</button>
+            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Cobrir o código novo, ou registrar uma exceção explícita, com dono e prazo, aprovada por quem responde.</button>
+            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Fazer o merge com a checagem desativada só desta vez e reativar depois.</button>
+          </div>
+          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Todos</p><p class="text-xs text-neutral-400">Sem exceção silenciosa</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Exceção</p><p class="text-xs text-neutral-400">Registrada, com prazo</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Evidência</p><p class="text-xs text-neutral-400">Anexada à liberação</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-purple-400 text-sm font-semibold mb-1">Protege</p><p class="text-xs text-neutral-400">O gate é do time</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Regra em texto vira teste</strong><span class="text-neutral-400"> - é o princípio central dos gates.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Base rápida e determinística</strong><span class="text-neutral-400"> - build, lint e testes servem ao loop do agente.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Contrato e cobertura</strong><span class="text-neutral-400"> - piso que não pode cair; código novo chega coberto.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Segurança é bloqueio</strong><span class="text-neutral-400"> - segredo e CVE crítica não passam.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Desempenho e rollback</strong><span class="text-neutral-400"> - orçamento explícito e volta testada.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Obrigatório é obrigatório</strong><span class="text-neutral-400"> - exceção só registrada, com dono e prazo.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-purple-400 mb-2">Próxima trilha:</h3>
+            <p class="text-neutral-300">Trilha 4 - Arquitetura na era da IA: legado, repositórios legíveis por agentes e controle de dívida.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 4 →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../assets/curso.js"></script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-3-3#q1', {
+          answer: 1,
+          explain: {
+            0: 'Baixar o limite silenciosamente transforma o gate em enfeite — e ninguém volta para subir depois.',
+            1: 'Isso. Ou você cumpre, ou registra uma exceção com dono, prazo e aprovação. O gate continua existindo.',
+            2: 'Desativar "só desta vez" é exatamente como gates morrem. A próxima vez chega em três dias.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

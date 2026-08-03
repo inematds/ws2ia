@@ -1,0 +1,107 @@
+/* INEMA · CSS base do curso (v1 baseline: light mode completo, bordas dark, topicos, SVG) */
+
+body { font-family: 'Inter', sans-serif; }
+.dark body { background-color: #111827; }
+.topic-explanation { display: none; }
+.topic-explanation.active { display: block; }
+
+/* nav sticky nao pode obscurecer o alvo focado (WCAG 2.4.11) */
+[id^="topico-"], [id^="modulo-"] { scroll-margin-top: 5rem; }
+
+/* diagramas: conter a intensidade no tema claro */
+html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+@keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+@media (prefers-reduced-motion: no-preference) {
+  .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+  .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+  .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
+}
+
+/* ---------- Light mode · base ---------- */
+html:not(.dark) body { background-color: #f8fafc; }
+html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+html:not(.dark) .text-neutral-100 { color: #111827; }
+html:not(.dark) .text-neutral-300 { color: #4b5563; }
+html:not(.dark) .text-neutral-400 { color: #6b7280; }
+html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+/* ---------- Light mode · cores de acento (todas as trilhas) ---------- */
+html:not(.dark) .text-emerald-400 { color: #059669; }
+html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,0.18); }
+html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+
+html:not(.dark) .text-blue-400 { color: #2563eb; }
+html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+
+html:not(.dark) .text-purple-400 { color: #7c3aed; }
+html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,0.18); }
+html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+
+html:not(.dark) .text-amber-400 { color: #92400e; }
+html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.12); }
+html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.08); }
+html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.25); }
+html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217,119,6,0.18); }
+html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+
+html:not(.dark) .text-teal-400 { color: #0d9488; }
+html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13,148,136,0.12); }
+html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13,148,136,0.08); }
+html:not(.dark) .border-teal-500\/30 { border-color: rgba(13,148,136,0.25); }
+html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13,148,136,0.18); }
+html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+html:not(.dark) .group:hover .group-hover\:text-teal-400 { color: #0d9488; }
+
+html:not(.dark) .text-rose-400 { color: #9f1239; }
+html:not(.dark) .bg-rose-500\/20 { background-color: rgba(225,29,72,0.12); }
+html:not(.dark) .bg-rose-500\/10 { background-color: rgba(225,29,72,0.08); }
+html:not(.dark) .border-rose-500\/30 { border-color: rgba(225,29,72,0.25); }
+html:not(.dark) .hover\:bg-rose-500\/30:hover { background-color: rgba(225,29,72,0.18); }
+html:not(.dark) .hover\:text-rose-400:hover { color: #9f1239; }
+html:not(.dark) .hover\:bg-rose-500\/10:hover { background-color: rgba(225,29,72,0.08); }
+html:not(.dark) .group:hover .group-hover\:text-rose-400 { color: #9f1239; }
+
+/* ---------- Light mode · sem gradientes + cores especiais ---------- */
+html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+html:not(.dark) .text-primary { color: #a16207; }
+html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+html:not(.dark) .text-sky-400 { color: #0369a1; }
+html:not(.dark) .text-yellow-400 { color: #a16207; }
+html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+html:not(.dark) .text-red-400 { color: #b91c1c; }
+html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+
+/* ---------- Light mode · navbar ---------- */
+html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+/* ---------- Dark mode · bordas e divisorias suavizadas ---------- */
+.dark .border-dark-600 { border-color: #374151; }
+.dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 4.2 · Arquitetura legível para agentes | Eng. de Software com IA</title>
+
+  <script src="../../assets/boot.js"></script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/curso.css">
+  <link rel="stylesheet" href="../../assets/learn.css">
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="4-2" data-inema-track="4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Arquitetura legível para agentes</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Um sistema precisa ser compreensível também para agentes. Isso não exige uma arquitetura exótica — exige
+        previsibilidade, contratos explícitos, comandos padronizados e poucas fontes conflitantes de verdade.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:4-2" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 4.2">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-amber-400">1. Estrutura previsível</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-amber-400">2. Limites de módulo</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-amber-400">3. Doc junto do código</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-amber-400">4. Comandos padrão</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-amber-400">5. AGENTS.md</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-amber-400">6. Fonte única</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-4-2#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">📁 Adote estrutura previsível</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-2-t1-p1">
+          Um repositório previsível reduz o contexto que o agente precisa carregar e o número de suposições que ele faz.
+          O mesmo vale para a pessoa que entrou no time ontem — <strong class="text-amber-400">as duas audiências
+          querem a mesma coisa</strong>.
+        </p>
+
+        <div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 250" class="w-full h-auto" role="img" aria-label="Estrutura de repositório com pastas docs, specs, skills e scripts em torno de um AGENTS.md central que funciona como mapa">
+            <defs>
+              <linearGradient id="m42-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+              <filter id="m42-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m42-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#f59e0b" opacity="0.12"/></pattern>
+              <marker id="m42-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="250" fill="url(#m42-grid)"/>
+            <g fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.5">
+              <path d="M420,66  C470,66 480,110 490,118" marker-end="url(#m42-ahc)"/>
+              <path d="M420,196 C470,196 480,142 490,134" marker-end="url(#m42-ahc)"/>
+              <path d="M660,66  C610,66 600,110 590,118" marker-end="url(#m42-ahc)"/>
+              <path d="M660,196 C610,196 600,142 590,134" marker-end="url(#m42-ahc)"/>
+            </g>
+            <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+              <rect x="150" y="42" width="270" height="48" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="285" y="72" text-anchor="middle" fill="#bfe6ff">/docs · arquitetura, decisões</text>
+              <rect x="150" y="172" width="270" height="48" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="285" y="202" text-anchor="middle" fill="#bfe6ff">/specs · uma por domínio</text>
+              <rect x="660" y="42" width="250" height="48" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="785" y="72" text-anchor="middle" fill="#bfe6ff">/skills · tarefas repetidas</text>
+              <rect x="660" y="172" width="250" height="48" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="785" y="202" text-anchor="middle" fill="#bfe6ff">/scripts · validate, test</text>
+            </g>
+            <g filter="url(#m42-glow)"><rect x="440" y="96" width="200" height="60" rx="15" fill="#1f1604" stroke="url(#m42-grad)" stroke-width="2"/></g>
+            <text x="540" y="122" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="600" font-size="17">AGENTS.md</text>
+            <text x="540" y="142" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="12">o mapa, não o território</text>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-amber-400">Como ler:</strong> o AGENTS.md no centro <em>aponta</em> para as quatro pastas — ele não
+            copia o conteúdo delas. As setas vão de fora para dentro porque cada pasta é dona da sua verdade; o mapa só diz onde procurar.
+            Um AGENTS.md que tenta conter tudo vira mais uma fonte desatualizada.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Previsível</p><p class="text-xs text-neutral-400">Achável sem tour guiado</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Convenção</p><p class="text-xs text-neutral-400">Acima de configuração</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Nome</p><p class="text-xs text-neutral-400">É infraestrutura</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Duas audiências</p><p class="text-xs text-neutral-400">Humano novo e agente</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-4-2#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">🚧 Deixe os limites entre módulos explícitos</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-2-t2-p1">
+          Um agente respeita a fronteira que consegue enxergar. Fronteira que existe só na cabeça do arquiteto será
+          atravessada — e, pior, será atravessada de forma consistente e bem escrita, o que torna difícil perceber.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Exemplo de estrutura</h3>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">/docs
+  arquitetura.md
+  dominios.md
+  decisoes/
+  playbooks/
+
+/specs
+  pagamentos/
+  usuarios/
+
+/skills
+  criar-migracao/
+  revisar-api/
+  corrigir-bug/
+
+/scripts
+  validate.sh
+  test-changed.sh
+
+AGENTS.md
+README.md</pre>
+          <p class="text-neutral-400 text-sm mt-3">Cada pasta tem um dono e um propósito. Um agente que entra nesse repositório sabe onde procurar spec, onde procurar decisão e o que rodar para validar.</p>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Escreva as fronteiras como regra executável de importação (o que <span class="font-mono text-sm">/pagamentos</span> pode importar, o que não pode). Assim ela vira gate no CI, não recomendação em documento — exatamente o princípio do módulo 3.3.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Visível</p><p class="text-xs text-neutral-400">Senão é atravessada</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Verificável</p><p class="text-xs text-neutral-400">Regra de import</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Contrato</p><p class="text-xs text-neutral-400">Entre domínios</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Escopo</p><p class="text-xs text-neutral-400">Fronteira limita a tarefa</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-4-2#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">📚 Mantenha documentação próxima ao código</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-2-t3-p1">
+          Documentação versionada no repositório entra na revisão junto com o código e no contexto do agente sem esforço.
+          Documentação em ferramenta externa vira folclore em três meses.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Doc que se mantém viva</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mora no repositório e muda no mesmo PR que o código</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Registra <em>decisões</em> e o porquê, não a sintaxe do framework</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Curta o suficiente para ser lida inteira</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Referencia o código em vez de repetir o que ele faz</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Doc que atrapalha</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Descreve o sistema que se pretendia ter, não o que existe</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Duplica informação que já está no código</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Está em três lugares, com três versões diferentes</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Ninguém sabe qual é a atual — nem o agente</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">No repo</p><p class="text-xs text-neutral-400">Entra na revisão</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Decisão</p><p class="text-xs text-neutral-400">Registre o porquê</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Desatualizada</p><p class="text-xs text-neutral-400">Pior que ausente</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Curta</p><p class="text-xs text-neutral-400">Lida é a que serve</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-4-2#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">⌨️ Padronize comandos e testes locais rápidos</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-2-t4-p1">
+          Um comando por intenção, igual na máquina de todo mundo e no CI. É o que permite ao agente fechar o loop
+          sozinho — <strong class="text-amber-400">sem comando padrão, ele inventa um, e inventa errado</strong>.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — auditar a legibilidade do seu repositório</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-amber-400">Objetivo:</strong> descobrir o que um agente não consegue deduzir do seu repo hoje. Rode numa sessão limpa, sem dar nenhuma explicação prévia.</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Você acabou de entrar neste repositório e não tem nenhum contexto além dele.
+Não pergunte nada agora; responda com o que conseguir deduzir dos arquivos.
+
+1. o que este sistema faz? (3 linhas)
+2. como eu instalo, testo, linto e builduei? (comandos exatos)
+3. onde ficam: regras de negócio, decisões de arquitetura, specs?
+4. quais são as fronteiras entre módulos e o que NÃO pode importar o quê?
+5. o que eu NÃO devo alterar sem aprovação?
+6. liste tudo que você teve que SUPOR para responder acima.
+
+Seja honesto no item 6 — é o item mais importante da resposta.</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-amber-400">Como verificar:</strong> a lista do item 6 é o seu backlog de legibilidade. Cada suposição é uma coisa que o próximo agente (e a próxima pessoa contratada) vai errar. Corrija o repositório — não o prompt.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Um comando</p><p class="text-xs text-neutral-400">Por intenção</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Local = CI</p><p class="text-xs text-neutral-400">Mesmo resultado</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Rápido</p><p class="text-xs text-neutral-400">Habilita o loop</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Suposição</p><p class="text-xs text-neutral-400">É seu backlog</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-4-2#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">📄 Escreva o AGENTS.md como mapa</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-2-t5-p1">
+          O AGENTS.md pode conter visão geral do sistema, comandos principais, regras do projeto, localização da
+          documentação, limitações, critérios de qualidade, ações proibidas e referências para skills e playbooks.
+          <strong class="text-amber-400">Ele não deve concentrar todo o conhecimento — deve funcionar como um mapa.</strong>
+        </p>
+
+        <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">🧭</span> Teste do bom AGENTS.md</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Cabe em uma tela e meia? Se não, você está duplicando outra fonte.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Traz os comandos exatos, copiáveis, sem "provavelmente é npm test"?</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>As proibições estão explícitas e em destaque?</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Aponta para onde está a verdade de cada assunto, em vez de repeti-la?</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Foi revisado no último trimestre?</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Um AGENTS.md de 900 linhas não é lido por inteiro — nem por humanos, nem com proveito por um agente que precisa achar rápido o que importa. Instrução que ninguém lê é instrução que não existe, com o agravante de dar falsa sensação de controle.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Mapa</p><p class="text-xs text-neutral-400">Aponta, não descreve</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Comandos</p><p class="text-xs text-neutral-400">Exatos e copiáveis</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Proibições</p><p class="text-xs text-neutral-400">Em destaque</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Revisado</p><p class="text-xs text-neutral-400">Como código</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-4-2#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">🎯 Garanta fontes únicas de verdade</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-2-t6-p1">
+          Diante de duas fontes conflitantes, o agente escolhe uma — silenciosamente. Você descobre qual na revisão, e
+          normalmente no pior momento possível.
+        </p>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Um dono por assunto</h4>
+              <p class="text-neutral-300 text-sm">Comandos moram no AGENTS.md; contrato mora na spec; decisão mora em <span class="font-mono text-xs">/docs/decisoes</span>. Quem precisar do assunto referencia o dono.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Referenciar em vez de copiar</h4>
+              <p class="text-neutral-300 text-sm">Toda cópia diverge — é questão de tempo. Um link para o arquivo certo envelhece muito melhor que um trecho colado.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-amber-500/30">
+              <h4 class="font-semibold text-white mb-2">Deletar o obsoleto é trabalho de verdade</h4>
+              <p class="text-neutral-300 text-sm">Documento antigo não some sozinho e continua entrando no contexto do agente. Remover a versão velha vale mais que escrever a nova.</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-inema-check="modulo-4-2#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
+          <p class="font-medium mb-4">Checagem rápida: qual é o melhor AGENTS.md?</p>
+          <div class="inema-check-options space-y-2">
+            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Um documento extenso com toda a arquitetura, glossário e histórico do projeto.</button>
+            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Um arquivo curto com comandos exatos, proibições explícitas e ponteiros para onde mora cada verdade.</button>
+            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Nenhum: o agente deve inferir tudo do próprio código, que é a única verdade.</button>
+          </div>
+          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Um dono</p><p class="text-xs text-neutral-400">Por assunto</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Referenciar</p><p class="text-xs text-neutral-400">Nunca copiar</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Deletar</p><p class="text-xs text-neutral-400">O obsoleto atrapalha</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Conflito</p><p class="text-xs text-neutral-400">Ele escolhe sozinho</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Previsibilidade &gt; sofisticação</strong><span class="text-neutral-400"> - o agente e a pessoa nova querem a mesma coisa.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Fronteira visível e verificável</strong><span class="text-neutral-400"> - regra de import vira gate.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Doc no repositório</strong><span class="text-neutral-400"> - entra na revisão e no contexto; registra decisão e porquê.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Comando padronizado</strong><span class="text-neutral-400"> - é infraestrutura de agente; local igual ao CI.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">AGENTS.md é mapa</strong><span class="text-neutral-400"> - curto, com comandos exatos e proibições em destaque.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Fonte única</strong><span class="text-neutral-400"> - referenciar em vez de copiar; deletar o obsoleto.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+            <p class="text-neutral-300">4.3 - Overengineering e dívida técnica gerada por IA.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../assets/curso.js"></script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-4-2#q1', {
+          answer: 1,
+          explain: {
+            0: 'Documento extenso duplica outras fontes e envelhece — vira mais uma verdade divergente no contexto.',
+            1: 'Isso. Mapa curto: comandos exatos, proibições visíveis, ponteiros para o dono de cada assunto.',
+            2: 'O código diz o que é, não o que é proibido nem como validar. Sem mapa, o agente supõe.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

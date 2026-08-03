@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Trilha 5 · Playbooks, Skills e Governança | Eng. de Software com IA</title>
+
+  <script src="../../assets/boot.js"></script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/curso.css">
+  <link rel="stylesheet" href="../../assets/learn.css">
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">TRILHA 5</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🛡️ Playbooks, Skills, Rules e Governança</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Transformar o que você aprendeu em processo reutilizável: procedimentos para tarefas recorrentes, capacidades
+        empacotadas, regras permanentes que limitam decisões arbitrárias e os cinco níveis de autonomia.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">3</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">18</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">~2h30</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="trilha:5" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da trilha 5">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 18</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 1000 240" class="w-full h-auto" role="img" aria-label="Escada dos cinco níveis de autonomia, da assistência até a autonomia crítica, com controles crescentes a cada degrau">
+        <defs>
+          <linearGradient id="t5h-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+          <filter id="t5h-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="t5h-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.12"/></pattern>
+        </defs>
+        <rect x="0" y="0" width="1000" height="240" fill="url(#t5h-grid)"/>
+        <path d="M40,208 L960,40" stroke="#2dd4bf" stroke-width="1.8" stroke-dasharray="9 9" opacity="0.4" fill="none"/>
+        <g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+          <rect x="30" y="176" width="176" height="44" rx="11" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="118" y="196" text-anchor="middle" fill="#99f6e4">1 · assistência</text><text x="118" y="212" text-anchor="middle" fill="#5eead4" font-size="11" font-weight="400">só sugere</text>
+          <rect x="222" y="140" width="176" height="44" rx="11" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="310" y="160" text-anchor="middle" fill="#99f6e4">2 · supervisionada</text><text x="310" y="176" text-anchor="middle" fill="#5eead4" font-size="11" font-weight="400">aprova cada ação</text>
+          <rect x="414" y="104" width="176" height="44" rx="11" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="502" y="124" text-anchor="middle" fill="#99f6e4">3 · controlada</text><text x="502" y="140" text-anchor="middle" fill="#5eead4" font-size="11" font-weight="400">passa por gates</text>
+          <rect x="606" y="68" width="176" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="694" y="88" text-anchor="middle" fill="#bfe6ff">4 · operacional</text><text x="694" y="104" text-anchor="middle" fill="#9ad6ff" font-size="11" font-weight="400">fluxo completo, com regras</text>
+        </g>
+        <g filter="url(#t5h-glow)"><rect x="798" y="32" width="172" height="44" rx="11" fill="#2a0f16" stroke="#f87171" stroke-width="2"/></g>
+        <text x="884" y="52" text-anchor="middle" fill="#fca5a5" font-family="Inter,sans-serif" font-size="12.5" font-weight="600">5 · crítica</text>
+        <text x="884" y="68" text-anchor="middle" fill="#fca5a5" font-family="Inter,sans-serif" font-size="11">não adotar sem rigor extremo</text>
+      </svg>
+      <p class="text-sm text-neutral-400 mt-3">
+        <strong class="text-teal-400">Como ler:</strong> a escada sobe em autonomia, mas cada degrau só é alcançável com o controle
+        do degrau anterior instalado. O topo aparece em vermelho de propósito: o nível 5 não é a meta do curso — é o limite que a
+        maioria das organizações não deveria cruzar.
+      </p>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#modulo-5-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">📘 Playbooks</h3>
+          <p class="text-xs text-neutral-400">Mesma tarefa, mesmo caminho</p>
+        </a>
+        <a href="#modulo-5-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">🧩 Skills e Rules</h3>
+          <p class="text-xs text-neutral-400">Capacidade e limite</p>
+        </a>
+        <a href="#modulo-5-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">🛡️ Governança</h3>
+          <p class="text-xs text-neutral-400">Cinco níveis de autonomia</p>
+        </a>
+      </div>
+    </section>
+
+    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+    <!-- MODULO 5.1 -->
+    <div id="modulo-5-1" data-inema-module="5-1" data-inema-track="5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📘 Playbooks e processos reutilizáveis</h3>
+        <p class="text-neutral-400 text-sm">Procedimentos para tarefas recorrentes: nova funcionalidade, correção de bug, modernização de legado, revisão de PR, refatoração, dependências, migração de banco, incidentes e validação antes do deploy.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t51-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">📘</span>
+            <div><span class="font-medium">Entenda o que é um playbook</span><span class="text-neutral-500 text-sm ml-2">- Sequência, não conselho</span></div>
+          </button>
+          <div id="t51-1" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um procedimento reutilizável para uma tarefa recorrente, escrito como sequência de passos com entradas, saídas e critério de conclusão.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O playbook é o que torna o resultado repetível entre pessoas e entre agentes — e é onde o conhecimento do time para de depender de quem está de plantão.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Passos ordenados &gt; princípios genéricos · Um playbook por tarefa recorrente · Ele evolui com o retorno da prática.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t51-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">✨</span>
+            <div><span class="font-medium">Playbook de nova funcionalidade</span><span class="text-neutral-500 text-sm ml-2">- Da spec ao PR</span></div>
+          </button>
+          <div id="t51-2" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ler a especificação → confirmar escopo → mapear impacto → criar plano → implementar mudança mínima → criar testes → executar quality gates → revisar → documentar → preparar pull request.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o caminho padrão do trabalho novo. Ter isso escrito elimina a variação de qualidade entre a segunda e a sexta-feira.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Confirmar escopo antes de codar · Mapear impacto revela o que quebra · Documentar faz parte do pronto.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t51-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🐞</span>
+            <div><span class="font-medium">Playbook de correção de bug</span><span class="text-neutral-500 text-sm ml-2">- Reproduzir antes de corrigir</span></div>
+          </button>
+          <div id="t51-3" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Reproduzir o erro → registrar evidência → identificar causa → criar teste que falha → implementar correção → executar regressão → revisar impacto → documentar.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A ordem importa: sem reprodução, você conserta o que imagina; sem teste que falha antes, não há prova de que o bug foi embora.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Reprodução é o primeiro passo · Teste que falha antes = prova · Regressão fecha o ciclo.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t51-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🏚️</span>
+            <div><span class="font-medium">Playbook de modernização</span><span class="text-neutral-500 text-sm ml-2">- Fronteira, adaptador, paralelo</span></div>
+          </button>
+          <div id="t51-4" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Mapear dependências → criar testes de caracterização → definir fronteira → criar adaptador → migrar módulo pequeno → executar em paralelo → comparar resultados → liberar gradualmente.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a trilha 4 condensada em procedimento — o formato em que ela realmente é usada no dia a dia.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Um módulo por vez · Comparação antes da troca · Liberação gradual mantém a volta disponível.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t51-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🚨</span>
+            <div><span class="font-medium">Playbook de incidente</span><span class="text-neutral-500 text-sm ml-2">- Evidência antes de mexer</span></div>
+          </button>
+          <div id="t51-5" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Coletar logs → classificar gravidade → preservar evidências → identificar causa provável → criar mitigação → validar → aplicar correção → registrar aprendizado.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sob pressão ninguém improvisa bem. O playbook é o que impede que a primeira reação apague a evidência do que aconteceu.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Preservar antes de agir · Mitigar ≠ corrigir · Aprendizado registrado vira regra ou gate.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t51-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">♻️</span>
+            <div><span class="font-medium">Mantenha os playbooks vivos</span><span class="text-neutral-500 text-sm ml-2">- Ou viram museu</span></div>
+          </button>
+          <div id="t51-6" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A prática de revisar o playbook toda vez que ele falha na realidade — e de guardar no repositório, versionado como código.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Playbook que não é usado apodrece e passa a atrapalhar: o agente segue um procedimento que já não descreve o sistema.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Falhou na prática? atualize · Versionado no repositório · Poucos e bons &gt; muitos e mortos.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-1.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 5.2 -->
+    <div id="modulo-5-2" data-inema-module="5-2" data-inema-track="5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧩 Skills e Rules</h3>
+        <p class="text-neutral-400 text-sm">Skills como capacidades reutilizáveis (analisar repositório, gerar spec, criar plano, implementar, revisar, testar) e rules como limites permanentes de comportamento.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t52-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🧩</span>
+            <div><span class="font-medium">Entenda o que é uma skill</span><span class="text-neutral-500 text-sm ml-2">- Capacidade empacotada</span></div>
+          </button>
+          <div id="t52-1" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma capacidade reutilizável que orienta o agente numa tarefa específica: analisar repositório, gerar especificação, criar plano, reproduzir bug, gerar testes, revisar arquitetura ou segurança, preparar PR.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Skill é o playbook em formato que o agente consome direto — deixa de ser você recolando o mesmo prompt toda semana.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Skill ≈ playbook executável · Uma tarefa por skill · Reuso reduz variação de qualidade.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t52-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🧱</span>
+            <div><span class="font-medium">Estruture uma skill</span><span class="text-neutral-500 text-sm ml-2">- Dez campos que bastam</span></div>
+          </button>
+          <div id="t52-2" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Objetivo, quando usar, entradas, ferramentas, etapas, critérios de aceitação, ações proibidas, tratamento de falhas, formato da saída e verificações obrigatórias.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">"Quando usar" e "ações proibidas" são os campos que separam uma skill útil de um prompt salvo — o primeiro faz o agente escolher certo, o segundo evita o dano.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Quando usar &gt; o que faz · Formato de saída torna a skill componível · Verificação obrigatória fecha o loop.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t52-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🗂️</span>
+            <div><span class="font-medium">Escolha quais skills criar primeiro</span><span class="text-neutral-500 text-sm ml-2">- Frequência × variação</span></div>
+          </button>
+          <div id="t52-3" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O critério de priorização: comece pelas tarefas que você repete muito e que hoje saem com qualidade inconsistente.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Skill de tarefa rara é manutenção sem retorno. Skill de tarefa semanal se paga na primeira semana.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Repetição justifica empacotar · Variação alta = ganho alto · Comece com 3 a 5 skills, não 30.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t52-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">📏</span>
+            <div><span class="font-medium">Entenda o que são rules</span><span class="text-neutral-500 text-sm ml-2">- Limite permanente</span></div>
+          </button>
+          <div id="t52-4" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Regras permanentes ou condicionais que limitam o comportamento dos agentes — nunca alterar testes para esconder falha, nunca inserir segredos, não fazer deploy sem aprovação, não refatorar fora do escopo.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Rules reduzem decisões arbitrárias. Elas não dependem de você lembrar de escrever a mesma proibição em cada tarefa.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Skill = capacidade, rule = limite · Regra vale em toda tarefa · Poucas e claras &gt; muitas e ignoradas.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t52-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🔐</span>
+            <div><span class="font-medium">Escreva rules de segurança e compatibilidade</span><span class="text-neutral-500 text-sm ml-2">- As inegociáveis</span></div>
+          </button>
+          <div id="t52-5" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O núcleo duro: não expor segredos, preservar APIs públicas, não remover logs de segurança, não modificar banco de produção diretamente, produzir evidência dos testes.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São as regras cuja violação custa caro e é difícil de reverter — merecem estar escritas e, quando possível, viradas gate.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Regra crítica também vira verificação · API pública é contrato · Evidência é obrigação, não cortesia.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t52-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🎚️</span>
+            <div><span class="font-medium">Use rules para limitar autonomia</span><span class="text-neutral-500 text-sm ml-2">- Tentativas, custo, destruição</span></div>
+          </button>
+          <div id="t52-6" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Regras que fixam limite de tentativas, teto de custo, exigência de aprovação antes de ações destrutivas e proibição de refatoração fora do escopo.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É onde a governança encontra o loop: a rule é a versão escrita e permanente dos limites que você configurou na trilha 2.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Limite escrito vale para todo agente · Destrutivo pede humano · Rule sem verificação depende de obediência.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-2.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 5.3 -->
+    <div id="modulo-5-3" data-inema-module="5-3" data-inema-track="5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🛡️ Governança e níveis de autonomia</h3>
+        <p class="text-neutral-400 text-sm">Identidade do agente, permissões, auditoria, controle de custos, dados acessíveis, política de segurança — e os cinco níveis de autonomia, do assistente ao crítico.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t53-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🛡️</span>
+            <div><span class="font-medium">Defina o que é governança de IA</span><span class="text-neutral-500 text-sm ml-2">- Como a IA pode operar aqui</span></div>
+          </button>
+          <div id="t53-1" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O conjunto de controles que define como a IA pode operar dentro da empresa: identidade, permissões, responsabilidades, auditoria, logs, custos, ambientes, dados, ações proibidas e tratamento de incidentes.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem governança, a adoção acontece de qualquer jeito — e a organização descobre suas regras depois do primeiro incidente.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Governança habilita, não só proíbe · Controle escrito &gt; norma implícita · Ela precisa caber no fluxo de trabalho.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t53-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🪪</span>
+            <div><span class="font-medium">Dê identidade e permissões ao agente</span><span class="text-neutral-500 text-sm ml-2">- Ele é um usuário</span></div>
+          </button>
+          <div id="t53-2" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Credencial própria, escopo mínimo de acesso, responsabilidades declaradas e trilha de auditoria por ação.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Agente rodando com a credencial pessoal de alguém torna impossível auditar e responsabilizar — e concede acesso que ninguém revisou.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Identidade própria sempre · Menor privilégio · Toda ação rastreável até quem autorizou.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t53-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">💰</span>
+            <div><span class="font-medium">Controle custo, dados e ambientes</span><span class="text-neutral-500 text-sm ml-2">- O que ele pode ver e gastar</span></div>
+          </button>
+          <div id="t53-3" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Teto de gasto por equipe e por tarefa, ambientes autorizados para execução, quais dados podem entrar no contexto e política de retenção.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dado pessoal ou segredo em contexto de terceiro é incidente de privacidade, não detalhe técnico — e custo sem teto vira surpresa no fechamento do mês.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Dado sensível não entra no contexto · Ambiente autorizado é lista curta · Custo por tarefa é métrica de gestão.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t53-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🪜</span>
+            <div><span class="font-medium">Conheça os cinco níveis de autonomia</span><span class="text-neutral-500 text-sm ml-2">- Do sugerir ao crítico</span></div>
+          </button>
+          <div id="t53-4" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Nível 1 assistência (só sugere) · 2 execução supervisionada (cada ação importante aprovada) · 3 execução controlada (tarefas delimitadas com quality gates) · 4 autonomia operacional limitada (fluxos completos dentro de regras e ambientes) · 5 autonomia crítica.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O nível 5 não deve ser adotado sem controles extremamente rigorosos. Saber onde você está evita conversas confusas sobre "usar IA ou não".</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">O nível é por tipo de tarefa, não por empresa · Subir de nível exige o controle do anterior · Nível 5 é limite, não meta.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t53-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📈</span>
+            <div><span class="font-medium">Suba de nível com evidência</span><span class="text-neutral-500 text-sm ml-2">- Métrica, não entusiasmo</span></div>
+          </button>
+          <div id="t53-5" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O processo de promover um tipo de tarefa a mais autonomia com base em números: taxa de aprovação sem correção, incidentes causados, custo por tarefa e tempo de revisão.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Autonomia concedida por empolgação volta atrás no primeiro susto — e aí o time perde também o que já funcionava.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Medir antes de promover · Piloto delimitado · Rebaixar também é decisão válida.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t53-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🧾</span>
+            <div><span class="font-medium">Monte o checklist de governança</span><span class="text-neutral-500 text-sm ml-2">- Uma página que decide</span></div>
+          </button>
+          <div id="t53-6" class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um documento curto que responde: quem é o agente, o que pode acessar, o que pode fazer sozinho, o que exige aprovação, quanto pode gastar, o que é registrado e quem responde.</p></div>
+              <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o artefato que permite escalar o uso de IA para outros times sem repetir a discussão inteira a cada vez.</p></div>
+              <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Uma página, não um manual · Revisão periódica · Sem dono, não existe governança.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-3.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 4: Arquitetura</a>
+      <a href="../trilha6/index.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">Trilha 6: Exercício prático →</a>
+    </div>
+  </main>
+
+  <div id="modal-5-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.1</span><span class="font-semibold">Playbooks e processos reutilizáveis</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
+      </div>
+      <iframe src="modulo-5-1.html" title="Módulo 5.1" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-5-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.2</span><span class="font-semibold">Skills e Rules</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
+      </div>
+      <iframe src="modulo-5-2.html" title="Módulo 5.2" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-5-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.3</span><span class="font-semibold">Governança e níveis de autonomia</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
+      </div>
+      <iframe src="modulo-5-3.html" title="Módulo 5.3" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../assets/curso.js"></script>
+  <script src="../../assets/learn.js"></script>
+  <script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>

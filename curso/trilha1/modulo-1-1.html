@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 1.1 · Onde realmente está a IA | Eng. de Software com IA</title>
+
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o) { var r = {}; for (var x in o) r[x] = o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') { for (var k in DEF) if (parsed[k] != null) p[k] = parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy === 'light') p.theme = 'claro'; else if (legacy === 'dark') p.theme = 'inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark': { dark: true, attr: null, cs: 'dark' }, 'claro': { dark: false, attr: null, cs: 'light' }, 'sepia': { dark: false, attr: 'sepia', cs: 'light' }, 'foco': { dark: null, attr: 'foco', cs: null }, 'contraste': { dark: true, attr: 'contraste', cs: 'dark' } };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style, scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale / 100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald: [152,76,45], blue: [217,91,60], purple: [258,90,66], amber: [38,92,50], teal: [174,72,41], rose: [350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0] + ''); s.setProperty('--accent-s', a[1] + '%'); s.setProperty('--accent-l', a[2] + '%');
+      s.setProperty('--accent', 'hsl(' + a[0] + ' ' + a[1] + '% ' + a[2] + '%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme = 'dark'; } catch (e) {} }
+  })();
+  </script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/learn.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    [id^="topico-"], [id^="modulo-"] { scroll-margin-top: 5rem; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
+    }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-rose-400:hover { color: #9f1239; }
+    html:not(.dark) .hover\:bg-rose-500\/10:hover { background-color: rgba(225,29,72,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.1</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="1-1" data-inema-track="1">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧭 Onde realmente está a IA na engenharia</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        As ferramentas atuais leem repositórios, criam arquivos, executam comandos, rodam testes e investigam falhas.
+        Este módulo situa você: em que fase estamos, o que um agente exige para operar, e o que muda no seu trabalho.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Base</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Fundamento</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:1-1" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 1.1">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-emerald-400">1. As três fases</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-emerald-400">2. O que o agente exige</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-emerald-400">3. O novo papel</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-emerald-400">4. Fundamentos</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-emerald-400">5. Limites reais</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-emerald-400">6. Só prompt, não</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-1-1#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">🪜 Identifique as três fases da IA no código</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-1-t1-p1">
+          A evolução do uso de IA no desenvolvimento passou por três fases. Elas não se substituem: convivem no seu dia.
+          O que muda em cada uma é <strong class="text-emerald-400">quanto da execução sai da sua mão</strong> — e, por
+          consequência, que tipo de controle você precisa colocar no lugar.
+        </p>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+          <p class="text-neutral-300 text-sm">
+            <strong>LLM</strong> é o modelo de IA que gera texto — o mesmo tipo que roda atrás do ChatGPT ou do Claude.
+            <strong>Ferramentas</strong> ("tools") são ações que esse modelo pode disparar sozinho: ler um arquivo, rodar
+            um comando no terminal, buscar na web. <strong>Agente</strong> é o modelo <em>mais</em> essas ferramentas
+            <em>mais</em> um ciclo que o faz repetir até achar que terminou. Guarde esses três: o curso inteiro usa.
+          </p>
+        </div>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Autocomplete</h4>
+              <p class="text-sm text-neutral-400 mb-3">A IA sugere linhas, funções ou pequenos trechos enquanto você digita.</p>
+              <p class="text-neutral-300 text-sm" data-inema-block="m1-1-t1-p2">O humano continua responsável por praticamente todas as decisões. O erro possível é local: uma sugestão ruim que você aceita sem ler. O custo de revisar é baixo porque o diff é pequeno.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Assistente</h4>
+              <p class="text-sm text-neutral-400 mb-3">A IA responde perguntas, explica código, cria funções, gera arquivos.</p>
+              <p class="text-neutral-300 text-sm" data-inema-block="m1-1-t1-p3">Ela já participa da implementação, mas ainda depende de instruções frequentes. Aqui aparece o primeiro risco de escala: você aceita blocos inteiros que não leu linha a linha, porque "parecia certo".</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-emerald-500/30">
+              <h4 class="font-semibold text-white mb-2">Agente</h4>
+              <p class="text-sm text-neutral-400 mb-3">Recebe uma tarefa e executa: explora o repositório, lê documentação, modifica arquivos, roda comandos e testes, analisa o erro e tenta corrigir a própria implementação.</p>
+              <p class="text-neutral-300 text-sm" data-inema-block="m1-1-t1-p4">Esta fase exige um novo tipo de engenharia. O agente não deve ser tratado como um chatbot esperto, e sim como um <strong class="text-emerald-400">componente operacional dentro de um sistema controlado</strong> — com permissões, limites, verificação e registro.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Sugestão</p><p class="text-xs text-neutral-400">Fase 1: risco local</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Resposta</p><p class="text-xs text-neutral-400">Fase 2: risco de bloco</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Execução</p><p class="text-xs text-neutral-400">Fase 3: risco sistêmico</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Controle</p><p class="text-xs text-neutral-400">Muda de linha para sistema</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-1-1#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">🧩 Liste o que um agente precisa para funcionar</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-1-t2-p1">
+          Quando um agente "não funciona", a causa quase nunca é o modelo. É um item ausente desta lista. Use-a como
+          diagnóstico: percorra os treze pontos e marque o que falta no seu setup atual.
+        </p>
+
+        <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 260" class="w-full h-auto" role="img" aria-label="O modelo no centro cercado pelos recursos que um agente precisa: contexto, ferramentas, permissões, ambiente, memória, testes e registro">
+            <defs>
+              <linearGradient id="m11-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+              <filter id="m11-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m11-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
+              <marker id="m11-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="260" fill="url(#m11-grid)"/>
+            <g fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.5">
+              <path d="M290,60  C400,60 420,120 430,120" marker-end="url(#m11-ahc)"/>
+              <path d="M290,130 L430,130" marker-end="url(#m11-ahc)"/>
+              <path d="M290,200 C400,200 420,140 430,140" marker-end="url(#m11-ahc)"/>
+              <path d="M710,60  C620,60 600,120 570,120" marker-end="url(#m11-ahc)"/>
+              <path d="M710,130 L570,130" marker-end="url(#m11-ahc)"/>
+              <path d="M710,200 C620,200 600,140 570,140" marker-end="url(#m11-ahc)"/>
+            </g>
+            <g filter="url(#m11-glow)"><rect x="430" y="98" width="140" height="64" rx="16" fill="#0e2018" stroke="url(#m11-grad)" stroke-width="2"/></g>
+            <text x="500" y="126" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="600" font-size="18">Modelo</text>
+            <text x="500" y="146" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-size="12.5">só uma peça</text>
+
+            <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+              <g class="wf-a"><rect x="60" y="42"  width="230" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="175" y="64"  text-anchor="middle" fill="#bfe6ff">contexto · documentação</text></g>
+              <g class="wf-a"><rect x="60" y="112" width="230" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="175" y="134" text-anchor="middle" fill="#bfe6ff">ferramentas · ambiente</text></g>
+              <g class="wf-a"><rect x="60" y="182" width="230" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="175" y="204" text-anchor="middle" fill="#bfe6ff">memória · estado</text></g>
+              <g class="wf-a"><rect x="710" y="42"  width="230" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="825" y="64"  text-anchor="middle" fill="#bfe6ff">permissões · regras</text></g>
+              <g class="wf-a"><rect x="710" y="112" width="230" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="825" y="134" text-anchor="middle" fill="#bfe6ff">testes · critério de fim</text></g>
+              <g class="wf-a"><rect x="710" y="182" width="230" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="825" y="204" text-anchor="middle" fill="#bfe6ff">interrupção · registro</text></g>
+            </g>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-emerald-400">Como ler:</strong> a caixa central é a única coisa que muitos times configuram — e é a
+            menor parte do problema. Tudo em ciano ao redor é o que você monta. Se uma dessas caixas está vazia, o agente falha
+            exatamente ali: sem "critério de fim" ele não para; sem "registro" você não descobre o que ele fez.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Setup que funciona</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Acesso ao repositório com escopo declarado (o que pode ler, o que pode escrever)</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Comando de teste que roda em segundos e falha alto</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Critério de conclusão explícito e verificável</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Log de todas as ações executadas</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Setup que vira acidente</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Acesso total à máquina "para facilitar"</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Nenhum teste — a verificação é você olhando o diff</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Termine quando estiver bom" como critério</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem registro: ninguém sabe quais comandos rodaram</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Contexto</p><p class="text-xs text-neutral-400">O que ele consegue ver</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Permissão</p><p class="text-xs text-neutral-400">O que ele pode fazer</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Verificação</p><p class="text-xs text-neutral-400">Como saber se deu certo</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Registro</p><p class="text-xs text-neutral-400">O que ficou de prova</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-1-1#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">🎛️ Assuma o novo papel do engenheiro</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-1-t3-p1">
+          O trabalho não diminuiu — ele mudou de lugar. Menos tempo digitando a implementação, mais tempo definindo o que
+          é certo, montando o contexto, fixando limites e julgando o resultado. Quem faz isso bem multiplica o time inteiro.
+        </p>
+
+        <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🎯</span> O deslocamento em uma frase</h3>
+          <p class="text-neutral-300 mb-4">Antes, seu produto era o código. Agora, seu produto é <strong class="text-emerald-400">o sistema que produz código confiável</strong> — a spec, o harness, o loop, os gates. O código é a saída desse sistema.</p>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Você escreve menos linhas e revisa mais mudanças.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Você transforma conhecimento tácito do time em documento e teste.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Você decide onde a autonomia para e o humano assina embaixo.</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Na próxima tarefa que você fosse delegar à IA, gaste 10 minutos escrevendo a spec antes de abrir o agente. Meça: quantas idas e vindas você economizou? Esse número é o argumento que convence seu time — não o discurso.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Especificar</p><p class="text-xs text-neutral-400">Definir o que é certo</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Contextualizar</p><p class="text-xs text-neutral-400">Escolher o que ele vê</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Limitar</p><p class="text-xs text-neutral-400">Definir onde para</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Julgar</p><p class="text-xs text-neutral-400">Aceitar ou rejeitar</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-1-1#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">🏗️ Entenda por que os fundamentos voltaram a importar</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-1-t4-p1">
+          A IA gera código rapidamente, mas não substitui conhecimento de engenharia. Quanto mais código ela produz, mais
+          valiosa fica a sua capacidade de <strong class="text-emerald-400">avaliar o resultado</strong> — e essa capacidade
+          vem de fundamentos, não de conhecer a ferramenta da vez.
+        </p>
+
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🔍</span> O que passa despercebido sem fundamentos</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-300 text-sm">
+            <div>• problemas de concorrência</div><div>• falhas de segurança</div>
+            <div>• erros de modelagem</div><div>• inconsistências no banco</div>
+            <div>• dependências frágeis</div><div>• problemas de desempenho</div>
+            <div>• incompatibilidades</div><div>• falhas de arquitetura</div>
+            <div>• impactos em outros sistemas</div><div>• comportamentos não documentados</div>
+          </div>
+          <p class="text-neutral-400 text-sm mt-4">Todos esses defeitos passam nos testes de caminho feliz. É exatamente por isso que eles chegam à produção.</p>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">O conhecimento durável</h3>
+          <p class="text-neutral-300 text-sm mb-3">Arquitetura, testes, sistemas operacionais, redes, APIs, segurança, bancos de dados e infraestrutura. Nada disso envelhece na velocidade das ferramentas.</p>
+          <p class="text-neutral-400 text-sm font-mono bg-dark-900/60 rounded-lg p-4 border border-dark-600">O conhecimento durável não está em decorar uma ferramenta.<br>Está em compreender como sistemas funcionam.</p>
+        </div>
+
+        <div data-inema-check="modulo-1-1#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
+          <p class="font-medium mb-4">Checagem rápida (não bloqueia nada): um agente entregou uma correção e todos os testes passaram. Qual é a conclusão correta?</p>
+          <div class="inema-check-options space-y-2">
+            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">A mudança está correta e pode ir para produção.</button>
+            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">A mudança satisfaz o que os testes cobrem — falta verificar se satisfaz a intenção.</button>
+            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Testes que passam não significam nada quando a IA escreveu o código.</button>
+          </div>
+          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Avaliar &gt; produzir</p><p class="text-xs text-neutral-400">O gargalo virou julgamento</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Caminho triste</p><p class="text-xs text-neutral-400">É onde mora o defeito</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Durável</p><p class="text-xs text-neutral-400">Sistemas, não produtos</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Escala</p><p class="text-xs text-neutral-400">Mais código, mais revisão</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-1-1#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">🚧 Reconheça os limites atuais das ferramentas</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-1-t5-p1">
+          Saber onde a ferramenta falha não é pessimismo — é o que define quais tarefas você delega hoje e quais ainda
+          exigem aprovação humana. Estes quatro limites explicam a maioria dos resultados ruins.
+        </p>
+
+        <div class="space-y-4 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-emerald-400 mb-1">1. Só existe o contexto que você deu</h4>
+            <p class="text-neutral-300 text-sm">O agente não sabe da conversa no corredor, da regra que só o Paulo conhece, nem do sistema vizinho que consome sua API de um jeito não documentado. O que não entrou no contexto, ele preenche com suposição plausível.</p>
+          </div>
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-emerald-400 mb-1">2. "Teste passou" não é "intenção atendida"</h4>
+            <p class="text-neutral-300 text-sm">Ele otimiza para o verificador que você deu. Se o verificador é fraco, a solução será fraca do jeito exato que o verificador não detecta.</p>
+          </div>
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-emerald-400 mb-1">3. Confiança constante, acerto variável</h4>
+            <p class="text-neutral-300 text-sm">O tom da resposta não varia com a qualidade dela. Você não consegue usar "ele pareceu seguro" como sinal.</p>
+          </div>
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-emerald-400 mb-1">4. Efeitos colaterais fora do repositório</h4>
+            <p class="text-neutral-300 text-sm">Banco, infraestrutura, permissões e integrações externas não voltam com um <span class="font-mono text-xs">git revert</span>. É por isso que essas ações pedem aprovação, não autonomia.</p>
+          </div>
+        </div>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Mudanças em produção, banco de dados, infraestrutura, permissões e segurança precisam de controles adicionais — sempre. Nenhuma economia de tempo compensa uma migração irreversível aplicada por um loop automático às 3h da manhã.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Contexto ausente</p><p class="text-xs text-neutral-400">Vira suposição</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Verificador fraco</p><p class="text-xs text-neutral-400">Solução fraca</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Tom ≠ acerto</p><p class="text-xs text-neutral-400">Confiança não é sinal</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Irreversível</p><p class="text-xs text-neutral-400">Exige humano</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-1-1#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">⚠️ Fuja do desenvolvimento baseado só em prompts</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-1-t6-p1">
+          Desenvolvimento só por prompt é aquele em que a única entrada é a frase do momento: sem especificação, sem
+          testes, sem limites, sem revisão independente. Parece produtivo por uma semana e cobra o preço no mês seguinte.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — o mesmo pedido, dois níveis</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-emerald-400">Objetivo:</strong> sentir na prática a diferença que o contexto faz. Rode os dois no seu agente (Claude Code, Codex, Cursor — tanto faz), num repositório de teste.</p>
+          <p class="text-neutral-400 text-sm mb-2">Prompt A (só prompt):</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Adicione cache no endpoint de listagem de produtos.</pre>
+          <p class="text-neutral-400 text-sm mb-2">Prompt B (mesma tarefa, com engenharia em volta):</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Tarefa: adicionar cache na listagem de produtos em &lt;caminho/do/arquivo&gt;.
+
+Fora do escopo: não alterar o contrato da resposta, não tocar em outros endpoints,
+não adicionar dependências novas sem me perguntar antes.
+
+Critérios de aceitação:
+- resposta idêntica à atual para os mesmos parâmetros (byte a byte);
+- invalidação do cache quando um produto é criado, alterado ou removido;
+- TTL configurável por variável de ambiente, com default de 60s;
+- teste automatizado cobrindo hit, miss e invalidação.
+
+Antes de implementar: me mostre o plano em até 10 linhas e espere aprovação.
+Ao terminar: rode &lt;comando de teste do seu projeto&gt; e cole a saída real.</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-emerald-400">Como verificar:</strong> compare os dois diffs. Conte arquivos alterados, dependências adicionadas e testes criados. O prompt A costuma inventar camada de cache genérica e mexer em arquivos não pedidos; o B entrega uma mudança revisável em minutos. Guarde os dois diffs — eles são o seu argumento no time.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Sinal de que você saiu do "só prompt"</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Existe um artefato escrito que define "certo" antes da execução</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Existe um comando que responde "deu certo?" sem opinião humana</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Existe uma fronteira do que não pode ser tocado</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Existe um segundo par de olhos (humano ou agente revisor)</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Sintomas da dívida por prompt</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Duas soluções para o mesmo problema em módulos diferentes</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>PRs grandes demais para revisar de verdade</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Testes que só cobrem o caminho feliz</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Dependências que ninguém sabe explicar por que entraram</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Velocidade dupla</p><p class="text-xs text-neutral-400">De entrega e de erro</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Fronteira</p><p class="text-xs text-neutral-400">Escopo negativo escrito</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Verificador</p><p class="text-xs text-neutral-400">Comando, não opinião</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Sistema</p><p class="text-xs text-neutral-400">O diferencial real</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- RESUMO -->
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Três fases</strong><span class="text-neutral-400"> - autocomplete, assistente e agente; o controle sobe da linha para o sistema.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Agente é componente</strong><span class="text-neutral-400"> - precisa de contexto, ferramentas, permissões, testes, critério de fim e registro.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Seu papel mudou</strong><span class="text-neutral-400"> - especificar, contextualizar, limitar e julgar.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Fundamentos decidem</strong><span class="text-neutral-400"> - só quem entende sistemas percebe o defeito que passa no teste.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Limites conhecidos viram regra</strong><span class="text-neutral-400"> - contexto ausente, verificador fraco, ações irreversíveis.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Só prompt não escala</strong><span class="text-neutral-400"> - o diferencial está no sistema construído ao redor do agente.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+            <p class="text-neutral-300">1.2 - Spec-Driven Development: transformar intenção em critério verificável.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const willOpen = !explanation.classList.contains('active');
+      explanation.classList.toggle('active');
+      button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    }
+    function openModal(modalId) { const m = document.getElementById(modalId); if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; } }
+    function closeModal() { document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden')); document.body.style.overflow = 'auto'; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const htmlEl = document.documentElement;
+    if (htmlEl.classList.contains('dark')) themeToggleLightIcon.classList.remove('hidden'); else themeToggleDarkIcon.classList.remove('hidden');
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden');
+      htmlEl.classList.toggle('dark');
+      const dark = htmlEl.classList.contains('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      try { const p = JSON.parse(localStorage.getItem('inema.prefs') || '{}'); p.theme = dark ? 'inema-dark' : 'claro'; localStorage.setItem('inema.prefs', JSON.stringify(p)); } catch (e) {}
+    });
+  </script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-1-1#q1', {
+          answer: 1,
+          explain: {
+            0: 'Não. Testes verdes provam apenas que o que está coberto continua funcionando — nada sobre o que ninguém testou.',
+            1: 'Isso. Passar nos testes é condição necessária, não suficiente. O código pode satisfazer o verificador e violar a intenção.',
+            2: 'Exagero na direção oposta. Testes valem — só não substituem revisão de intenção e arquitetura.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

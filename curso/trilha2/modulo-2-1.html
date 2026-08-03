@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 2.1 · Harness Engineering | Eng. de Software com IA</title>
+
+  <script src="../../assets/boot.js"></script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/curso.css">
+  <link rel="stylesheet" href="../../assets/learn.css">
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.1</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="2-1" data-inema-track="2">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Harness Engineering</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Harness Engineering é a engenharia da estrutura que envolve o modelo de IA. O modelo é apenas uma parte do
+        sistema — o harness define o que ele vê, o que pode fazer, como é verificado e quando precisa parar.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">55</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:2-1" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 2.1">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-blue-400">1. O que é harness</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-blue-400">2. Contexto</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-blue-400">3. Ferramentas e permissões</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-blue-400">4. Sandbox</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-blue-400">5. Memória e logs</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-blue-400">6. Verificadores e limites</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-2-1#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">🧰 Entenda o que é um harness</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-1-t1-p1">
+          O harness define: o que o agente consegue ver, quais ferramentas pode usar, quais ações pode executar, quais
+          regras deve seguir, como o contexto é selecionado, como o estado é preservado, como os resultados são
+          verificados, quando parar e o que exige aprovação. <strong class="text-blue-400">O diferencial não está no
+          prompt — está no sistema criado ao redor do agente.</strong>
+        </p>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+          <p class="text-neutral-300 text-sm">
+            <strong>Harness</strong> significa literalmente "arreio": o equipamento que conecta a força ao trabalho e dá direção.
+            Aqui é tudo que fica em volta do modelo. <strong>Sandbox</strong> é um ambiente descartável, isolado do resto.
+            <strong>Observabilidade</strong> é o conjunto de logs e métricas que permite reconstruir o que aconteceu depois do fato.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 220" class="w-full h-auto" role="img" aria-label="Fluxo do harness: pedido, leitura da especificação, seleção de contexto, plano, execução isolada, testes, revisão, quality gates, aprovação e entrega">
+            <defs>
+              <linearGradient id="m21-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+              <filter id="m21-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m21-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+              <marker id="m21-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="220" fill="url(#m21-grid)"/>
+            <g fill="none" stroke="#60a5fa" stroke-width="1.8" opacity="0.5">
+              <path d="M172,60 L192,60" marker-end="url(#m21-ah)"/><path d="M368,60 L388,60" marker-end="url(#m21-ah)"/>
+              <path d="M564,60 L584,60" marker-end="url(#m21-ah)"/><path d="M760,60 L780,60" marker-end="url(#m21-ah)"/>
+              <path d="M880,84 C880,110 200,110 140,110 L140,140" marker-end="url(#m21-ah)"/>
+              <path d="M240,164 L260,164" marker-end="url(#m21-ah)"/><path d="M436,164 L456,164" marker-end="url(#m21-ah)"/>
+              <path d="M632,164 L652,164" marker-end="url(#m21-ah)"/>
+            </g>
+            <g font-family="Inter,sans-serif" font-size="13.5" font-weight="600">
+              <rect x="20" y="38" width="152" height="44" rx="11" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="96" y="65" text-anchor="middle" fill="#bfdbfe">pedido</text>
+              <rect x="192" y="38" width="176" height="44" rx="11" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="280" y="65" text-anchor="middle" fill="#bfdbfe">ler a especificação</text>
+              <rect x="388" y="38" width="176" height="44" rx="11" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="476" y="65" text-anchor="middle" fill="#bfdbfe">selecionar contexto</text>
+              <rect x="584" y="38" width="176" height="44" rx="11" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="672" y="65" text-anchor="middle" fill="#bfdbfe">criar o plano</text>
+              <rect x="780" y="38" width="200" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="880" y="65" text-anchor="middle" fill="#bfe6ff">executar isolado</text>
+              <rect x="64" y="142" width="176" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="152" y="169" text-anchor="middle" fill="#bfe6ff">testes</text>
+              <rect x="260" y="142" width="176" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="348" y="169" text-anchor="middle" fill="#bfe6ff">revisão</text>
+              <rect x="456" y="142" width="176" height="44" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="544" y="169" text-anchor="middle" fill="#bfe6ff">quality gates</text>
+            </g>
+            <g filter="url(#m21-glow)"><rect x="652" y="136" width="328" height="56" rx="14" fill="#0e1622" stroke="url(#m21-grad)" stroke-width="2"/></g>
+            <text x="816" y="160" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="600" font-size="15">aprovação → entrega</text>
+            <text x="816" y="180" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="12">humano assina o que é irreversível</text>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-blue-400">Como ler:</strong> o pedido entra à esquerda e só chega à caixa iluminada (entrega) depois de
+            passar por execução isolada, testes, revisão e gates. Repare que nenhuma seta pula direto do plano para a entrega — é essa
+            ausência de atalho que caracteriza um harness.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Ver</p><p class="text-xs text-neutral-400">Contexto selecionado</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Fazer</p><p class="text-xs text-neutral-400">Ferramentas e permissões</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Provar</p><p class="text-xs text-neutral-400">Verificadores</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Parar</p><p class="text-xs text-neutral-400">Limites e aprovação</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-2-1#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">🗂️ Selecione contexto de propósito</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-1-t2-p1">
+          Contexto é o conjunto de arquivos, documentos, exemplos e informações relevantes para a tarefa. A tentação é
+          jogar tudo. O resultado de jogar tudo é um agente que imita o pior padrão do repositório com a mesma
+          naturalidade com que imita o melhor.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Contexto que ajuda</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>A especificação da tarefa (fonte da verdade)</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Os 3–8 arquivos que serão realmente tocados</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Um exemplo <em>bom</em> do padrão que você quer replicado</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Os testes relacionados e como rodá-los</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>O AGENTS.md com comandos e regras do projeto</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Contexto que atrapalha</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>O repositório inteiro "por precaução"</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Documentação desatualizada que contradiz o código</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Código legado que você quer justamente abandonar</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Duas fontes de verdade dizendo coisas diferentes</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Histórico de chat irrelevante arrastado adiante</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Antes de rodar o agente, escreva em uma linha: "o que ele precisa ler para não supor nada?". Se a resposta tem mais de dez arquivos, provavelmente a tarefa está grande demais — quebre antes de executar.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Curadoria</p><p class="text-xs text-neutral-400">Escolher é o trabalho</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Exemplo bom</p><p class="text-xs text-neutral-400">Vale mais que descrição</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Fonte única</p><p class="text-xs text-neutral-400">Evita instrução conflitante</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Tarefa grande</p><p class="text-xs text-neutral-400">Quebre antes de rodar</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-2-1#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">🔑 Defina ferramentas e permissões</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-1-t3-p1">
+          Ferramentas são terminal, editor, busca, testes, banco de dados, APIs. Permissões definem o que pode ser lido,
+          alterado, executado ou publicado com cada uma. <strong class="text-blue-400">Permissão implícita é permissão
+          total</strong> — e a maior parte dos incidentes com agentes é acesso que ninguém decidiu conceder, apenas não negou.
+        </p>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — declare o harness em AGENTS.md</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-blue-400">Objetivo:</strong> tirar as permissões da sua cabeça e colocá-las num arquivo versionado, que o agente lê antes de agir. Crie <span class="font-mono text-xs">AGENTS.md</span> na raiz do repositório com este conteúdo, ajustando o que está entre <span class="font-mono text-xs">&lt; &gt;</span>.</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4"># AGENTS.md
+
+## Comandos
+- instalar: &lt;comando&gt;
+- testar: &lt;comando de teste&gt;
+- lint: &lt;comando de lint&gt;
+- build: &lt;comando de build&gt;
+
+## Pode (sem perguntar)
+- ler qualquer arquivo do repositório
+- criar branch e commitar na branch de trabalho
+- rodar testes, lint e build
+- criar e editar arquivos em &lt;pastas permitidas&gt;
+
+## Não pode (exige aprovação humana explícita)
+- alterar arquivos de teste existentes
+- adicionar ou atualizar dependências
+- rodar migração de banco
+- alterar CI/CD, secrets, infraestrutura ou permissões
+- fazer push na branch principal ou deploy
+
+## Limites
+- no máximo &lt;N&gt; arquivos alterados por tarefa
+- no máximo &lt;N&gt; tentativas de correção antes de parar e me perguntar
+- se a mesma falha ocorrer 2 vezes, pare e relate — não tente uma terceira
+
+## Definição de pronto
+- os testes passam (cole a saída real, não resuma)
+- nenhum arquivo fora do escopo foi tocado
+- o diff cabe em uma revisão de 10 minutos</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Como verificar:</strong> peça ao agente "leia o AGENTS.md e me diga, em lista, o que você NÃO pode fazer nesta tarefa". Se ele não repetir suas proibições corretamente, o arquivo está ambíguo — reescreva antes de delegar qualquer coisa.</p>
+        </div>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Um agente com acesso a secrets, produção ou CI/CD é um usuário privilegiado — trate-o como tal: identidade própria, credencial de menor privilégio e trilha de auditoria. "É só um assistente" não é modelo de ameaça.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Menor privilégio</p><p class="text-xs text-neutral-400">O padrão é negar</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Escrito</p><p class="text-xs text-neutral-400">Regra fora do arquivo não existe</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Identidade</p><p class="text-xs text-neutral-400">Agente é usuário, não mágica</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Auditoria</p><p class="text-xs text-neutral-400">Toda ação deixa rastro</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-2-1#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">📦 Isole a execução em sandbox</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-1-t4-p1">
+          Sandbox é o ambiente isolado onde o agente executa sem afetar produção nem o seu ambiente de trabalho. É o que
+          transforma "erro do agente" em "tentativa descartada" — e é o que permite conceder mais autonomia com menos medo.
+        </p>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Isolamento de código</h4>
+              <p class="text-neutral-300 text-sm">Branch dedicada ou <span class="font-mono text-xs">git worktree</span> separado. Descartar é <span class="font-mono text-xs">git worktree remove</span> — custo zero, sem sujar seu diretório de trabalho.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Isolamento de execução</h4>
+              <p class="text-neutral-300 text-sm">Container ou VM com rede restrita. O agente pode rodar o que quiser lá dentro; o que ele não alcança, não quebra.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-blue-500/30">
+              <h4 class="font-semibold text-white mb-2">Isolamento de dados</h4>
+              <p class="text-neutral-300 text-sm">Base descartável com dados sintéticos ou anonimizados. Nunca aponte um agente autônomo para o banco de produção — nem para leitura, se lá houver dado pessoal.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Errar barato</p><p class="text-xs text-neutral-400">É o objetivo do sandbox</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Worktree</p><p class="text-xs text-neutral-400">Isolamento barato de código</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Rede restrita</p><p class="text-xs text-neutral-400">Limita o alcance real</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Dado sintético</p><p class="text-xs text-neutral-400">Produção fica fora</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-2-1#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">🧠 Gerencie memória, estado e observabilidade</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-1-t5-p1">
+          Memória é o que ele carrega; estado é onde ele parou; observabilidade é o que ficou registrado. Os três
+          resolvem problemas diferentes e são confundidos com frequência.
+        </p>
+
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> O que registrar em cada execução</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• <strong>Entrada:</strong> qual spec, qual contexto, qual versão do repositório (commit).</li>
+            <li>• <strong>Ações:</strong> comandos executados e arquivos alterados, em ordem.</li>
+            <li>• <strong>Verificação:</strong> saída real dos testes — não o resumo do agente.</li>
+            <li>• <strong>Custo:</strong> tempo, tentativas e tokens consumidos.</li>
+            <li>• <strong>Desfecho:</strong> sucesso, desistência ou interrupção — e por quê.</li>
+          </ul>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Monitor de execução <span class="text-xs text-neutral-500 font-normal">(recriação ilustrativa, não é screenshot real)</span></h3>
+          <div class="rounded-lg border border-dark-600 overflow-hidden">
+            <div class="flex items-center gap-2 px-3 py-2 bg-dark-700 border-b border-dark-600">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-neutral-400 ml-2 font-mono">agente · tarefa #482</span>
+            </div>
+            <div class="p-4 font-mono text-xs text-neutral-300 space-y-1 bg-dark-900/60">
+              <p><span class="text-blue-400">[plano]</span> 3 passos · 4 arquivos previstos</p>
+              <p><span class="text-blue-400">[exec ]</span> editou src/pagamentos/idempotencia.ts</p>
+              <p><span class="text-emerald-400">[teste]</span> 128 passaram · 1 falhou (duplicidade)</p>
+              <p><span class="text-blue-400">[exec ]</span> tentativa 2/3 · corrigiu chave composta</p>
+              <p><span class="text-emerald-400">[teste]</span> 129 passaram · 0 falharam</p>
+              <p><span class="text-yellow-400">[gate ]</span> aguardando aprovação: migração detectada</p>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">Como ler:</strong> cada linha é um evento auditável. "tentativa 2/3" mostra o limite funcionando; a última linha mostra o loop parando sozinho diante de uma ação irreversível — exatamente o comportamento que você quer.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Memória</p><p class="text-xs text-neutral-400">O que ele carrega</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Estado</p><p class="text-xs text-neutral-400">Onde ele parou</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Log</p><p class="text-xs text-neutral-400">O que ficou provado</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Saída real</p><p class="text-xs text-neutral-400">Nunca o resumo dele</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-2-1#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">✅ Instale verificadores e limites</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-1-t6-p1">
+          Verificadores são os testes e validações que avaliam a qualidade do resultado. Limites são os tetos de tempo,
+          custo, tentativas, arquivos modificados e ações permitidas. <strong class="text-blue-400">A qualidade do
+          verificador determina quanta autonomia você pode conceder</strong> — não a qualidade do modelo.
+        </p>
+
+        <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📏</span> Os limites que valem a pena configurar hoje</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Arquivos alterados:</strong> mantém o diff revisável e denuncia escopo estourado.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Tentativas:</strong> impede a repetição da mesma correção com outra roupa.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Tempo e custo:</strong> transforma "ficou rodando a noite toda" em alerta, não em fatura.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Ações proibidas:</strong> deploy, migração, secret, branch principal — sempre com humano.</span></li>
+          </ul>
+        </div>
+
+        <div data-inema-check="modulo-2-1#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
+          <p class="font-medium mb-4">Checagem rápida: você quer aumentar a autonomia do agente num repositório. Qual investimento tem mais efeito?</p>
+          <div class="inema-check-options space-y-2">
+            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Trocar para um modelo maior e mais caro.</button>
+            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Escrever prompts mais detalhados a cada tarefa.</button>
+            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Melhorar os verificadores (testes rápidos e confiáveis) e o isolamento.</button>
+          </div>
+          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Verificador</p><p class="text-xs text-neutral-400">Autoriza a autonomia</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Teste rápido</p><p class="text-xs text-neutral-400">Loop só funciona se for veloz</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Teto</p><p class="text-xs text-neutral-400">Freio quando o resto falha</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Aprovação</p><p class="text-xs text-neutral-400">Parte do harness, não extra</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Harness é o sistema em volta</strong><span class="text-neutral-400"> - instruções, contexto, ferramentas, permissões, sandbox, memória, logs, verificadores, limites.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Contexto é curadoria</strong><span class="text-neutral-400"> - jogar tudo faz o agente imitar o pior padrão do repositório.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Permissão implícita é total</strong><span class="text-neutral-400"> - escreva o que pode e o que não pode no AGENTS.md.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Sandbox torna o erro barato</strong><span class="text-neutral-400"> - código, execução e dados isolados.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Log é evidência</strong><span class="text-neutral-400"> - guarde a saída real dos testes, não o resumo do agente.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">O verificador libera autonomia</strong><span class="text-neutral-400"> - e os limites seguram quando ele falha.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3>
+            <p class="text-neutral-300">2.2 - Loop Engineering: o ciclo que executa, testa, corrige — e sabe parar.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo Módulo →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../assets/curso.js"></script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-2-1#q1', {
+          answer: 2,
+          explain: {
+            0: 'Modelo maior ajuda na margem. Sem verificador confiável, ele só erra com mais eloquência.',
+            1: 'Prompt melhor resolve uma tarefa. Verificador melhor resolve todas as próximas.',
+            2: 'Isso. Verificação rápida e confiável + isolamento é o que permite delegar mais sem aumentar o risco.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

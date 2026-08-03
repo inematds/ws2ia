@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="ws2ia">
+  <title>Módulo 1.2 · Spec-Driven Development | Eng. de Software com IA</title>
+
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o) { var r = {}; for (var x in o) r[x] = o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') { for (var k in DEF) if (parsed[k] != null) p[k] = parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy === 'light') p.theme = 'claro'; else if (legacy === 'dark') p.theme = 'inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark': { dark: true, attr: null, cs: 'dark' }, 'claro': { dark: false, attr: null, cs: 'light' }, 'sepia': { dark: false, attr: 'sepia', cs: 'light' }, 'foco': { dark: null, attr: 'foco', cs: null }, 'contraste': { dark: true, attr: 'contraste', cs: 'dark' } };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style, scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale / 100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald: [152,76,45], blue: [217,91,60], purple: [258,90,66], amber: [38,92,50], teal: [174,72,41], rose: [350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0] + ''); s.setProperty('--accent-s', a[1] + '%'); s.setProperty('--accent-l', a[2] + '%');
+      s.setProperty('--accent', 'hsl(' + a[0] + ' ' + a[1] + '% ' + a[2] + '%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme = 'dark'; } catch (e) {} }
+  })();
+  </script>
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/learn.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    [id^="topico-"], [id^="modulo-"] { scroll-margin-top: 5rem; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
+    }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-rose-400:hover { color: #9f1239; }
+    html:not(.dark) .hover\:bg-rose-500\/10:hover { background-color: rgba(225,29,72,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <span class="text-neutral-600">-</span>
+          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
+            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="1-2" data-inema-track="1">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📐 Spec-Driven Development</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Desenvolvimento orientado por especificações: transformar intenção em critérios verificáveis que reduzem
+        ambiguidade — e que um agente consegue executar, testar e provar que cumpriu.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Base</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+
+      <div class="mt-6 max-w-2xl">
+        <div data-inema-meter="modulo:1-2" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 1.2">
+          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+
+    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+      <ul class="space-y-1 text-sm">
+        <li><a href="#topico-1" class="inema-toc-link hover:text-emerald-400">1. O fluxo da spec</a></li>
+        <li><a href="#topico-2" class="inema-toc-link hover:text-emerald-400">2. Os 11 elementos</a></li>
+        <li><a href="#topico-3" class="inema-toc-link hover:text-emerald-400">3. Escopo e aceitação</a></li>
+        <li><a href="#topico-4" class="inema-toc-link hover:text-emerald-400">4. Contratos e erros</a></li>
+        <li><a href="#topico-5" class="inema-toc-link hover:text-emerald-400">5. Ruim × completa</a></li>
+        <li><a href="#topico-6" class="inema-toc-link hover:text-emerald-400">6. Spec vira teste</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo" class="inema-prose">
+
+      <!-- TOPICO 1 -->
+      <section id="topico-1" data-inema-topic="modulo-1-2#topico-1" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+          <h2 class="text-2xl font-bold">📐 Adote o fluxo orientado por especificação</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-2-t1-p1">
+          Spec-Driven Development significa que a especificação vem antes do código — e permanece como fonte da verdade
+          durante toda a execução. Uma especificação não é um texto genérico: ela existe para
+          <strong class="text-emerald-400">reduzir ambiguidade</strong> e transformar intenção em critérios verificáveis.
+        </p>
+
+        <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+          <svg viewBox="0 0 1000 150" class="w-full h-auto" role="img" aria-label="Fluxo linear: intenção, especificação estruturada, plano, implementação, testes e verificação">
+            <defs>
+              <linearGradient id="m12-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+              <filter id="m12-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="m12-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
+              <marker id="m12-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="150" fill="url(#m12-grid)"/>
+            <g fill="none" stroke="#34d399" stroke-width="1.8" opacity="0.5">
+              <path d="M148,72 L166,72" marker-end="url(#m12-ah)"/><path d="M314,72 L332,72" marker-end="url(#m12-ah)"/>
+              <path d="M446,72 L464,72" marker-end="url(#m12-ah)"/><path d="M612,72 L630,72" marker-end="url(#m12-ah)"/>
+              <path d="M744,72 L762,72" marker-end="url(#m12-ah)"/>
+            </g>
+            <rect x="16" y="48" width="132" height="48" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+            <text x="82" y="78" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-weight="600" font-size="14">Intenção</text>
+            <g filter="url(#m12-glow)"><rect x="166" y="42" width="148" height="60" rx="12" fill="#0e2018" stroke="url(#m12-grad)" stroke-width="2"/></g>
+            <text x="240" y="70" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="600" font-size="15">Especificação</text>
+            <text x="240" y="88" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-size="11.5">estruturada</text>
+            <rect x="332" y="48" width="114" height="48" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+            <text x="389" y="78" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-weight="600" font-size="14">Plano</text>
+            <rect x="464" y="48" width="148" height="48" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+            <text x="538" y="78" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-weight="600" font-size="14">Implementação</text>
+            <rect x="630" y="48" width="114" height="48" rx="12" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+            <text x="687" y="78" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-weight="600" font-size="14">Testes</text>
+            <rect x="762" y="48" width="222" height="48" rx="12" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+            <text x="873" y="78" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-weight="600" font-size="14">Verificação contra a spec</text>
+            <text x="240" y="126" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-size="12">fonte da verdade</text>
+            <text x="873" y="126" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="12">compara com a fonte da verdade</text>
+          </svg>
+          <p class="text-sm text-neutral-400 mt-3">
+            <strong class="text-emerald-400">Como ler:</strong> repare nas duas pontas. A especificação (esquerda, em destaque) e a
+            verificação (direita, em ciano) falam da mesma coisa — a segunda só existe para conferir a primeira. Se você não escreveu a
+            spec, a verificação não tem contra o que comparar, e "pronto" vira opinião.
+          </p>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+          <p class="text-neutral-300 text-sm">
+            <strong>Especificação (spec)</strong> é um documento curto que diz o que precisa existir e como saber que ficou pronto —
+            não é documentação de arquitetura nem um chamado no Jira. <strong>Critério de aceitação</strong> é uma frase que pode ser
+            respondida com sim ou não olhando o sistema ("a resposta continua idêntica para os mesmos parâmetros"). Se a frase depende
+            de gosto ("ficar mais organizado"), ela ainda não é critério.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Antes do código</p><p class="text-xs text-neutral-400">Spec precede o plano</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Ambiguidade</p><p class="text-xs text-neutral-400">Alguém sempre decide</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Verificável</p><p class="text-xs text-neutral-400">Sim/não, não "melhor"</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Fonte da verdade</p><p class="text-xs text-neutral-400">Vale mais que o chat</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 2 -->
+      <section id="topico-2" data-inema-topic="modulo-1-2#topico-2" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+          <h2 class="text-2xl font-bold">🧱 Monte os elementos de uma boa especificação</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-2-t2-p1">
+          Este é o esqueleto. Cada campo ausente vira uma decisão que o agente toma sozinho — normalmente a mais genérica
+          possível. Use como checklist: se um campo está vazio, pergunte-se quem vai decidir aquilo, e quando.
+        </p>
+
+        <div class="space-y-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Problema</p><p class="text-neutral-300 text-sm">Qual problema precisa ser resolvido? (não é a solução)</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Objetivo</p><p class="text-neutral-300 text-sm">Qual resultado deve ser alcançado?</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Escopo · Fora do escopo</p><p class="text-neutral-300 text-sm">O que faz parte da tarefa — e o que <strong>não</strong> deve ser alterado.</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Entradas · Saídas</p><p class="text-neutral-300 text-sm">Quais dados ou eventos entram; quais resultados o sistema produz.</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Contratos</p><p class="text-neutral-300 text-sm">Interfaces, formatos e comportamentos que devem ser preservados.</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Condições de erro</p><p class="text-neutral-300 text-sm">O que deve acontecer quando algo falhar.</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Restrições</p><p class="text-neutral-300 text-sm">Tecnologias, padrões, limites e regras a respeitar.</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Critérios de aceitação · Testes</p><p class="text-neutral-300 text-sm">Como verificar a conclusão; quais testes criar ou executar.</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 font-semibold text-sm mb-1">Definição de pronto</p><p class="text-neutral-300 text-sm">Quais condições encerram o trabalho — sem negociação posterior.</p></div>
+        </div>
+
+        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+          <p class="text-neutral-300">Comece guardando esse esqueleto como <span class="font-mono text-sm">specs/_template.md</span> no repositório. Spec que mora junto do código é lida; spec que mora numa wiki externa envelhece em duas semanas.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Campo vazio</p><p class="text-xs text-neutral-400">= decisão delegada</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Fora do escopo</p><p class="text-xs text-neutral-400">Freio da refatoração</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Contrato</p><p class="text-xs text-neutral-400">Protege quem consome</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Pronto</p><p class="text-xs text-neutral-400">Encerra a discussão</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 3 -->
+      <section id="topico-3" data-inema-topic="modulo-1-2#topico-3" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+          <h2 class="text-2xl font-bold">🎯 Delimite escopo e critérios de aceitação</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-2-t3-p1">
+          Escopo positivo todo mundo escreve. O que salva a revisão é o <strong class="text-emerald-400">escopo negativo</strong>:
+          a lista do que não pode ser tocado. Sem ele, um agente competente "aproveita a viagem" e devolve um diff de
+          quarenta arquivos que ninguém revisa direito.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+            <h4 class="font-bold text-emerald-400 mb-4">✓ Critério verificável</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"A resposta permanece idêntica para os mesmos parâmetros."</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Requisição duplicada com a mesma chave de idempotência não cria segunda cobrança."</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Nenhum arquivo fora de <span class="font-mono text-xs">src/pagamentos/</span> é alterado."</span></li>
+              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"A suíte roda em menos de 90 segundos."</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+            <h4 class="font-bold text-red-400 mb-4">✗ Critério que não decide nada</h4>
+            <ul class="space-y-3 text-neutral-300 text-sm">
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Deixar o código mais limpo."</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Melhorar a performance."</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Seguir as boas práticas."</span></li>
+              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Manter compatibilidade" (sem dizer com o quê).</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Teste do escopo negativo</h3>
+          <p class="text-neutral-300 text-sm mb-3">Antes de mandar a tarefa, responda em uma linha cada:</p>
+          <p class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300">Quais arquivos/pastas ele NÃO pode tocar?<br>Quais dependências ele NÃO pode adicionar?<br>Qual comportamento existente NÃO pode mudar?<br>Que tipo de refatoração fica para depois?</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Sim/não</p><p class="text-xs text-neutral-400">Critério é binário</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Escopo negativo</p><p class="text-xs text-neutral-400">Vale tanto quanto o positivo</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Diff pequeno</p><p class="text-xs text-neutral-400">É revisável de verdade</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Sem "melhor"</p><p class="text-xs text-neutral-400">Comparativo vago não serve</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 4 -->
+      <section id="topico-4" data-inema-topic="modulo-1-2#topico-4" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+          <h2 class="text-2xl font-bold">🔌 Descreva contratos, entradas, saídas e erros</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-2-t4-p1">
+          Quase toda regressão grave nasce de um contrato implícito: alguém sabia que aquele campo nunca podia vir nulo,
+          mas isso não estava escrito em lugar nenhum. O agente não adivinha o que o time inteiro esqueceu de registrar.
+        </p>
+
+        <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🔒</span> O que um contrato fixa</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Forma:</strong> nomes de campos, tipos, obrigatoriedade, formato de data, unidade de valor monetário.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Comportamento:</strong> ordenação, paginação, idempotência, efeitos colaterais.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Falha:</strong> qual código de erro, qual corpo de resposta, se há retentativa e com qual espera.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Compatibilidade:</strong> quem consome hoje e o que não pode quebrar para essa pessoa.</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🧭</span> Condições de erro que quase sempre faltam</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-300 text-sm">
+            <div>• timeout do serviço externo</div><div>• resposta parcial / paginada</div>
+            <div>• dado duplicado em reprocessamento</div><div>• permissão insuficiente</div>
+            <div>• limite de taxa (rate limit) atingido</div><div>• falha no meio de uma transação</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Implícito quebra</p><p class="text-xs text-neutral-400">Escreva o óbvio</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Erro é requisito</p><p class="text-xs text-neutral-400">Caminho triste tem spec</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Quem consome</p><p class="text-xs text-neutral-400">Liste antes de mudar</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Teste de contrato</p><p class="text-xs text-neutral-400">Transforma acordo em gate</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 5 -->
+      <section id="topico-5" data-inema-topic="modulo-1-2#topico-5" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+          <h2 class="text-2xl font-bold">🆚 Compare uma spec ruim com uma spec completa</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-2-t5-p1">
+          O par canônico do workshop. Leia os dois e conte quantas decisões estavam escondidas na frase curta.
+        </p>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">✗</span> Especificação ruim</h3>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Crie um sistema de pagamentos.</pre>
+          <p class="text-neutral-300 text-sm mt-3">Meios de pagamento, duplicidade, estados, webhooks, dados sensíveis, testes, rollback — tudo isso será decidido por quem executar, do jeito que parecer razoável no momento.</p>
+        </div>
+
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">✓</span> Especificação mais completa</h3>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Criar um serviço de pagamentos que:
+
+- aceite PIX e cartão;
+- impeça duplicidade por chave de idempotência;
+- registre todos os estados da transação;
+- processe webhooks;
+- realize retentativas;
+- gere logs estruturados;
+- preserve compatibilidade com a API atual;
+- não armazene dados sensíveis de cartão;
+- inclua testes unitários e de integração;
+- tenha rollback para migrações;
+- bloqueie o merge se os testes falharem.</pre>
+          <p class="text-neutral-300 text-sm mt-3">Cada linha fecha uma porta de decisão. Quanto melhor a especificação, menor a chance de o agente tomar decisões incompatíveis com o sistema.</p>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — gere a spec com o próprio agente</h3>
+          <p class="text-neutral-300 text-sm mb-2"><strong class="text-emerald-400">Objetivo:</strong> sair da frase curta sem escrever tudo do zero. Cole no seu agente, dentro do repositório real.</p>
+          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Você vai escrever uma ESPECIFICAÇÃO, não código. Não altere nenhum arquivo.
+
+Tarefa que eu quero fazer: &lt;descreva em uma frase&gt;
+Repositório: leia &lt;caminhos relevantes&gt; antes de responder.
+
+Produza um documento com estas seções, e nada além delas:
+problema · objetivo · escopo · fora do escopo · entradas · saídas ·
+contratos · condições de erro · restrições · critérios de aceitação ·
+testes · definição de pronto
+
+Regras:
+- cada critério de aceitação deve ser verificável com sim ou não;
+- liste explicitamente o que NÃO deve ser alterado;
+- no final, liste em "PERGUNTAS" tudo que você teve que supor.
+- não invente regras de negócio: se não achou no código, vai para PERGUNTAS.</pre>
+          <p class="text-neutral-300 text-sm"><strong class="text-emerald-400">Como verificar:</strong> a seção "PERGUNTAS" é o ouro do exercício — ela lista exatamente as decisões que o agente teria tomado sozinho se você tivesse mandado o prompt curto. Responda-as, atualize a spec e só então autorize a implementação.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Uma linha</p><p class="text-xs text-neutral-400">Esconde dez decisões</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Idempotência</p><p class="text-xs text-neutral-400">Requisito, não detalhe</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">PERGUNTAS</p><p class="text-xs text-neutral-400">Suposições à vista</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Spec versionada</p><p class="text-xs text-neutral-400">Mora no repositório</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TOPICO 6 -->
+      <section id="topico-6" data-inema-topic="modulo-1-2#topico-6" class="mb-16">
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+          <h2 class="text-2xl font-bold">🔗 Transforme cada critério em teste</h2>
+        </div>
+
+        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m1-2-t6-p1">
+          Aqui a spec deixa de ser documento e vira mecanismo. Uma regra escrita em texto é útil; a mesma regra
+          transformada em teste automático é <strong class="text-emerald-400">muito mais confiável</strong> — e é o que
+          permite delegar execução ao agente sem perder controle.
+        </p>
+
+        <div class="space-y-6 mb-6">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">1</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Leia o critério em voz alta</h4>
+              <p class="text-neutral-300 text-sm">"Requisição duplicada com a mesma chave não gera segunda cobrança."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">2</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+              <h4 class="font-semibold text-white mb-2">Escreva o teste que falha hoje</h4>
+              <p class="text-neutral-300 text-sm">Dispara duas vezes a mesma requisição e afirma que existe exatamente uma cobrança. Ele precisa falhar antes da implementação — senão não está testando nada.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">3</span></div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-emerald-500/30">
+              <h4 class="font-semibold text-white mb-2">Entregue o teste ao agente como definição de pronto</h4>
+              <p class="text-neutral-300 text-sm">A tarefa deixa de ser "implemente idempotência" e passa a ser "faça este teste passar sem alterar o próprio teste". É uma condição de parada objetiva — o assunto da trilha 2.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+          <p class="text-neutral-300">Se o agente pode editar os testes livremente, ele tem permissão para redefinir o que significa "pronto". Trate arquivos de teste como área protegida: alterar teste é mudança de spec e exige aprovação humana explícita.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Spec executável</p><p class="text-xs text-neutral-400">Teste é a regra viva</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Falha primeiro</p><p class="text-xs text-neutral-400">Senão não prova nada</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Teste protegido</p><p class="text-xs text-neutral-400">Mudar teste = mudar spec</p></div>
+          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-emerald-400 text-sm font-semibold mb-1">Autonomia</p><p class="text-xs text-neutral-400">Vem do verificador</p></div>
+        </div>
+
+        <div class="flex justify-start items-center gap-3 mt-6">
+          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
+          </button>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
+            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- RESUMO -->
+      <section class="mb-12">
+        <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Spec antes do código</strong><span class="text-neutral-400"> - intenção → spec → plano → implementação → testes → verificação.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Esqueleto de 11 campos</strong><span class="text-neutral-400"> - campo vazio é decisão delegada ao agente.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Escopo negativo</strong><span class="text-neutral-400"> - dizer o que não pode ser tocado mantém o diff revisável.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Contrato escrito</strong><span class="text-neutral-400"> - forma, comportamento, falha e compatibilidade.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">A frase curta esconde decisões</strong><span class="text-neutral-400"> - o exercício das PERGUNTAS revela quais.</span></div></div>
+            <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Critério vira teste</strong><span class="text-neutral-400"> - regra em texto é útil; regra em teste é confiável.</span></div></div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+            <h3 class="font-semibold text-emerald-400 mb-2">Próxima trilha:</h3>
+            <p class="text-neutral-300">Trilha 2 - Harness Engineering: o sistema que envolve o modelo (ferramentas, contexto, permissões, limites).</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+            <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Trilha 2 →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        <span class="text-neutral-600 mx-1">-</span>
+        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const willOpen = !explanation.classList.contains('active');
+      explanation.classList.toggle('active');
+      button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    }
+    function openModal(modalId) { const m = document.getElementById(modalId); if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; } }
+    function closeModal() { document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden')); document.body.style.overflow = 'auto'; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const htmlEl = document.documentElement;
+    if (htmlEl.classList.contains('dark')) themeToggleLightIcon.classList.remove('hidden'); else themeToggleDarkIcon.classList.remove('hidden');
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden');
+      htmlEl.classList.toggle('dark');
+      const dark = htmlEl.classList.contains('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      try { const p = JSON.parse(localStorage.getItem('inema.prefs') || '{}'); p.theme = dark ? 'inema-dark' : 'claro'; localStorage.setItem('inema.prefs', JSON.stringify(p)); } catch (e) {}
+    });
+  </script>
+  <script src="../../assets/learn.js"></script>
+  <script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>
