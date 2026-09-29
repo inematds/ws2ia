@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+
+<html class="dark" lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="ws2ia">
-  <title>Módulo 5.2 · Skills e Rules | Eng. de Software com IA</title>
-
-  <script src="../../assets/boot.js"></script>
-
-  <script type="application/json" data-inema-manifest>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Módulo 5.2 · Skills e Rules | Eng. de Software com IA</title>
+<script src="../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
   {
     "course": "ws2ia",
     "tracks": [
@@ -42,173 +41,155 @@
     ]
   }
   </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/curso.css">
-  <link rel="stylesheet" href="../../assets/learn.css">
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-
-  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
-
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-          <span class="text-neutral-600">-</span>
-          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
-          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
-          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
-          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
-          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
-            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
-          </button>
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
-    <div class="flex items-center space-x-2 text-sm text-neutral-400">
-      <a href="../../index.html" class="hover:text-teal-400">Início</a><span>/</span>
-      <a href="index.html" class="hover:text-teal-400">Trilha 5</a><span>/</span>
-      <span class="text-teal-400">Módulo 5.2</span>
-    </div>
-  </nav>
-
-  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="5-2" data-inema-track="5">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MÓDULO 5.2</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧩 Skills e Rules</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/curso.css" rel="stylesheet"/>
+<link href="../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha5/modulo-5-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha5/modulo-5-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha5/modulo-5-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-5-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha5/modulo-5-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha5/modulo-5-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10" href="index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>Minha jornada</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Alternar tema claro/escuro" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Trilha de navegação" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-teal-400" href="../../index.html">Início</a><span>/</span>
+<a class="hover:text-teal-400" href="index.html">Trilha 5</a><span>/</span>
+<span class="text-teal-400">Módulo 5.2</span>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="5-2" data-inema-track="5">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MÓDULO 5.2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🧩 Skills e Rules</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
         Skills são capacidades reutilizáveis que orientam o agente em tarefas específicas. Rules são regras permanentes
         que limitam o comportamento dele. Uma amplia; a outra cerca.
       </p>
-
-      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
-      </div>
-
-      <div class="mt-6 max-w-2xl">
-        <div data-inema-meter="modulo:5-2" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 5.2">
-          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
-
-    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
-      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
-      <ul class="space-y-1 text-sm">
-        <li><a href="#topico-1" class="inema-toc-link hover:text-teal-400">1. O que é skill</a></li>
-        <li><a href="#topico-2" class="inema-toc-link hover:text-teal-400">2. Estrutura</a></li>
-        <li><a href="#topico-3" class="inema-toc-link hover:text-teal-400">3. Quais criar</a></li>
-        <li><a href="#topico-4" class="inema-toc-link hover:text-teal-400">4. O que são rules</a></li>
-        <li><a href="#topico-5" class="inema-toc-link hover:text-teal-400">5. Segurança</a></li>
-        <li><a href="#topico-6" class="inema-toc-link hover:text-teal-400">6. Limitar autonomia</a></li>
-      </ul>
-    </nav>
-
-    <main id="conteudo" class="inema-prose">
-
-      <!-- TOPICO 1 -->
-      <section id="topico-1" data-inema-topic="modulo-5-2#topico-1" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
-          <h2 class="text-2xl font-bold">🧩 Entenda o que é uma skill</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t1-p1">
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Progresso do módulo 5.2" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:5-2" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+<nav aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
+<p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+<ul class="space-y-1 text-sm">
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-1">1. O que é skill</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-2">2. Estrutura</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-3">3. Quais criar</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-4">4. O que são rules</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-5">5. Segurança</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-6">6. Limitar autonomia</a></li>
+</ul>
+</nav>
+<main class="inema-prose" id="conteudo">
+<!-- TOPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-5-2#topico-1" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🧩 Entenda o que é uma skill</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t1-p1">
           Skill é uma capacidade reutilizável que orienta o agente numa tarefa específica: analisar repositório, gerar
           especificação, criar plano, reproduzir bug, gerar testes, revisar arquitetura, revisar segurança, atualizar
           documentação, preparar pull request, modernizar módulo legado, analisar incidente, validar deploy.
         </p>
-
-        <div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
-          <svg viewBox="0 0 1000 200" class="w-full h-auto" role="img" aria-label="Skills como capacidades dentro de um cercado de rules: a skill amplia o que o agente faz, a rule limita por onde ele pode ir">
-            <defs>
-              <linearGradient id="m52-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
-              <filter id="m52-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <pattern id="m52-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.12"/></pattern>
-            </defs>
-            <rect x="0" y="0" width="1000" height="200" fill="url(#m52-grid)"/>
-            <g filter="url(#m52-glow)"><rect x="30" y="24" width="940" height="152" rx="20" fill="none" stroke="url(#m52-grad)" stroke-width="2" stroke-dasharray="12 8"/></g>
-            <text x="52" y="52" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="600" font-size="15">RULES · o cercado (valem em toda tarefa)</text>
-            <g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
-              <rect x="60" y="72" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="158" y="96" text-anchor="middle" fill="#bfe6ff">analisar repositório</text>
-              <rect x="276" y="72" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="374" y="96" text-anchor="middle" fill="#bfe6ff">gerar especificação</text>
-              <rect x="492" y="72" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="590" y="96" text-anchor="middle" fill="#bfe6ff">gerar testes</text>
-              <rect x="708" y="72" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="806" y="96" text-anchor="middle" fill="#bfe6ff">revisar segurança</text>
-              <rect x="60" y="122" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="158" y="146" text-anchor="middle" fill="#bfe6ff">reproduzir bug</text>
-              <rect x="276" y="122" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="374" y="146" text-anchor="middle" fill="#bfe6ff">preparar PR</text>
-              <rect x="492" y="122" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="590" y="146" text-anchor="middle" fill="#bfe6ff">modernizar módulo</text>
-              <rect x="708" y="122" width="196" height="38" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="806" y="146" text-anchor="middle" fill="#bfe6ff">analisar incidente</text>
-            </g>
-          </svg>
-          <p class="text-sm text-neutral-400 mt-3">
-            <strong class="text-teal-400">Como ler:</strong> as caixas em ciano são skills — cada uma amplia o que o agente consegue
+<div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+<svg aria-label="Skills como capacidades dentro de um cercado de rules: a skill amplia o que o agente faz, a rule limita por onde ele pode ir" class="w-full h-auto" role="img" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="m52-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2dd4bf"></stop><stop offset="1" stop-color="#14b8a6"></stop></lineargradient>
+<filter height="180%" id="m52-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m52-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#14b8a6" opacity="0.12" r="1.3"></circle></pattern>
+</defs>
+<rect fill="url(#m52-grid)" height="200" width="1000" x="0" y="0"></rect>
+<g filter="url(#m52-glow)"><rect fill="none" height="152" rx="20" stroke="url(#m52-grad)" stroke-dasharray="12 8" stroke-width="2" width="940" x="30" y="24"></rect></g>
+<text fill="#2dd4bf" font-family="Inter,sans-serif" font-size="15" font-weight="600" x="52" y="52">RULES · o cercado (valem em toda tarefa)</text>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="60" y="72"></rect><text fill="#bfe6ff" text-anchor="middle" x="158" y="96">analisar repositório</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="276" y="72"></rect><text fill="#bfe6ff" text-anchor="middle" x="374" y="96">gerar especificação</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="492" y="72"></rect><text fill="#bfe6ff" text-anchor="middle" x="590" y="96">gerar testes</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="708" y="72"></rect><text fill="#bfe6ff" text-anchor="middle" x="806" y="96">revisar segurança</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="60" y="122"></rect><text fill="#bfe6ff" text-anchor="middle" x="158" y="146">reproduzir bug</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="276" y="122"></rect><text fill="#bfe6ff" text-anchor="middle" x="374" y="146">preparar PR</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="492" y="122"></rect><text fill="#bfe6ff" text-anchor="middle" x="590" y="146">modernizar módulo</text>
+<rect fill="#0e1b26" height="38" rx="10" stroke="#38bdf8" stroke-width="2" width="196" x="708" y="122"></rect><text fill="#bfe6ff" text-anchor="middle" x="806" y="146">analisar incidente</text>
+</g>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-teal-400">Como ler:</strong> as caixas em ciano são skills — cada uma amplia o que o agente consegue
             fazer bem. A linha tracejada em volta são as rules: elas não ensinam nada, apenas definem por onde ninguém passa. Adicionar
             skill sem cercado é como aumentar potência sem freio.
           </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Capacidade</p><p class="text-xs text-neutral-400">Skill amplia</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Limite</p><p class="text-xs text-neutral-400">Rule cerca</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Reuso</p><p class="text-xs text-neutral-400">Menos variação</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Uma tarefa</p><p class="text-xs text-neutral-400">Por skill</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 2 -->
-      <section id="topico-2" data-inema-topic="modulo-5-2#topico-2" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
-          <h2 class="text-2xl font-bold">🧱 Estruture uma skill</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t2-p1">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Capacidade</p><p class="text-xs text-neutral-400">Skill amplia</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Limite</p><p class="text-xs text-neutral-400">Rule cerca</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Reuso</p><p class="text-xs text-neutral-400">Menos variação</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Uma tarefa</p><p class="text-xs text-neutral-400">Por skill</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-5-2#topico-2" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">🧱 Estruture uma skill</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t2-p1">
           Dez campos bastam. Os dois que mais separam uma skill útil de um prompt salvo são
           <strong class="text-teal-400">"quando usar"</strong> (faz o agente escolher certo) e
           <strong class="text-teal-400">"ações proibidas"</strong> (evita o dano).
         </p>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — sua primeira skill</h3>
-          <p class="text-neutral-300 text-sm mb-2"><strong class="text-teal-400">Objetivo:</strong> transformar um prompt que você já repete numa skill versionada. Crie <span class="font-mono text-xs">skills/&lt;nome&gt;/SKILL.md</span> com este esqueleto.</p>
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4"># Skill: &lt;nome curto e verbal, ex.: revisar-api&gt;
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — sua primeira skill</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-teal-400">Objetivo:</strong> transformar um prompt que você já repete numa skill versionada. Crie <span class="font-mono text-xs">skills/&lt;nome&gt;/SKILL.md</span> com este esqueleto.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4"># Skill: &lt;nome curto e verbal, ex.: revisar-api&gt;
 
 ## Objetivo
 &lt;o que esta skill entrega, em uma frase&gt;
@@ -240,96 +221,85 @@
 
 ## Verificações obrigatórias
 - &lt;o que rodar antes de declarar pronto, com a saída real anexada&gt;</pre>
-          <p class="text-neutral-300 text-sm"><strong class="text-teal-400">Como verificar:</strong> peça a alguém do time para usar a skill numa tarefa real sem você explicar nada. Se essa pessoa precisar perguntar algo, o que faltou vira campo novo. Skill boa é a que funciona sem o autor por perto.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Quando usar</p><p class="text-xs text-neutral-400">O campo mais importante</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Proibições</p><p class="text-xs text-neutral-400">Dentro da própria skill</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Formato</p><p class="text-xs text-neutral-400">Torna componível</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Verificação</p><p class="text-xs text-neutral-400">Fecha o loop</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 3 -->
-      <section id="topico-3" data-inema-topic="modulo-5-2#topico-3" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
-          <h2 class="text-2xl font-bold">🗂️ Escolha quais skills criar primeiro</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t3-p1">
+<p class="text-neutral-300 text-sm"><strong class="text-teal-400">Como verificar:</strong> peça a alguém do time para usar a skill numa tarefa real sem você explicar nada. Se essa pessoa precisar perguntar algo, o que faltou vira campo novo. Skill boa é a que funciona sem o autor por perto.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Quando usar</p><p class="text-xs text-neutral-400">O campo mais importante</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Proibições</p><p class="text-xs text-neutral-400">Dentro da própria skill</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Formato</p><p class="text-xs text-neutral-400">Torna componível</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Verificação</p><p class="text-xs text-neutral-400">Fecha o loop</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-5-2#topico-3" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🗂️ Escolha quais skills criar primeiro</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t3-p1">
           Priorize por <strong class="text-teal-400">frequência × variação de qualidade</strong>: tarefas que você repete
           muito e que hoje saem diferentes dependendo de quem faz. Skill de tarefa rara é manutenção sem retorno.
         </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-            <h4 class="font-bold text-emerald-400 mb-4">✓ Boas primeiras skills</h4>
-            <ul class="space-y-3 text-neutral-300 text-sm">
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Gerar especificação a partir de uma tarefa</span></li>
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Revisar PR com lente de segurança</span></li>
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Reproduzir bug e escrever o teste que falha</span></li>
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Preparar PR com evidências anexadas</span></li>
-            </ul>
-          </div>
-          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-            <h4 class="font-bold text-red-400 mb-4">✗ Skills que não se pagam</h4>
-            <ul class="space-y-3 text-neutral-300 text-sm">
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Fazer qualquer coisa no repositório" (genérica demais)</span></li>
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Tarefa que acontece uma vez por semestre</span></li>
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Processo que ainda muda toda semana</span></li>
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Trinta skills criadas antes de usar a primeira</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-          <p class="text-neutral-300">Comece com três a cinco skills. Se em um mês uma delas não foi usada, ela não era prioridade — apague. Coleção grande de skills não usadas tem o mesmo problema de documentação morta: entra no contexto e atrapalha.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Frequência</p><p class="text-xs text-neutral-400">Primeiro critério</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Variação</p><p class="text-xs text-neutral-400">Onde há mais ganho</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">3 a 5</p><p class="text-xs text-neutral-400">Não trinta</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Não usada</p><p class="text-xs text-neutral-400">Apague</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 4 -->
-      <section id="topico-4" data-inema-topic="modulo-5-2#topico-4" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
-          <h2 class="text-2xl font-bold">📏 Entenda o que são rules</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t4-p1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Boas primeiras skills</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Gerar especificação a partir de uma tarefa</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Revisar PR com lente de segurança</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Reproduzir bug e escrever o teste que falha</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Preparar PR com evidências anexadas</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Skills que não se pagam</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Fazer qualquer coisa no repositório" (genérica demais)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Tarefa que acontece uma vez por semestre</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Processo que ainda muda toda semana</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Trinta skills criadas antes de usar a primeira</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+<p class="text-neutral-300">Comece com três a cinco skills. Se em um mês uma delas não foi usada, ela não era prioridade — apague. Coleção grande de skills não usadas tem o mesmo problema de documentação morta: entra no contexto e atrapalha.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Frequência</p><p class="text-xs text-neutral-400">Primeiro critério</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Variação</p><p class="text-xs text-neutral-400">Onde há mais ganho</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">3 a 5</p><p class="text-xs text-neutral-400">Não trinta</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Não usada</p><p class="text-xs text-neutral-400">Apague</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-5-2#topico-4" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">📏 Entenda o que são rules</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t4-p1">
           Rules são regras permanentes ou condicionais que limitam o comportamento dos agentes. Elas valem em toda tarefa,
           independentemente da skill usada. <strong class="text-teal-400">Rules reduzem decisões arbitrárias.</strong>
-        </p>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <h3 class="text-lg font-semibold mb-3">Conjunto base — copie e adapte</h3>
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">- nunca alterar testes para esconder uma falha
+</p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3">Conjunto base — copie e adapte</h3>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">- nunca alterar testes para esconder uma falha
 - nunca inserir segredos no repositório
 - não adicionar dependência sem justificar
 - preservar APIs públicas
@@ -341,170 +311,153 @@
 - parar quando o custo ultrapassar o limite
 - pedir aprovação antes de ações destrutivas
 - não realizar refatoração fora do escopo</pre>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Permanente</p><p class="text-xs text-neutral-400">Vale em toda tarefa</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Arbitrariedade</p><p class="text-xs text-neutral-400">É o que a rule corta</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Clara</p><p class="text-xs text-neutral-400">Uma linha, sem ambiguidade</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Poucas</p><p class="text-xs text-neutral-400">Lista longa é ignorada</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 5 -->
-      <section id="topico-5" data-inema-topic="modulo-5-2#topico-5" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
-          <h2 class="text-2xl font-bold">🔐 Escreva rules de segurança e compatibilidade</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t5-p1">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Permanente</p><p class="text-xs text-neutral-400">Vale em toda tarefa</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Arbitrariedade</p><p class="text-xs text-neutral-400">É o que a rule corta</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Clara</p><p class="text-xs text-neutral-400">Uma linha, sem ambiguidade</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Poucas</p><p class="text-xs text-neutral-400">Lista longa é ignorada</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-5-2#topico-5" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🔐 Escreva rules de segurança e compatibilidade</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t5-p1">
           Este é o núcleo duro: as regras cuja violação custa caro e é difícil de reverter. Elas merecem estar escritas —
           e, sempre que possível, viradas gate automático.
         </p>
-
-        <div class="space-y-6 mb-6">
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
-            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-              <h4 class="font-semibold text-white mb-2">Nunca alterar testes para esconder falha</h4>
-              <p class="text-neutral-300 text-sm">É a regra que protege o próprio conceito de "pronto". Sem ela, todo o resto do curso perde o sentido — o verificador deixa de ser confiável.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
-            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-              <h4 class="font-semibold text-white mb-2">Nunca inserir segredos no repositório</h4>
-              <p class="text-neutral-300 text-sm">Combine com o gate de detecção de segredos do módulo 3.3. Regra e verificação juntas: uma orienta, a outra impede.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
-            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-teal-500/30">
-              <h4 class="font-semibold text-white mb-2">Preservar APIs públicas e produzir evidência</h4>
-              <p class="text-neutral-300 text-sm">Contrato público não muda sem versionamento. E toda entrega vem com a saída real dos testes — evidência é obrigação, não cortesia.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
-          <p class="text-neutral-300">Rule sem verificação depende de obediência — e obediência de um sistema probabilístico não é garantia. Sempre que a regra for crítica <em>e</em> automatizável, transforme-a em gate. A rule continua valendo para orientar; o gate é quem impede.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Teste intocável</p><p class="text-xs text-neutral-400">Protege o "pronto"</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Segredo</p><p class="text-xs text-neutral-400">Rule + gate</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">API pública</p><p class="text-xs text-neutral-400">Contrato preservado</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Evidência</p><p class="text-xs text-neutral-400">Obrigação</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 6 -->
-      <section id="topico-6" data-inema-topic="modulo-5-2#topico-6" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
-          <h2 class="text-2xl font-bold">🎚️ Use rules para limitar autonomia</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t6-p1">
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Nunca alterar testes para esconder falha</h4>
+<p class="text-neutral-300 text-sm">É a regra que protege o próprio conceito de "pronto". Sem ela, todo o resto do curso perde o sentido — o verificador deixa de ser confiável.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Nunca inserir segredos no repositório</h4>
+<p class="text-neutral-300 text-sm">Combine com o gate de detecção de segredos do módulo 3.3. Regra e verificação juntas: uma orienta, a outra impede.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-teal-500/30">
+<h4 class="font-semibold text-white mb-2">Preservar APIs públicas e produzir evidência</h4>
+<p class="text-neutral-300 text-sm">Contrato público não muda sem versionamento. E toda entrega vem com a saída real dos testes — evidência é obrigação, não cortesia.</p>
+</div>
+</div>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+<p class="text-neutral-300">Rule sem verificação depende de obediência — e obediência de um sistema probabilístico não é garantia. Sempre que a regra for crítica <em>e</em> automatizável, transforme-a em gate. A rule continua valendo para orientar; o gate é quem impede.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Teste intocável</p><p class="text-xs text-neutral-400">Protege o "pronto"</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Segredo</p><p class="text-xs text-neutral-400">Rule + gate</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">API pública</p><p class="text-xs text-neutral-400">Contrato preservado</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Evidência</p><p class="text-xs text-neutral-400">Obrigação</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-5-2#topico-6" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">🎚️ Use rules para limitar autonomia</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-2-t6-p1">
           Limite de tentativas, teto de custo, aprovação antes de ações destrutivas, proibição de refatoração fora do
           escopo: é a versão escrita e permanente dos limites que você configurou na trilha 2.
         </p>
-
-        <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center"><span class="mr-2">🔗</span> Onde cada peça vive</h3>
-          <ul class="space-y-2 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Rule</strong> (texto, sempre válida): "pedir aprovação antes de ações destrutivas".</span></li>
-            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Harness</strong> (configuração): a permissão que simplesmente não existe para o agente.</span></li>
-            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Gate</strong> (verificação): o pipeline que barra a mudança se a regra foi violada.</span></li>
-            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span>As três camadas se reforçam. Depender de uma só é aposta.</span></li>
-          </ul>
-        </div>
-
-        <div data-inema-check="modulo-5-2#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
-          <p class="font-medium mb-4">Checagem rápida: você escreveu a rule "nunca commitar segredo". Isso é suficiente?</p>
-          <div class="inema-check-options space-y-2">
-            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Sim — a regra está escrita e o agente foi instruído.</button>
-            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Não — regra crítica e automatizável também precisa virar gate que barra o commit.</button>
-            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Não — o certo é remover o acesso do agente ao repositório inteiro.</button>
-          </div>
-          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Rule</p><p class="text-xs text-neutral-400">Orienta</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Harness</p><p class="text-xs text-neutral-400">Nem dá a permissão</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Gate</p><p class="text-xs text-neutral-400">Impede na saída</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Três camadas</p><p class="text-xs text-neutral-400">Se reforçam</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <section class="mb-12">
-        <div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
-          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
-          <div class="space-y-4 mb-8">
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Skill amplia, rule cerca</strong><span class="text-neutral-400"> - capacidade e limite são coisas diferentes.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Dez campos bastam</strong><span class="text-neutral-400"> - "quando usar" e "ações proibidas" fazem a diferença.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Comece com 3 a 5 skills</strong><span class="text-neutral-400"> - frequência × variação de qualidade.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Rules reduzem arbitrariedade</strong><span class="text-neutral-400"> - valem em toda tarefa, sem depender de lembrar.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Núcleo duro escrito</strong><span class="text-neutral-400"> - teste intocável, sem segredo, API preservada, evidência sempre.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Rule + harness + gate</strong><span class="text-neutral-400"> - três camadas que se reforçam.</span></div></div>
-          </div>
-          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-            <h3 class="font-semibold text-teal-400 mb-2">Próximo Módulo:</h3>
-            <p class="text-neutral-300">5.3 - Governança e níveis de autonomia: quem é o agente e até onde ele vai.</p>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
-            <a href="modulo-5-3.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">Próximo Módulo →</a>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <footer class="border-t border-dark-600 py-8 mt-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
-      <p class="mt-2">
-        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
-        <span class="text-neutral-600 mx-1">-</span>
-        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="../../assets/curso.js"></script>
-  <script src="../../assets/learn.js"></script>
-  <script>
+<div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center"><span class="mr-2">🔗</span> Onde cada peça vive</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Rule</strong> (texto, sempre válida): "pedir aprovação antes de ações destrutivas".</span></li>
+<li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Harness</strong> (configuração): a permissão que simplesmente não existe para o agente.</span></li>
+<li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Gate</strong> (verificação): o pipeline que barra a mudança se a regra foi violada.</span></li>
+<li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span>As três camadas se reforçam. Depender de uma só é aposta.</span></li>
+</ul>
+</div>
+<div class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-5-2#q1">
+<p class="font-medium mb-4">Checagem rápida: você escreveu a rule "nunca commitar segredo". Isso é suficiente?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Sim — a regra está escrita e o agente foi instruído.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Não — regra crítica e automatizável também precisa virar gate que barra o commit.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Não — o certo é remover o acesso do agente ao repositório inteiro.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Rule</p><p class="text-xs text-neutral-400">Orienta</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Harness</p><p class="text-xs text-neutral-400">Nem dá a permissão</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Gate</p><p class="text-xs text-neutral-400">Impede na saída</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Três camadas</p><p class="text-xs text-neutral-400">Se reforçam</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<section class="mb-12">
+<div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Skill amplia, rule cerca</strong><span class="text-neutral-400"> - capacidade e limite são coisas diferentes.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Dez campos bastam</strong><span class="text-neutral-400"> - "quando usar" e "ações proibidas" fazem a diferença.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Comece com 3 a 5 skills</strong><span class="text-neutral-400"> - frequência × variação de qualidade.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Rules reduzem arbitrariedade</strong><span class="text-neutral-400"> - valem em toda tarefa, sem depender de lembrar.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Núcleo duro escrito</strong><span class="text-neutral-400"> - teste intocável, sem segredo, API preservada, evidência sempre.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Rule + harness + gate</strong><span class="text-neutral-400"> - três camadas que se reforçam.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-teal-400 mb-2">Próximo Módulo:</h3>
+<p class="text-neutral-300">5.3 - Governança e níveis de autonomia: quem é o agente e até onde ele vai.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para Trilha</a>
+<a class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors" href="modulo-5-3.html">Próximo Módulo →</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../assets/curso.js"></script>
+<script src="../../assets/learn.js"></script>
+<script>
     if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
     window.addEventListener('DOMContentLoaded', function () {
       if (window.INEMA && INEMA.registerCheck) {

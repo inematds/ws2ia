@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Module 4.3 · Overengineering and Technical Debt | AI Software Engineering</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha4/modulo-4-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha4/modulo-4-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha4/modulo-4-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha4/modulo-4-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-4-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha4/modulo-4-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Skip to content</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">AI Software Engineering</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Foundations</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flow &amp; Quality</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10" href="index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Architecture</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governance</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Practice</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>My journey</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Switch between light and dark themes" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-amber-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-amber-400" href="index.html">Track 4</a><span>/</span>
+<span class="text-amber-400">Module 4.3</span>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="4-3" data-inema-track="4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MODULE 4.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🪓 Overengineering and AI-generated technical debt</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Even if the error rate per line stays the same, the amount of code grows—and the total number of problems
+        grows with it. This module is about containing complexity before it becomes structural.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">50</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Advanced</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Practical</div><div class="text-xs text-neutral-400">Type</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Module 4.3 progress" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:4-3" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 of 6</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+<nav aria-label="Page index" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
+<p class="text-sm text-neutral-400 mb-2">Section <span class="inema-toc-pos">1</span> from <span class="inema-toc-total">6</span></p>
+<ul class="space-y-1 text-sm">
+<li><a class="inema-toc-link hover:text-amber-400" href="#topico-1">1. Smallest change</a></li>
+<li><a class="inema-toc-link hover:text-amber-400" href="#topico-2">2. Premature abstraction</a></li>
+<li><a class="inema-toc-link hover:text-amber-400" href="#topico-3">3. Dependencies and limits</a></li>
+<li><a class="inema-toc-link hover:text-amber-400" href="#topico-4">4. Semantic duplication</a></li>
+<li><a class="inema-toc-link hover:text-amber-400" href="#topico-5">5. Superficial tests</a></li>
+<li><a class="inema-toc-link hover:text-amber-400" href="#topico-6">6. Violates the intent</a></li>
+</ul>
+</nav>
+<main class="inema-prose" id="conteudo">
+<!-- TOPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-4-3#topico-1" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🪓 Require the smallest possible change</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-3-t1-p1">
+          AI tends to produce seemingly complete solutions, even when a smaller solution would suffice:
+          premature abstractions, unnecessary layers, redundant interfaces, internal frameworks, too many files,
+          excessive configuration, handling hypothetical cases.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3">The practical rule — paste it into your AGENTS.md</h3>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Implement the smallest change that satisfies the acceptance criteria.
+Don’t create new abstractions, dependencies, or layers without a proven need.</pre>
+<p class="text-neutral-400 text-sm mt-3">Two sentences. This is the best cost-benefit control in this entire course.</p>
+</div>
+<div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+<svg aria-label="Comparison between a minimal solution with a few files and an overbuilt solution with unnecessary layers, interfaces, and configuration" class="w-full h-auto" role="img" viewbox="0 0 1000 210">
+<defs>
+<lineargradient id="m43-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fbbf24"></stop><stop offset="1" stop-color="#f59e0b"></stop></lineargradient>
+<filter height="180%" id="m43-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m43-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#f59e0b" opacity="0.12" r="1.3"></circle></pattern>
+</defs>
+<rect fill="url(#m43-grid)" height="210" width="1000" x="0" y="0"></rect>
+<path d="M500,14 L500,196" opacity="0.5" stroke="#9ca3af" stroke-dasharray="9 9" stroke-width="1.6"></path>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="14" font-weight="600" x="40" y="36">✓ same spec, minimal solution</text>
+<text fill="#f87171" font-family="Inter,sans-serif" font-size="14" font-weight="600" x="540" y="36">✗ same spec, bloated solution</text>
+<g filter="url(#m43-glow)"><rect fill="#1f1604" height="46" rx="11" stroke="url(#m43-grad)" stroke-width="2" width="200" x="40" y="60"></rect></g>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="140" y="89">2 files</text>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#1f1604" height="34" rx="9" stroke="#fbbf24" stroke-width="2" width="200" x="40" y="118"></rect><text fill="#fcd9a0" text-anchor="middle" x="140" y="140">1 new test</text>
+<rect fill="#1f1604" height="34" rx="9" stroke="#fbbf24" stroke-width="2" width="200" x="40" y="160"></rect><text fill="#fcd9a0" text-anchor="middle" x="140" y="182">0 dependencies</text>
+<rect fill="#2a0f16" height="34" rx="9" stroke="#f87171" stroke-width="2" width="200" x="540" y="60"></rect><text fill="#fca5a5" text-anchor="middle" x="640" y="82">generic interface</text>
+<rect fill="#2a0f16" height="34" rx="9" stroke="#f87171" stroke-width="2" width="200" x="756" y="60"></rect><text fill="#fca5a5" text-anchor="middle" x="856" y="82">factory + registry</text>
+<rect fill="#2a0f16" height="34" rx="9" stroke="#f87171" stroke-width="2" width="200" x="540" y="102"></rect><text fill="#fca5a5" text-anchor="middle" x="640" y="124">config layer</text>
+<rect fill="#2a0f16" height="34" rx="9" stroke="#f87171" stroke-width="2" width="200" x="756" y="102"></rect><text fill="#fca5a5" text-anchor="middle" x="856" y="124">3 dependencies</text>
+<rect fill="#2a0f16" height="34" rx="9" stroke="#f87171" stroke-width="2" width="416" x="540" y="144"></rect><text fill="#fca5a5" text-anchor="middle" x="748" y="166">18 files · "ready for the future"</text>
+</g>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-amber-400">How to read:</strong> both sides <em>pass the same tests</em>. The difference shows up six months from now, when someone needs to change something: on the left, they edit two files; on the right, they need to understand the factory, the registry, and the configuration layer before touching a single line.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Smaller</p><p class="text-xs text-neutral-400">That meets the criterion</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Preserve</p><p class="text-xs text-neutral-400">The existing structure</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Justify</p><p class="text-xs text-neutral-400">Every new component</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Reviewable</p><p class="text-xs text-neutral-400">A small diff gets read</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-4-3#topico-2" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">🏗️ Avoid premature abstractions</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-3-t2-p1">
+          A bad abstraction costs more than duplication: to change anything, you first have to undo the abstraction.
+          And it looks like quality—nice names, symmetrical layers, everything "extensible".
+        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ When to abstract</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>There are two or three uses <em>real</em>, unanticipated</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Uses vary along the same axis (the abstraction captures the right variation)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Duplication has already caused an inconsistency bug</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ When NOT to abstract</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"One day we’ll need to support another provider"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A single use, with an interface created “just in case”</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Surface similarity: two things that look alike today but evolve separately</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Practical tip</h3>
+<p class="text-neutral-300">Always ask for both versions: "show me the simple and extensible solutions, with the cost of each; recommend one and say what it sacrifices". The conversation gets focused in thirty seconds—and the answer is usually the simple one.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">2–3 real uses</p><p class="text-xs text-neutral-400">Before abstracting</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Hypothetical</p><p class="text-xs text-neutral-400">Isn’t a requirement</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Wrong &gt; duplicated</p><p class="text-xs text-neutral-400">In cost</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Two versions</p><p class="text-xs text-neutral-400">Always compare</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-4-3#topico-3" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">📦 Manage dependencies and changed files</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-3-t3-p1">
+          Every dependency is an attack surface, an update cost, and a risk of abandonment. And every extra file in the
+          diff reduces the chance that someone will actually review it—past a certain size, the PR isn’t reviewed: it’s accepted.
+        </p>
+<div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">🚦</span> Recommended controls</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Prohibit new dependencies without explicit approval.</span></li>
+<li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Limit the number of files changed per task.</span></li>
+<li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Avoid refactoring outside the scope—it becomes another PR.</span></li>
+<li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Remove unused code orphaned by the change.</span></li>
+<li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Evaluate the maintenance cost before accepting the solution.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Attention</h3>
+<p class="text-neutral-300">An AI-suggested dependency deserves an extra check: does it actually exist? Is it maintained? Is the name what you expect? An invented package—or one with a name similar to a real package—is a known supply chain attack vector.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Ongoing cost</p><p class="text-xs text-neutral-400">Every dependency has</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Does it really exist?</p><p class="text-xs text-neutral-400">Check the package</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">File limit</p><p class="text-xs text-neutral-400">Signals scope</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Orphan</p><p class="text-xs text-neutral-400">Remove what’s left</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-4-3#topico-4" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">👯 Fight semantic duplication</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-3-t4-p1">
+          This is the kind of debt AI generates most, because each task starts without remembering what already exists. The result
+          is a third date-formatting function, with a different name, in another module, with different edge-case behavior.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Copyable exercise — duplication hunt</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-amber-400">Objective:</strong> measure the semantic debt accumulated in your repository. Run it once per quarter.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Analise &lt;pasta ou repositório&gt; e encontre DUPLICAÇÃO SEMÂNTICA: trechos que
+resolvem o mesmo problema com implementações diferentes (não copie-e-cola literal).
+
+Para cada grupo encontrado, informe:
+- o que fazem (uma frase);
+- onde estão (arquivo:linha de cada ocorrência);
+- as diferenças de comportamento entre elas (especialmente em bordas:
+  nulo, vazio, fuso horário, arredondamento, erro);
+- qual é a mais completa e por quê;
+- risco de consolidar (baixo/médio/alto).
+
+Não altere nada. Ordene por risco de inconsistência para o usuário final.</pre>
+<p class="text-neutral-300 text-sm"><strong class="text-amber-400">How to verify:</strong> choose the highest-risk group and manually check the edge-case differences. There’s almost always at least one case where the two implementations disagree—and that’s a bug no one had reported yet.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">"Does it already exist?"</p><p class="text-xs text-neutral-400">Ask before creating</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Edges</p><p class="text-xs text-neutral-400">Where they disagree</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Inconsistency</p><p class="text-xs text-neutral-400">Becomes a user-facing bug</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Consolidate</p><p class="text-xs text-neutral-400">Recurring work</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-4-3#topico-5" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🧪 Be Wary of Superficial Tests</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-3-t5-p1">
+          A test that runs the code without asserting relevant behavior gives you the worst possible combination:
+          <strong class="text-amber-400">a sense of security with zero protection</strong> — and still blocks refactoring,
+          because it tests the implementation instead of the behavior.
+        </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">1</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">The “break it on purpose” test</h4>
+<p class="text-neutral-300 text-sm">Introduce an obvious bug in the function and run the suite. If nothing turns red, that test isn't testing anything. It's the quickest way to evaluate AI-generated tests.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">2</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Behavior, not implementation</h4>
+<p class="text-neutral-300 text-sm">A test that checks which internal methods were called breaks with every refactor and catches no defects. Test what goes in and what comes out.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold">3</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-amber-500/30">
+<h4 class="font-semibold text-white mb-2">Ask for errors and edge cases, not the happy path</h4>
+<p class="text-neutral-300 text-sm">Explicitly instruct: "prioritize error cases, limits, and concurrency; don't generate redundant happy-path tests". Without this, you get twenty variations of the same scenario.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Break it on purpose</p><p class="text-xs text-neutral-400">Did the test fail?</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Behavior</p><p class="text-xs text-neutral-400">Input and output</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Edges</p><p class="text-xs text-neutral-400">That’s where the bug lives</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Empty test</p><p class="text-xs text-neutral-400">It’s debt, not an asset</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-4-3#topico-6" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">🎭 Detect code that violates the intent</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m4-3-t6-p1">
+          It’s the most dangerous flaw in AI-driven development: the solution that <strong class="text-amber-400">passes the
+          tests and is still wrong</strong>. It passes every automated gate with a green signal because it optimized precisely for the verifier.
+        </p>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">🚩</span> Signals in the diff</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• Condition that specifically handles the value used in the test.</li>
+<li>• <span class="font-mono text-xs">try/catch</span> that swallows the exception and returns a default value.</li>
+<li>• Cache added “to improve performance” that actually hides the inconsistency.</li>
+<li>• Verification removed "because it was causing a failure".</li>
+<li>• Update the old test in the same commit as the fix.</li>
+</ul>
+</div>
+<div class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-4-3#q1">
+<p class="font-medium mb-4">Quick check: the agent delivered 18 files, 3 new dependencies, and an abstraction layer—and everything passes. What should you do?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Accept: the tests pass and the code is well structured.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Ask for the minimum version that meets the same criteria and compare the two.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Accept it and open a refactoring task to simplify it later.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Read the diff</p><p class="text-xs text-neutral-400">Not just the result</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Swallowed exception</p><p class="text-xs text-neutral-400">Red flag</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Modified test</p><p class="text-xs text-neutral-400">Alongside the fix</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-amber-400 text-sm font-semibold mb-1">Target metric</p><p class="text-xs text-neutral-400">Stops measuring</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<section class="mb-12">
+<div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">The smallest possible change</strong><span class="text-neutral-400"> - two sentences in AGENTS.md that stand in for a process.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Abstraction after real use</strong><span class="text-neutral-400"> - the wrong one costs more than duplication.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Dependency and diff within limits</strong><span class="text-neutral-400"> - and check whether the suggested package actually exists.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Semantic duplication</strong><span class="text-neutral-400"> - typical AI debt; hunt for it quarterly.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">A test that doesn’t fail isn’t testing</strong><span class="text-neutral-400"> - break it on purpose to check.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Passing ≠ being correct</strong><span class="text-neutral-400"> - a violation of intent passes through all the gates.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-amber-400 mb-2">Next track:</h3>
+<p class="text-neutral-300">Track 5 - Playbooks, Skills, Rules, and Governance: turn all of this into a reusable process.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track</a>
+<a class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors" href="../trilha5/index.html">Track 5 →</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Advanced AI Software Engineering Workshop — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-4-3#q1', {
+          answer: 1,
+          explain: {
+            0: '"Bem estruturado" e "necessário" são coisas diferentes. Estrutura que ninguém pediu é custo permanente.',
+            1: 'Isso. Comparar as duas versões torna a decisão objetiva — e a mínima costuma ganhar.',
+            2: 'A tarefa de simplificar depois nunca é priorizada. A hora de conter complexidade é antes do merge.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

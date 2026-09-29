@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="ws2ia">
-  <title>Trilha 2 · Harness &amp; Loop | Eng. de Software com IA</title>
 
-  <script>
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Trilha 2 · Harness &amp; Loop | Eng. de Software com IA</title>
+<script>
   (function () {
     try {
       var html = document.documentElement;
@@ -36,8 +36,7 @@
     } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme = 'dark'; } catch (e) {} }
   })();
   </script>
-
-  <script type="application/json" data-inema-manifest>
+<script data-inema-manifest="" type="application/json">
   {
     "course": "ws2ia",
     "tracks": [
@@ -71,14 +70,13 @@
     ]
   }
   </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/learn.css">
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/learn.css" rel="stylesheet"/>
+<style>
     body { font-family: 'Inter', sans-serif; }
     .dark body { background-color: #111827; }
     .topic-explanation { display: none; }
@@ -139,372 +137,343 @@
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
   </style>
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-
-  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
-
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-          <span class="text-neutral-600">-</span>
-          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
-          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
-          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
-          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
-          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
-            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
-          </button>
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="2">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Harness &amp; Loop Engineering</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">
+<link href="https://inematds.github.io/ws2ia/curso/trilha2/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha2/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha2/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha2/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha2/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>Minha jornada</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Alternar tema claro/escuro" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="2">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Harness &amp; Loop Engineering</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
         O modelo é só uma peça. Esta trilha monta o resto: o harness (o que o agente vê, pode usar e tem permissão de fazer)
         e o loop (o ciclo de executar, testar e corrigir — com condição de parada, limites e rollback).
       </p>
-
-      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">2</div><div class="text-xs text-neutral-400">Módulos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">12</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~1h50</div><div class="text-xs text-neutral-400">Duração</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
-      </div>
-
-      <div class="mt-6 max-w-2xl">
-        <div data-inema-meter="trilha:2" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da trilha 2">
-          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 12</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main id="conteudo" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-    <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
-      <svg viewBox="0 0 1000 240" class="w-full h-auto" role="img" aria-label="O harness envolve o modelo com ferramentas, permissões, contexto e verificadores; dentro dele gira o loop de observar, planejar, executar, testar e corrigir">
-        <defs>
-          <linearGradient id="t2h-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
-          <filter id="t2h-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <pattern id="t2h-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
-          <marker id="t2h-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
-        </defs>
-        <rect x="0" y="0" width="1000" height="240" fill="url(#t2h-grid)"/>
-        <g filter="url(#t2h-glow)"><rect x="40" y="24" width="920" height="192" rx="20" fill="#0e1622" stroke="url(#t2h-grad)" stroke-width="2"/></g>
-        <text x="72" y="54" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="600" font-size="17">HARNESS · o sistema em volta do modelo</text>
-        <g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
-          <rect x="72" y="70" width="170" height="30" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="157" y="90" text-anchor="middle" fill="#bfe6ff">contexto</text>
-          <rect x="256" y="70" width="170" height="30" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="341" y="90" text-anchor="middle" fill="#bfe6ff">ferramentas</text>
-          <rect x="440" y="70" width="170" height="30" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="525" y="90" text-anchor="middle" fill="#bfe6ff">permissões</text>
-          <rect x="624" y="70" width="150" height="30" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="699" y="90" text-anchor="middle" fill="#bfe6ff">sandbox</text>
-          <rect x="788" y="70" width="140" height="30" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="858" y="90" text-anchor="middle" fill="#bfe6ff">limites</text>
-        </g>
-        <g fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.55">
-          <path d="M300,170 L400,170" marker-end="url(#t2h-ahc)"/>
-          <path d="M520,170 L620,170" marker-end="url(#t2h-ahc)"/>
-          <path d="M740,170 C800,170 800,132 500,132 C260,132 250,158 250,158" marker-end="url(#t2h-ahc)"/>
-        </g>
-        <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
-          <rect x="130" y="152" width="170" height="36" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="215" y="176" text-anchor="middle" fill="#bfdbfe">planejar</text>
-          <rect x="400" y="152" width="120" height="36" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="460" y="176" text-anchor="middle" fill="#bfdbfe">executar</text>
-          <rect x="620" y="152" width="120" height="36" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/><text x="680" y="176" text-anchor="middle" fill="#bfdbfe">testar</text>
-        </g>
-        <text x="500" y="122" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="12">volta corrigindo — até a condição de parada</text>
-      </svg>
-      <p class="text-sm text-neutral-400 mt-3">
-        <strong class="text-blue-400">Como ler:</strong> a caixa grande é o harness — nada acontece fora dela. Dentro, o loop gira
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">2</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">12</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~1h50</div><div class="text-xs text-neutral-400">Duração</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Progresso da trilha 2" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:2" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 12</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="conteudo">
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+<svg aria-label="O harness envolve o modelo com ferramentas, permissões, contexto e verificadores; dentro dele gira o loop de observar, planejar, executar, testar e corrigir" class="w-full h-auto" role="img" viewbox="0 0 1000 240">
+<defs>
+<lineargradient id="t2h-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<filter height="180%" id="t2h-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t2h-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t2h-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#t2h-grid)" height="240" width="1000" x="0" y="0"></rect>
+<g filter="url(#t2h-glow)"><rect fill="#0e1622" height="192" rx="20" stroke="url(#t2h-grad)" stroke-width="2" width="920" x="40" y="24"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="17" font-weight="600" x="72" y="54">HARNESS · o sistema em volta do modelo</text>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#0e1b26" height="30" rx="9" stroke="#38bdf8" stroke-width="2" width="170" x="72" y="70"></rect><text fill="#bfe6ff" text-anchor="middle" x="157" y="90">contexto</text>
+<rect fill="#0e1b26" height="30" rx="9" stroke="#38bdf8" stroke-width="2" width="170" x="256" y="70"></rect><text fill="#bfe6ff" text-anchor="middle" x="341" y="90">ferramentas</text>
+<rect fill="#0e1b26" height="30" rx="9" stroke="#38bdf8" stroke-width="2" width="170" x="440" y="70"></rect><text fill="#bfe6ff" text-anchor="middle" x="525" y="90">permissões</text>
+<rect fill="#0e1b26" height="30" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="624" y="70"></rect><text fill="#bfe6ff" text-anchor="middle" x="699" y="90">sandbox</text>
+<rect fill="#0e1b26" height="30" rx="9" stroke="#38bdf8" stroke-width="2" width="140" x="788" y="70"></rect><text fill="#bfe6ff" text-anchor="middle" x="858" y="90">limites</text>
+</g>
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<path d="M300,170 L400,170" marker-end="url(#t2h-ahc)"></path>
+<path d="M520,170 L620,170" marker-end="url(#t2h-ahc)"></path>
+<path d="M740,170 C800,170 800,132 500,132 C260,132 250,158 250,158" marker-end="url(#t2h-ahc)"></path>
+</g>
+<g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+<rect fill="#0e1622" height="36" rx="10" stroke="#60a5fa" stroke-width="2" width="170" x="130" y="152"></rect><text fill="#bfdbfe" text-anchor="middle" x="215" y="176">planejar</text>
+<rect fill="#0e1622" height="36" rx="10" stroke="#60a5fa" stroke-width="2" width="120" x="400" y="152"></rect><text fill="#bfdbfe" text-anchor="middle" x="460" y="176">executar</text>
+<rect fill="#0e1622" height="36" rx="10" stroke="#60a5fa" stroke-width="2" width="120" x="620" y="152"></rect><text fill="#bfdbfe" text-anchor="middle" x="680" y="176">testar</text>
+</g>
+<text fill="#9ad6ff" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="500" y="122">volta corrigindo — até a condição de parada</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-blue-400">Como ler:</strong> a caixa grande é o harness — nada acontece fora dela. Dentro, o loop gira
         (planejar → executar → testar) e volta pela seta de cima quando o teste falha. A trilha ensina a montar a caixa (módulo 2.1)
         e a fazer o giro parar na hora certa (módulo 2.2).
       </p>
-    </div>
-
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a href="#modulo-2-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~55 min</span></div>
-          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">⚙️ Harness Engineering</h3>
-          <p class="text-xs text-neutral-400">O prompt não é o diferencial</p>
-        </a>
-        <a href="#modulo-2-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
-          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🔄 Loop Engineering</h3>
-          <p class="text-xs text-neutral-400">Saber parar é o recurso</p>
-        </a>
-      </div>
-    </section>
-
-    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
-
-    <!-- MODULO 2.1 -->
-    <div id="modulo-2-1" data-inema-module="2-1" data-inema-track="2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~55 min</span></div>
-        <h3 class="text-2xl font-bold mb-2">⚙️ Harness Engineering</h3>
-        <p class="text-neutral-400 text-sm">A engenharia da estrutura que envolve o modelo: instruções, contexto, ferramentas, permissões, sandbox, memória, estado, observabilidade, verificadores e limites.</p>
-      </div>
-
-      <div class="divide-y divide-dark-600">
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t21-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <span class="text-lg">🧰</span>
-            <div><span class="font-medium">Entenda o que é um harness</span><span class="text-neutral-500 text-sm ml-2">- O modelo é só uma peça</span></div>
-          </button>
-          <div id="t21-1" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O conjunto que define o que o agente vê, quais ferramentas pode usar, quais ações pode executar, quais regras segue, como o contexto é selecionado, como o estado é preservado, como o resultado é verificado, quando parar e o que exige aprovação.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Trocar de modelo melhora alguns pontos percentuais; montar um harness decente muda o resultado de categoria. É a alavanca com maior retorno.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Harness = sistema ao redor do modelo · O diferencial não está no prompt · Todo poder concedido precisa de limite correspondente.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t21-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <span class="text-lg">🗂️</span>
-            <div><span class="font-medium">Selecione contexto de propósito</span><span class="text-neutral-500 text-sm ml-2">- Menos e melhor, não tudo</span></div>
-          </button>
-          <div id="t21-2" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A escolha deliberada dos arquivos, documentos e exemplos relevantes para a tarefa — em vez de jogar o repositório inteiro na entrada.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Contexto irrelevante não é neutro: ele dilui o sinal, aumenta custo e faz o agente imitar padrões que você não quer replicar.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Curadoria &gt; volume · Exemplo bom vale mais que descrição longa · Fonte única de verdade evita instrução conflitante.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t21-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <span class="text-lg">🔑</span>
-            <div><span class="font-medium">Defina ferramentas e permissões</span><span class="text-neutral-500 text-sm ml-2">- Ler, escrever, executar, publicar</span></div>
-          </button>
-          <div id="t21-3" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A lista explícita de recursos disponíveis (terminal, editor, busca, testes, banco, APIs) e o que pode ser lido, alterado, executado ou publicado com cada um.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Permissão implícita é permissão total. A maior parte dos incidentes com agentes é acesso que ninguém decidiu conceder — apenas não negou.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Menor privilégio · Ação irreversível exige aprovação · Ferramenta sem limite é ferramenta perigosa.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t21-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <span class="text-lg">📦</span>
-            <div><span class="font-medium">Isole a execução em sandbox</span><span class="text-neutral-500 text-sm ml-2">- Errar barato é o objetivo</span></div>
-          </button>
-          <div id="t21-4" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um ambiente isolado (container, worktree, branch, base de dados descartável) onde o agente executa sem afetar produção nem o seu ambiente de trabalho.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sandbox é o que transforma "erro do agente" em "tentativa descartada". Sem isolamento, cada tentativa é um risco real.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Isolamento permite autonomia maior · Estado descartável &gt; estado precioso · Reversibilidade é pré-requisito de velocidade.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t21-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <span class="text-lg">🧠</span>
-            <div><span class="font-medium">Gerencie memória, estado e observabilidade</span><span class="text-neutral-500 text-sm ml-2">- Onde ele está e o que fez</span></div>
-          </button>
-          <div id="t21-5" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Memória são informações persistentes ou temporárias usadas na tarefa; estado é o registro do ponto atual do trabalho; observabilidade são os logs, métricas e histórico das ações.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem estado, o agente reinicia do zero a cada interrupção. Sem observabilidade, você não consegue auditar nem explicar o que aconteceu.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Estado permite retomar · Log é evidência, não enfeite · Memória sem curadoria vira ruído acumulado.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t21-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <span class="text-lg">✅</span>
-            <div><span class="font-medium">Instale verificadores e limites</span><span class="text-neutral-500 text-sm ml-2">- Tempo, custo, tentativas, arquivos</span></div>
-          </button>
-          <div id="t21-6" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Testes e validações que avaliam a qualidade do resultado, somados aos tetos de tempo, custo, número de tentativas, arquivos modificados e ações permitidas.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O verificador é o que autoriza autonomia: quanto melhor ele for, mais você pode delegar sem medo. Os limites são o freio quando o verificador falha.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Verificador fraco = autonomia perigosa · Limite de arquivos mantém o diff revisável · Aprovação humana em ação crítica é parte do harness.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-2-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-2-1.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-
-    <!-- MODULO 2.2 -->
-    <div id="modulo-2-2" data-inema-module="2-2" data-inema-track="2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
-        <h3 class="text-2xl font-bold mb-2">🔄 Loop Engineering</h3>
-        <p class="text-neutral-400 text-sm">Ciclos de execução e correção: observar, planejar, executar, testar, avaliar, corrigir — com condição de parada, limite de tentativas, custo, rollback e fallback.</p>
-      </div>
-
-      <div class="divide-y divide-dark-600">
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t22-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <span class="text-lg">🔄</span>
-            <div><span class="font-medium">Desenhe o ciclo de execução</span><span class="text-neutral-500 text-sm ml-2">- Observar → corrigir → repetir</span></div>
-          </button>
-          <div id="t22-1" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O ciclo padrão de um agente: observar, entender, planejar, executar, testar, avaliar, corrigir e repetir.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Loop Engineering não é mandar a IA "continuar até funcionar" — é criar uma sequência controlada, mensurável e verificável.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cada volta precisa de sinal novo · Sem avaliação não há correção · Repetir sem medir é gastar dinheiro.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t22-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <span class="text-lg">🎯</span>
-            <div><span class="font-medium">Estabeleça objetivo verificável e estado</span><span class="text-neutral-500 text-sm ml-2">- Ele precisa saber onde parou</span></div>
-          </button>
-          <div id="t22-2" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um alvo que pode ser checado por um comando, mais o registro persistente do que já foi feito entre as voltas do loop.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Loop com objetivo subjetivo nunca termina; loop sem estado refaz trabalho e se contradiz.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Objetivo = comando que responde sim/não · Estado persistente permite retomar · Progresso mensurável evita loop cego.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t22-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <span class="text-lg">🛑</span>
-            <div><span class="font-medium">Defina condições de parada</span><span class="text-neutral-500 text-sm ml-2">- Sucesso, desistência e teto</span></div>
-          </button>
-          <div id="t22-3" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">As três saídas de qualquer loop: terminou com sucesso, esgotou tentativas/custo, ou detectou que não está progredindo e deve parar pedindo ajuda.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A parada por desistência é a que quase ninguém implementa — e é justamente ela que evita a queima de orçamento em looping infinito.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Toda saída precisa ser explícita · Parar e perguntar é resultado válido · Sem teto, o loop consome até alguém notar.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t22-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <span class="text-lg">💸</span>
-            <div><span class="font-medium">Controle tentativas e custo</span><span class="text-neutral-500 text-sm ml-2">- Tokens, tempo e recursos</span></div>
-          </button>
-          <div id="t22-4" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Tetos explícitos de repetição e de consumo, com a regra de que a mesma ação não deve ser repetida sem mudança de abordagem.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Agente preso repete a mesma correção com pequenas variações. Sem limite de tentativas, isso vira custo puro e nenhum progresso.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mesma falha 2x = mude a estratégia · Custo é limite de projeto, não detalhe · Medir por tentativa revela loops improdutivos.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t22-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <span class="text-lg">↩️</span>
-            <div><span class="font-medium">Prepare rollback e fallback</span><span class="text-neutral-500 text-sm ml-2">- Voltar e ter plano B</span></div>
-          </button>
-          <div id="t22-5" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rollback devolve o sistema ao estado anterior; fallback define a alternativa quando o caminho principal não funciona.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A capacidade de desfazer é o que define quanto risco você pode aceitar. Onde não há rollback, não há autonomia.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Migração precisa ser reversível · Branch/worktree é rollback barato · Fallback evita parada total do fluxo.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t22-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <span class="text-lg">🙋</span>
-            <div><span class="font-medium">Insira aprovação humana no ponto certo</span><span class="text-neutral-500 text-sm ml-2">- Antes do irreversível</span></div>
-          </button>
-          <div id="t22-6" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A interrupção obrigatória do loop antes de ações críticas: deploy, migração, mudança de permissão, alteração em produção.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aprovação no lugar errado vira carimbo automático; no lugar certo, ela é o último ponto de controle antes do dano.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Aprovar com evidência, não por confiança · Poucas aprovações e sérias &gt; muitas e ignoradas · Reversível pode ser automático.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-2-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-
-    <div class="flex flex-col sm:flex-row gap-4 mt-12">
-      <a href="../trilha1/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 1: Fundamentos</a>
-      <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 3: Fluxo &amp; Qualidade →</a>
-    </div>
-  </main>
-
-  <div id="modal-2-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
-    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
-      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
-        <div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Harness Engineering</span></div>
-        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
-      </div>
-      <iframe src="modulo-2-1.html" title="Módulo 2.1" class="flex-1 w-full rounded-b-xl"></iframe>
-    </div>
-  </div>
-  <div id="modal-2-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
-    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
-      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
-        <div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Loop Engineering</span></div>
-        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
-      </div>
-      <iframe src="modulo-2-2.html" title="Módulo 2.2" class="flex-1 w-full rounded-b-xl"></iframe>
-    </div>
-  </div>
-
-  <footer class="border-t border-dark-600 py-8 mt-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
-      <p class="mt-2">
-        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
-        <span class="text-neutral-600 mx-1">-</span>
-        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
-      </p>
-    </div>
-  </footer>
-
-  <script>
+</div>
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-1">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~55 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">⚙️ Harness Engineering</h3>
+<p class="text-xs text-neutral-400">O prompt não é o diferencial</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-2">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🔄 Loop Engineering</h3>
+<p class="text-xs text-neutral-400">Saber parar é o recurso</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+<!-- MODULO 2.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-1" data-inema-track="2" id="modulo-2-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~55 min</span></div>
+<h3 class="text-2xl font-bold mb-2">⚙️ Harness Engineering</h3>
+<p class="text-neutral-400 text-sm">A engenharia da estrutura que envolve o modelo: instruções, contexto, ferramentas, permissões, sandbox, memória, estado, observabilidade, verificadores e limites.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t21-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧰</span>
+<div><span class="font-medium">Entenda o que é um harness</span><span class="text-neutral-500 text-sm ml-2">- O modelo é só uma peça</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t21-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O conjunto que define o que o agente vê, quais ferramentas pode usar, quais ações pode executar, quais regras segue, como o contexto é selecionado, como o estado é preservado, como o resultado é verificado, quando parar e o que exige aprovação.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Trocar de modelo melhora alguns pontos percentuais; montar um harness decente muda o resultado de categoria. É a alavanca com maior retorno.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Harness = sistema ao redor do modelo · O diferencial não está no prompt · Todo poder concedido precisa de limite correspondente.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t21-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🗂️</span>
+<div><span class="font-medium">Selecione contexto de propósito</span><span class="text-neutral-500 text-sm ml-2">- Menos e melhor, não tudo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t21-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A escolha deliberada dos arquivos, documentos e exemplos relevantes para a tarefa — em vez de jogar o repositório inteiro na entrada.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Contexto irrelevante não é neutro: ele dilui o sinal, aumenta custo e faz o agente imitar padrões que você não quer replicar.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Curadoria &gt; volume · Exemplo bom vale mais que descrição longa · Fonte única de verdade evita instrução conflitante.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t21-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🔑</span>
+<div><span class="font-medium">Defina ferramentas e permissões</span><span class="text-neutral-500 text-sm ml-2">- Ler, escrever, executar, publicar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t21-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A lista explícita de recursos disponíveis (terminal, editor, busca, testes, banco, APIs) e o que pode ser lido, alterado, executado ou publicado com cada um.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Permissão implícita é permissão total. A maior parte dos incidentes com agentes é acesso que ninguém decidiu conceder — apenas não negou.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Menor privilégio · Ação irreversível exige aprovação · Ferramenta sem limite é ferramenta perigosa.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t21-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">📦</span>
+<div><span class="font-medium">Isole a execução em sandbox</span><span class="text-neutral-500 text-sm ml-2">- Errar barato é o objetivo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t21-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um ambiente isolado (container, worktree, branch, base de dados descartável) onde o agente executa sem afetar produção nem o seu ambiente de trabalho.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sandbox é o que transforma "erro do agente" em "tentativa descartada". Sem isolamento, cada tentativa é um risco real.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Isolamento permite autonomia maior · Estado descartável &gt; estado precioso · Reversibilidade é pré-requisito de velocidade.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t21-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🧠</span>
+<div><span class="font-medium">Gerencie memória, estado e observabilidade</span><span class="text-neutral-500 text-sm ml-2">- Onde ele está e o que fez</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t21-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Memória são informações persistentes ou temporárias usadas na tarefa; estado é o registro do ponto atual do trabalho; observabilidade são os logs, métricas e histórico das ações.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem estado, o agente reinicia do zero a cada interrupção. Sem observabilidade, você não consegue auditar nem explicar o que aconteceu.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Estado permite retomar · Log é evidência, não enfeite · Memória sem curadoria vira ruído acumulado.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t21-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">✅</span>
+<div><span class="font-medium">Instale verificadores e limites</span><span class="text-neutral-500 text-sm ml-2">- Tempo, custo, tentativas, arquivos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t21-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Testes e validações que avaliam a qualidade do resultado, somados aos tetos de tempo, custo, número de tentativas, arquivos modificados e ações permitidas.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O verificador é o que autoriza autonomia: quanto melhor ele for, mais você pode delegar sem medo. Os limites são o freio quando o verificador falha.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Verificador fraco = autonomia perigosa · Limite de arquivos mantém o diff revisável · Aprovação humana em ação crítica é parte do harness.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-1')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-1.html">Ver Completo</a>
+</div>
+</div>
+<!-- MODULO 2.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-2" data-inema-track="2" id="modulo-2-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🔄 Loop Engineering</h3>
+<p class="text-neutral-400 text-sm">Ciclos de execução e correção: observar, planejar, executar, testar, avaliar, corrigir — com condição de parada, limite de tentativas, custo, rollback e fallback.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t22-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🔄</span>
+<div><span class="font-medium">Desenhe o ciclo de execução</span><span class="text-neutral-500 text-sm ml-2">- Observar → corrigir → repetir</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t22-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O ciclo padrão de um agente: observar, entender, planejar, executar, testar, avaliar, corrigir e repetir.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Loop Engineering não é mandar a IA "continuar até funcionar" — é criar uma sequência controlada, mensurável e verificável.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cada volta precisa de sinal novo · Sem avaliação não há correção · Repetir sem medir é gastar dinheiro.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t22-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎯</span>
+<div><span class="font-medium">Estabeleça objetivo verificável e estado</span><span class="text-neutral-500 text-sm ml-2">- Ele precisa saber onde parou</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t22-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um alvo que pode ser checado por um comando, mais o registro persistente do que já foi feito entre as voltas do loop.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Loop com objetivo subjetivo nunca termina; loop sem estado refaz trabalho e se contradiz.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Objetivo = comando que responde sim/não · Estado persistente permite retomar · Progresso mensurável evita loop cego.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t22-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🛑</span>
+<div><span class="font-medium">Defina condições de parada</span><span class="text-neutral-500 text-sm ml-2">- Sucesso, desistência e teto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t22-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">As três saídas de qualquer loop: terminou com sucesso, esgotou tentativas/custo, ou detectou que não está progredindo e deve parar pedindo ajuda.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A parada por desistência é a que quase ninguém implementa — e é justamente ela que evita a queima de orçamento em looping infinito.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Toda saída precisa ser explícita · Parar e perguntar é resultado válido · Sem teto, o loop consome até alguém notar.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t22-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">💸</span>
+<div><span class="font-medium">Controle tentativas e custo</span><span class="text-neutral-500 text-sm ml-2">- Tokens, tempo e recursos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t22-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Tetos explícitos de repetição e de consumo, com a regra de que a mesma ação não deve ser repetida sem mudança de abordagem.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Agente preso repete a mesma correção com pequenas variações. Sem limite de tentativas, isso vira custo puro e nenhum progresso.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mesma falha 2x = mude a estratégia · Custo é limite de projeto, não detalhe · Medir por tentativa revela loops improdutivos.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t22-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">↩️</span>
+<div><span class="font-medium">Prepare rollback e fallback</span><span class="text-neutral-500 text-sm ml-2">- Voltar e ter plano B</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t22-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rollback devolve o sistema ao estado anterior; fallback define a alternativa quando o caminho principal não funciona.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A capacidade de desfazer é o que define quanto risco você pode aceitar. Onde não há rollback, não há autonomia.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Migração precisa ser reversível · Branch/worktree é rollback barato · Fallback evita parada total do fluxo.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t22-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🙋</span>
+<div><span class="font-medium">Insira aprovação humana no ponto certo</span><span class="text-neutral-500 text-sm ml-2">- Antes do irreversível</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t22-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A interrupção obrigatória do loop antes de ações críticas: deploy, migração, mudança de permissão, alteração em produção.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aprovação no lugar errado vira carimbo automático; no lugar certo, ela é o último ponto de controle antes do dano.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Aprovar com evidência, não por confiança · Poucas aprovações e sérias &gt; muitas e ignoradas · Reversível pode ser automático.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-2')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-2.html">Ver Completo</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-12">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha1/index.html">← Trilha 1: Fundamentos</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="../trilha3/index.html">Trilha 3: Fluxo &amp; Qualidade →</a>
+</div>
+</main>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Harness Engineering</span></div>
+<button aria-label="Fechar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-1.html" title="Módulo 2.1"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Loop Engineering</span></div>
+<button aria-label="Fechar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-2.html" title="Módulo 2.2"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script>
     function toggleTopic(button) {
       const topicItem = button.closest('.topic-item');
       const explanation = topicItem.querySelector('.topic-explanation');
@@ -532,7 +501,7 @@
       try { const p = JSON.parse(localStorage.getItem('inema.prefs') || '{}'); p.theme = dark ? 'inema-dark' : 'claro'; localStorage.setItem('inema.prefs', JSON.stringify(p)); } catch (e) {}
     });
   </script>
-  <script src="../../assets/learn.js"></script>
-  <script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+<script src="../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
 </body>
 </html>

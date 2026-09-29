@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Track 6 · Practical Exercise | AI Software Engineering</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha6/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha6/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha6/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha6/" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha6/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Skip to content</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">AI Software Engineering</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Foundations</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flow &amp; Quality</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Architecture</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governance</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-rose-400 bg-rose-500/10" href="index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Practice</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>My journey</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Switch between light and dark themes" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-rose-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="6">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-rose-500/20 text-rose-400 text-xs font-semibold rounded-full mb-4">TRACK 6 · HANDS-ON</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 Hands-On Exercise: The Complete Workflow</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Here, you don’t read about the method—you execute it. In eight steps, in a small, real repository, you build the
+        specification, configure the harness, define the loop, implement, apply the quality gates, conduct the
+        independent review, and prepare the handoff with evidence.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">2</div><div class="text-xs text-neutral-400">Modules</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">12</div><div class="text-xs text-neutral-400">Steps</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">~2h30</div><div class="text-xs text-neutral-400">Duration</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">Practice</div><div class="text-xs text-neutral-400">Format</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Track 6 progress" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:6" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 of 12</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="conteudo">
+<div class="rounded-2xl border border-rose-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden">
+<svg aria-label="The exercise’s eight steps: problem selection, specification, harness, loop, implementation, quality gates, independent review, and delivery" class="w-full h-auto" role="img" viewbox="0 0 1000 220">
+<defs>
+<lineargradient id="t6h-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fb7185"></stop><stop offset="1" stop-color="#f43f5e"></stop></lineargradient>
+<filter height="180%" id="t6h-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t6h-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#f43f5e" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t6h-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fb7185"></path></marker>
+</defs>
+<rect fill="url(#t6h-grid)" height="220" width="1000" x="0" y="0"></rect>
+<g fill="none" opacity="0.5" stroke="#fb7185" stroke-width="1.8">
+<path d="M244,62 L258,62" marker-end="url(#t6h-ah)"></path><path d="M472,62 L486,62" marker-end="url(#t6h-ah)"></path>
+<path d="M700,62 L714,62" marker-end="url(#t6h-ah)"></path>
+<path d="M860,86 L860,110 L140,110 L140,134" marker-end="url(#t6h-ah)"></path>
+<path d="M244,158 L258,158" marker-end="url(#t6h-ah)"></path><path d="M472,158 L486,158" marker-end="url(#t6h-ah)"></path>
+<path d="M700,158 L714,158" marker-end="url(#t6h-ah)"></path>
+</g>
+<g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+<rect fill="#2a0f16" height="44" rx="11" stroke="#fb7185" stroke-width="2" width="220" x="24" y="40"></rect><text fill="#fecdd3" text-anchor="middle" x="134" y="67">1 · choose the problem</text>
+<rect fill="#2a0f16" height="44" rx="11" stroke="#fb7185" stroke-width="2" width="214" x="258" y="40"></rect><text fill="#fecdd3" text-anchor="middle" x="365" y="67">2 · specification</text>
+<rect fill="#2a0f16" height="44" rx="11" stroke="#fb7185" stroke-width="2" width="214" x="486" y="40"></rect><text fill="#fecdd3" text-anchor="middle" x="593" y="67">3 · harness</text>
+<rect fill="#2a0f16" height="44" rx="11" stroke="#fb7185" stroke-width="2" width="262" x="714" y="40"></rect><text fill="#fecdd3" text-anchor="middle" x="845" y="67">4 · loop</text>
+<rect fill="#0e1b26" height="44" rx="11" stroke="#38bdf8" stroke-width="2" width="220" x="24" y="136"></rect><text fill="#bfe6ff" text-anchor="middle" x="134" y="163">5 · implementation</text>
+<rect fill="#0e1b26" height="44" rx="11" stroke="#38bdf8" stroke-width="2" width="214" x="258" y="136"></rect><text fill="#bfe6ff" text-anchor="middle" x="365" y="163">6 · quality gates</text>
+<rect fill="#0e1b26" height="44" rx="11" stroke="#38bdf8" stroke-width="2" width="214" x="486" y="136"></rect><text fill="#bfe6ff" text-anchor="middle" x="593" y="163">7 · independent review</text>
+</g>
+<g filter="url(#t6h-glow)"><rect fill="#2a0f16" height="56" rx="14" stroke="url(#t6h-grad)" stroke-width="2" width="262" x="714" y="130"></rect></g>
+<text fill="#fb7185" font-family="Inter,sans-serif" font-size="15" font-weight="600" text-anchor="middle" x="845" y="154">8 · delivery</text>
+<text fill="#fecdd3" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="845" y="174">PR with attached evidence</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-rose-400">How to read:</strong> the first four stages (module 6.1) are preparation—no production code is
+        written during them. The next four (module 6.2, in cyan) are execution and verification. If the preparation
+        is good, execution is fast; if you skip preparation, you’ll recognize all the problems described in track 4.
+      </p>
+</div>
+<!-- COMO USAR -->
+<section class="mb-12">
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+<h2 class="text-2xl font-bold mb-4 flex items-center"><span class="mr-2">🧰</span> Before starting</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+<div>
+<h3 class="font-semibold text-primary mb-2">What you need</h3>
+<ul class="space-y-1 text-neutral-300">
+<li>• One repository <strong>your</strong>, small, with tests that run.</li>
+<li>• A coding agent (Claude Code, Codex, Cursor — it doesn’t matter).</li>
+<li>• A new branch. None of this happens on the main branch.</li>
+<li>• 2 to 3 uninterrupted hours — or two 90-minute sessions.</li>
+</ul>
+</div>
+<div>
+<h3 class="font-semibold text-primary mb-2">How to choose the task</h3>
+<ul class="space-y-1 text-neutral-300">
+<li>• Small: fits in 3 to 5 files.</li>
+<li>• Verifiable: you can prove it’s done with a test.</li>
+<li>• Real: something that was actually on your list.</li>
+<li>• Reversible: no database migration or public contract change.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Learning path map</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-rose-500/30 p-5 transition-all" href="#modulo-6-1">
+<div class="flex items-center justify-between mb-2"><span class="text-rose-400 font-bold text-sm">6.1</span><span class="text-xs text-neutral-500">~75 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-rose-400 transition-colors">🧱 Preparation (steps 1–4)</h3>
+<p class="text-xs text-neutral-400">No code yet</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-rose-500/30 p-5 transition-all" href="#modulo-6-2">
+<div class="flex items-center justify-between mb-2"><span class="text-rose-400 font-bold text-sm">6.2</span><span class="text-xs text-neutral-500">~75 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-rose-400 transition-colors">🏁 Execution (steps 5–8)</h3>
+<p class="text-xs text-neutral-400">From implementation to delivery</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Detailed content</h2>
+<!-- MODULO 6.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="6-1" data-inema-track="6" id="modulo-6-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-rose-400 font-bold">6.1</span><span class="text-xs text-neutral-500">~75 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🧱 Exercise: Spec, Harness, and Loop</h3>
+<p class="text-neutral-400 text-sm">Steps 1 through 4 of the final project: choose the problem, write the full specification, set up the harness with limits, and design the execution loop—all before the first line of code.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t61-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🎯</span>
+<div><span class="font-medium">Step 1 — Choose the problem</span><span class="text-neutral-500 text-sm ml-2">- Small, real, reversible</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t61-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Selecting a feature, bug, or legacy module from your own repository to use as the exercise case.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Choosing wrong is the most common way for the exercise to fail: a task that's too large prevents you from closing the loop, so you don't see the method working.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">3 to 5 files · testable · reversible · something already on your list.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t61-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">📐</span>
+<div><span class="font-medium">Step 2 — Write the specification</span><span class="text-neutral-500 text-sm ml-2">- With the QUESTIONS section</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t61-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Applying module 1.2 to your case: problem, objective, scope, out of scope, inputs, outputs, contracts, errors, constraints, criteria, tests, and definition of done.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">This is where the exercise pays off: while it’s still on paper, you’ll discover decisions you would have delegated without realizing it.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Verifiable criteria · explicit negative scope · every assumption becomes a question answered before coding.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t61-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">⚙️</span>
+<div><span class="font-medium">Step 3 — Set up the harness</span><span class="text-neutral-500 text-sm ml-2">- AGENTS.md and sandbox</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t61-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Define tools, context, permissions, and limits: the AGENTS.md for module 2.1, the isolated branch/worktree, and the quick test command.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Without this, you’ll spend the entire exercise repeating constraints in chat—and some will slip through.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Implicit permission means full access · isolation makes mistakes cheap · documented test command.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t61-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🔄</span>
+<div><span class="font-medium">Step 4 — Define the loop</span><span class="text-neutral-500 text-sm ml-2">- And the three outputs</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t61-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The execution, testing, and correction cycle with a verifiable objective, attempt limit, stop condition for lack of progress, and human approval point.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Writing the loop beforehand is what keeps the session from turning into “try again” until you’re exhausted.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Objective = command · maximum attempts · same failure twice → stop · tests must remain untouched.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t61-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🧾</span>
+<div><span class="font-medium">Prepare the exercise record</span><span class="text-neutral-500 text-sm ml-2">- You’ll compare later</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t61-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">A simple file where you record time spent, attempts, cost, what the agent assumed, and where you had to step in.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Without a record, the exercise becomes an impression. With a record, it becomes the case you take to the team.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Measure your own practice · Human intervention is data · Compare before and after.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t61-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">✅</span>
+<div><span class="font-medium">Preparation checkpoint</span><span class="text-neutral-500 text-sm ml-2">- Proceed only if everything is ✓</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t61-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The final check before releasing the agent: a spec with verifiable criteria, QUESTIONS answered, AGENTS.md in place, an isolated branch, a working test command, and defined limits.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Every item missing here becomes an expensive fix in module 6.2—or a result that passes the tests but is wrong.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Good preparation = fast execution · no code yet · ready means ready.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-6-1')">View in Modal</button>
+<a class="px-4 py-2 text-sm bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-colors" href="modulo-6-1.html">View Full</a>
+</div>
+</div>
+<!-- MODULO 6.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="6-2" data-inema-track="6" id="modulo-6-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-rose-400 font-bold">6.2</span><span class="text-xs text-neutral-500">~75 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🏁 Exercise: execution, gates, review, and delivery</h3>
+<p class="text-neutral-400 text-sm">Steps 5 through 8: implement the smallest possible change, run the build, lint, tests, and security checks, conduct the independent review, and prepare the pull request with evidence.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t62-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">⌨️</span>
+<div><span class="font-medium">Step 5 — Run the implementation</span><span class="text-neutral-500 text-sm ml-2">- Plan first, code second</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t62-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Run the loop defined in step 4, requiring the plan before implementation and the smallest change that satisfies the criteria.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Approving the plan takes two minutes and saves an hour of rework in the wrong direction.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Plan approved first · smallest change · actual test output pasted, never summarized.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t62-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🚦</span>
+<div><span class="font-medium">Step 6 — Apply the quality gates</span><span class="text-neutral-500 text-sm ml-2">- Build, lint, tests, security</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t62-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Run the full module 3.3 test suite against the change and record the result of each gate.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">That’s where you find out which gates your repository still lacks — and that list is a valuable outcome of the exercise.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">A missing gate is also a result · no secrets, no new dependencies without approval · evidence attached.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t62-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🔍</span>
+<div><span class="font-medium">Step 7 — Conduct an independent review</span><span class="text-neutral-500 text-sm ml-2">- New session, clean context</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t62-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Open a clean session and review the change using the module 3.2 prompt, receiving only the specification and diff.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">This is the stage that most surprises people doing the exercise: the reviewer finds things the implementer defended with confidence.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Context independence · findings with severity · you decide what becomes a change.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t62-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">📦</span>
+<div><span class="font-medium">Step 8 — Prepare the delivery</span><span class="text-neutral-500 text-sm ml-2">- PR with evidence</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t62-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Assemble the pull request with the spec, diff, actual test output, gate results, review findings, and what was out of scope.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">A PR with evidence is reviewed in minutes; a PR without evidence is reviewed by word of mouth—or approved without being read.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Attached evidence &gt; narrative · declare what was left out too · record human approval.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t62-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">📊</span>
+<div><span class="font-medium">Do the exercise retrospective</span><span class="text-neutral-500 text-sm ml-2">- What became a rule?</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t62-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Reviewing the process itself: where you had to intervene, what assumptions the agent made, which gates were missing, and how much it cost.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Every intervention you make could become a rule, a gate, or an AGENTS.md item—that’s how the system improves on its own for the next task.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Intervention → rule · missing gate → backlog · learning recorded, not remembered.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t62-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🎒</span>
+<div><span class="font-medium">Put together your deliverables kit</span><span class="text-neutral-500 text-sm ml-2">- What you take away from the course</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t62-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-rose-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The collection of the artifacts produced: spec template, AGENTS.md, loop template, rules, skills, gate checklist, review workflow, playbooks, and governance checklist.</p></div>
+<div><span class="text-rose-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">This kit is what turns a two-day workshop into a permanent change in practice—because it goes back to the repository with you.</p></div>
+<div><span class="text-rose-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Versioned artifact &gt; annotation · start with what you already used in the exercise · share it with the team.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-6-2')">View in Modal</button>
+<a class="px-4 py-2 text-sm bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-colors" href="modulo-6-2.html">View Full</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-12">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha5/index.html">← Track 5: Governance</a>
+<a class="flex-1 text-center px-6 py-3 bg-rose-600 text-white rounded-lg font-semibold hover:bg-rose-500 transition-colors" href="../../index.html">Return to the beginning of the course</a>
+</div>
+</main>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-6-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-rose-400 font-bold">6.1</span><span class="font-semibold">Exercise: spec, harness, and loop</span></div>
+<button aria-label="Close" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-6-1.html" title="Module 6.1"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-6-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-rose-400 font-bold">6.2</span><span class="font-semibold">Exercise: execution, gates, and delivery</span></div>
+<button aria-label="Close" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-6-2.html" title="Module 6.2"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Advanced AI Software Engineering Workshop — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>

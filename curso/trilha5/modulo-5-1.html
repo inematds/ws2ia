@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+
+<html class="dark" lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="ws2ia">
-  <title>Módulo 5.1 · Playbooks e processos reutilizáveis | Eng. de Software com IA</title>
-
-  <script src="../../assets/boot.js"></script>
-
-  <script type="application/json" data-inema-manifest>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Módulo 5.1 · Playbooks e processos reutilizáveis | Eng. de Software com IA</title>
+<script src="../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
   {
     "course": "ws2ia",
     "tracks": [
@@ -42,182 +41,163 @@
     ]
   }
   </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/curso.css">
-  <link rel="stylesheet" href="../../assets/learn.css">
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-
-  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
-
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-          <span class="text-neutral-600">-</span>
-          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
-          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
-          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
-          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
-          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
-            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
-          </button>
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
-    <div class="flex items-center space-x-2 text-sm text-neutral-400">
-      <a href="../../index.html" class="hover:text-teal-400">Início</a><span>/</span>
-      <a href="index.html" class="hover:text-teal-400">Trilha 5</a><span>/</span>
-      <span class="text-teal-400">Módulo 5.1</span>
-    </div>
-  </nav>
-
-  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="5-1" data-inema-track="5">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MÓDULO 5.1</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📘 Playbooks e processos reutilizáveis</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/curso.css" rel="stylesheet"/>
+<link href="../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha5/modulo-5-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha5/modulo-5-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha5/modulo-5-1.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-5-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha5/modulo-5-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha5/modulo-5-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10" href="index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>Minha jornada</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Alternar tema claro/escuro" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Trilha de navegação" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-teal-400" href="../../index.html">Início</a><span>/</span>
+<a class="hover:text-teal-400" href="index.html">Trilha 5</a><span>/</span>
+<span class="text-teal-400">Módulo 5.1</span>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="5-1" data-inema-track="5">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MÓDULO 5.1</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">📘 Playbooks e processos reutilizáveis</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
         Playbooks são procedimentos reutilizáveis para tarefas recorrentes. Eles transformam o que você aprendeu nas
         trilhas anteriores em algo que qualquer pessoa — ou agente — consegue executar do mesmo jeito.
       </p>
-
-      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
-      </div>
-
-      <div class="mt-6 max-w-2xl">
-        <div data-inema-meter="modulo:5-1" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do módulo 5.1">
-          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
-
-    <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
-      <p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
-      <ul class="space-y-1 text-sm">
-        <li><a href="#topico-1" class="inema-toc-link hover:text-teal-400">1. O que é playbook</a></li>
-        <li><a href="#topico-2" class="inema-toc-link hover:text-teal-400">2. Nova funcionalidade</a></li>
-        <li><a href="#topico-3" class="inema-toc-link hover:text-teal-400">3. Correção de bug</a></li>
-        <li><a href="#topico-4" class="inema-toc-link hover:text-teal-400">4. Modernização</a></li>
-        <li><a href="#topico-5" class="inema-toc-link hover:text-teal-400">5. Incidente</a></li>
-        <li><a href="#topico-6" class="inema-toc-link hover:text-teal-400">6. Manter vivo</a></li>
-      </ul>
-    </nav>
-
-    <main id="conteudo" class="inema-prose">
-
-      <!-- TOPICO 1 -->
-      <section id="topico-1" data-inema-topic="modulo-5-1#topico-1" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
-          <h2 class="text-2xl font-bold">📘 Entenda o que é um playbook</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t1-p1">
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Progresso do módulo 5.1" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:5-1" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 6</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+<nav aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
+<p class="text-sm text-neutral-400 mb-2">Seção <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+<ul class="space-y-1 text-sm">
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-1">1. O que é playbook</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-2">2. Nova funcionalidade</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-3">3. Correção de bug</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-4">4. Modernização</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-5">5. Incidente</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-6">6. Manter vivo</a></li>
+</ul>
+</nav>
+<main class="inema-prose" id="conteudo">
+<!-- TOPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-5-1#topico-1" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">📘 Entenda o que é um playbook</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t1-p1">
           Playbook é um procedimento reutilizável para uma tarefa recorrente. Não é um princípio ("teste bem"), é uma
           <strong class="text-teal-400">sequência de passos</strong> com ordem, entradas, saídas e critério de conclusão.
         </p>
-
-        <div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
-          <svg viewBox="0 0 1000 200" class="w-full h-auto" role="img" aria-label="Quatro playbooks — funcionalidade, bug, modernização e incidente — compartilhando o mesmo esqueleto de entrada, passos, verificação e registro">
-            <defs>
-              <linearGradient id="m51-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
-              <filter id="m51-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <pattern id="m51-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.12"/></pattern>
-              <marker id="m51-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
-            </defs>
-            <rect x="0" y="0" width="1000" height="200" fill="url(#m51-grid)"/>
-            <g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
-              <rect x="30" y="24" width="180" height="32" rx="9" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="120" y="45" text-anchor="middle" fill="#99f6e4">funcionalidade</text>
-              <rect x="30" y="66" width="180" height="32" rx="9" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="120" y="87" text-anchor="middle" fill="#99f6e4">bug</text>
-              <rect x="30" y="108" width="180" height="32" rx="9" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="120" y="129" text-anchor="middle" fill="#99f6e4">modernização</text>
-              <rect x="30" y="150" width="180" height="32" rx="9" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/><text x="120" y="171" text-anchor="middle" fill="#99f6e4">incidente</text>
-            </g>
-            <g fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.5">
-              <path d="M210,40  C280,40 290,100 320,100" marker-end="url(#m51-ahc)"/>
-              <path d="M210,82  C280,82 290,100 320,100" marker-end="url(#m51-ahc)"/>
-              <path d="M210,124 C280,124 290,102 320,102" marker-end="url(#m51-ahc)"/>
-              <path d="M210,166 C280,166 290,104 320,104" marker-end="url(#m51-ahc)"/>
-            </g>
-            <g filter="url(#m51-glow)"><rect x="320" y="66" width="650" height="72" rx="16" fill="#0c1f1c" stroke="url(#m51-grad)" stroke-width="2"/></g>
-            <text x="645" y="94" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="600" font-size="16">mesmo esqueleto</text>
-            <text x="645" y="118" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="13">entrada → passos ordenados → verificação → registro do aprendizado</text>
-          </svg>
-          <p class="text-sm text-neutral-400 mt-3">
-            <strong class="text-teal-400">Como ler:</strong> os quatro playbooks tratam de situações diferentes, mas convergem para o
+<div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+<svg aria-label="Quatro playbooks — funcionalidade, bug, modernização e incidente — compartilhando o mesmo esqueleto de entrada, passos, verificação e registro" class="w-full h-auto" role="img" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="m51-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2dd4bf"></stop><stop offset="1" stop-color="#14b8a6"></stop></lineargradient>
+<filter height="180%" id="m51-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m51-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#14b8a6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m51-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m51-grid)" height="200" width="1000" x="0" y="0"></rect>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#0c1f1c" height="32" rx="9" stroke="#2dd4bf" stroke-width="2" width="180" x="30" y="24"></rect><text fill="#99f6e4" text-anchor="middle" x="120" y="45">funcionalidade</text>
+<rect fill="#0c1f1c" height="32" rx="9" stroke="#2dd4bf" stroke-width="2" width="180" x="30" y="66"></rect><text fill="#99f6e4" text-anchor="middle" x="120" y="87">bug</text>
+<rect fill="#0c1f1c" height="32" rx="9" stroke="#2dd4bf" stroke-width="2" width="180" x="30" y="108"></rect><text fill="#99f6e4" text-anchor="middle" x="120" y="129">modernização</text>
+<rect fill="#0c1f1c" height="32" rx="9" stroke="#2dd4bf" stroke-width="2" width="180" x="30" y="150"></rect><text fill="#99f6e4" text-anchor="middle" x="120" y="171">incidente</text>
+</g>
+<g fill="none" opacity="0.5" stroke="#38bdf8" stroke-width="1.8">
+<path d="M210,40  C280,40 290,100 320,100" marker-end="url(#m51-ahc)"></path>
+<path d="M210,82  C280,82 290,100 320,100" marker-end="url(#m51-ahc)"></path>
+<path d="M210,124 C280,124 290,102 320,102" marker-end="url(#m51-ahc)"></path>
+<path d="M210,166 C280,166 290,104 320,104" marker-end="url(#m51-ahc)"></path>
+</g>
+<g filter="url(#m51-glow)"><rect fill="#0c1f1c" height="72" rx="16" stroke="url(#m51-grad)" stroke-width="2" width="650" x="320" y="66"></rect></g>
+<text fill="#2dd4bf" font-family="Inter,sans-serif" font-size="16" font-weight="600" text-anchor="middle" x="645" y="94">mesmo esqueleto</text>
+<text fill="#99f6e4" font-family="Inter,sans-serif" font-size="13" text-anchor="middle" x="645" y="118">entrada → passos ordenados → verificação → registro do aprendizado</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-teal-400">Como ler:</strong> os quatro playbooks tratam de situações diferentes, mas convergem para o
             mesmo formato. Se você aprender esse esqueleto, escreve qualquer playbook novo em quinze minutos — e todos ficam
             consumíveis pelo mesmo agente.
           </p>
-        </div>
-
-        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
-          <p class="text-neutral-300 text-sm">
-            <strong>Playbook</strong> é o procedimento escrito para humanos e agentes. <strong>Skill</strong> (módulo 5.2) é esse mesmo
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> Novo aqui?</h3>
+<p class="text-neutral-300 text-sm">
+<strong>Playbook</strong> é o procedimento escrito para humanos e agentes. <strong>Skill</strong> (módulo 5.2) é esse mesmo
             procedimento empacotado para o agente executar direto. <strong>Rule</strong> é um limite que vale em <em>todas</em> as tarefas,
             independente de playbook. Um descreve o caminho, o outro o encurta, o terceiro cerca a estrada.
           </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Sequência</p><p class="text-xs text-neutral-400">Não conselho</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Recorrente</p><p class="text-xs text-neutral-400">Tarefa que se repete</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Repetível</p><p class="text-xs text-neutral-400">Entre pessoas e agentes</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Esqueleto</p><p class="text-xs text-neutral-400">Igual para todos</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 2 -->
-      <section id="topico-2" data-inema-topic="modulo-5-1#topico-2" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
-          <h2 class="text-2xl font-bold">✨ Playbook de nova funcionalidade</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t2-p1">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Sequência</p><p class="text-xs text-neutral-400">Não conselho</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Recorrente</p><p class="text-xs text-neutral-400">Tarefa que se repete</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Repetível</p><p class="text-xs text-neutral-400">Entre pessoas e agentes</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Esqueleto</p><p class="text-xs text-neutral-400">Igual para todos</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-5-1#topico-2" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">✨ Playbook de nova funcionalidade</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t2-p1">
           O caminho padrão do trabalho novo. Ter isso escrito elimina a diferença de qualidade entre a tarefa feita na
           segunda de manhã e a feita na sexta às 18h.
         </p>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Ler a especificação
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Ler a especificação
 → confirmar escopo
 → mapear impacto
 → criar plano
@@ -227,58 +207,52 @@
 → revisar
 → documentar
 → preparar pull request</pre>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-            <h4 class="font-bold text-emerald-400 mb-4">✓ Onde o playbook salva</h4>
-            <ul class="space-y-3 text-neutral-300 text-sm">
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Confirmar escopo" pega o mal-entendido antes do código existir</span></li>
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Mapear impacto" revela o consumidor que ia quebrar</span></li>
-              <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Plano antes de implementar" permite corrigir rumo barato</span></li>
-            </ul>
-          </div>
-          <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-            <h4 class="font-bold text-red-400 mb-4">✗ Os atalhos que custam caro</h4>
-            <ul class="space-y-3 text-neutral-300 text-sm">
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Pular o plano "porque é rápido"</span></li>
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Deixar documentação para depois (nunca chega)</span></li>
-              <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Escrever os testes só depois de tudo pronto</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Confirmar</p><p class="text-xs text-neutral-400">Antes de codar</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Impacto</p><p class="text-xs text-neutral-400">Quem quebra?</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Mínima</p><p class="text-xs text-neutral-400">A mudança certa</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Documentar</p><p class="text-xs text-neutral-400">Faz parte do pronto</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 3 -->
-      <section id="topico-3" data-inema-topic="modulo-5-1#topico-3" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
-          <h2 class="text-2xl font-bold">🐞 Playbook de correção de bug</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t3-p1">
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Onde o playbook salva</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Confirmar escopo" pega o mal-entendido antes do código existir</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Mapear impacto" revela o consumidor que ia quebrar</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Plano antes de implementar" permite corrigir rumo barato</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Os atalhos que custam caro</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Pular o plano "porque é rápido"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Deixar documentação para depois (nunca chega)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Escrever os testes só depois de tudo pronto</span></li>
+</ul>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Confirmar</p><p class="text-xs text-neutral-400">Antes de codar</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Impacto</p><p class="text-xs text-neutral-400">Quem quebra?</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Mínima</p><p class="text-xs text-neutral-400">A mudança certa</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Documentar</p><p class="text-xs text-neutral-400">Faz parte do pronto</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-5-1#topico-3" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🐞 Playbook de correção de bug</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t3-p1">
           Aqui a ordem é tudo. Sem reprodução, você conserta o que imagina; sem teste que falha antes, não existe prova
           de que o bug foi embora.
         </p>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Reproduzir o erro
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Reproduzir o erro
 → registrar evidência
 → identificar causa
 → criar teste que falha
@@ -286,43 +260,37 @@
 → executar regressão
 → revisar impacto
 → documentar</pre>
-        </div>
-
-        <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-          <p class="text-neutral-300">Se o bug não reproduz, o playbook muda: a tarefa passa a ser "conseguir reproduzir" — com mais logs, mais dados, ambiente mais parecido. Corrigir sem reproduzir é chute com aparência de trabalho.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Reproduzir</p><p class="text-xs text-neutral-400">Primeiro passo, sempre</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Teste que falha</p><p class="text-xs text-neutral-400">É a prova</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Regressão</p><p class="text-xs text-neutral-400">Fecha o ciclo</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Não reproduz?</p><p class="text-xs text-neutral-400">Essa vira a tarefa</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 4 -->
-      <section id="topico-4" data-inema-topic="modulo-5-1#topico-4" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
-          <h2 class="text-2xl font-bold">🏚️ Playbook de modernização</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t4-p1">
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+<p class="text-neutral-300">Se o bug não reproduz, o playbook muda: a tarefa passa a ser "conseguir reproduzir" — com mais logs, mais dados, ambiente mais parecido. Corrigir sem reproduzir é chute com aparência de trabalho.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Reproduzir</p><p class="text-xs text-neutral-400">Primeiro passo, sempre</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Teste que falha</p><p class="text-xs text-neutral-400">É a prova</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Regressão</p><p class="text-xs text-neutral-400">Fecha o ciclo</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Não reproduz?</p><p class="text-xs text-neutral-400">Essa vira a tarefa</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-5-1#topico-4" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">🏚️ Playbook de modernização</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t4-p1">
           É a trilha 4 condensada em procedimento — o formato em que ela realmente é usada.
         </p>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Mapear dependências
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Mapear dependências
 → criar testes de caracterização
 → definir fronteira
 → criar adaptador
@@ -330,12 +298,11 @@
 → executar em paralelo
 → comparar resultados
 → liberar gradualmente</pre>
-        </div>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — gerar seus playbooks a partir do que o time já faz</h3>
-          <p class="text-neutral-300 text-sm mb-2"><strong class="text-teal-400">Objetivo:</strong> escrever o primeiro playbook do seu repositório sem partir do zero, usando o histórico real.</p>
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Analise os últimos 30 pull requests deste repositório (use git log e os arquivos
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Exercício copiável — gerar seus playbooks a partir do que o time já faz</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-teal-400">Objetivo:</strong> escrever o primeiro playbook do seu repositório sem partir do zero, usando o histórico real.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Analise os últimos 30 pull requests deste repositório (use git log e os arquivos
 alterados). Não altere nada.
 
 1. agrupe os PRs por TIPO de tarefa (feature, bug, dependência, refatoração,
@@ -349,40 +316,35 @@ alterados). Não altere nada.
 4. aponte quais passos poderiam virar verificação automática.
 
 Salve a proposta em docs/playbooks/&lt;nome&gt;.md e me mostre o conteúdo.</pre>
-          <p class="text-neutral-300 text-sm"><strong class="text-teal-400">Como verificar:</strong> use o playbook na próxima tarefa desse tipo e anote onde ele travou ou ficou vago. A segunda versão — escrita depois do primeiro uso real — é a que vale.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Do histórico</p><p class="text-xs text-neutral-400">Não da imaginação</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">O que faltou</p><p class="text-xs text-neutral-400">Vira passo explícito</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Evidência</p><p class="text-xs text-neutral-400">Parte do playbook</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Automatizável</p><p class="text-xs text-neutral-400">Marque desde já</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 5 -->
-      <section id="topico-5" data-inema-topic="modulo-5-1#topico-5" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
-          <h2 class="text-2xl font-bold">🚨 Playbook de incidente</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t5-p1">
+<p class="text-neutral-300 text-sm"><strong class="text-teal-400">Como verificar:</strong> use o playbook na próxima tarefa desse tipo e anote onde ele travou ou ficou vago. A segunda versão — escrita depois do primeiro uso real — é a que vale.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Do histórico</p><p class="text-xs text-neutral-400">Não da imaginação</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">O que faltou</p><p class="text-xs text-neutral-400">Vira passo explícito</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Evidência</p><p class="text-xs text-neutral-400">Parte do playbook</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Automatizável</p><p class="text-xs text-neutral-400">Marque desde já</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-5-1#topico-5" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🚨 Playbook de incidente</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t5-p1">
           Sob pressão ninguém improvisa bem. Este playbook existe principalmente para impedir que a primeira reação
           apague a evidência do que aconteceu.
         </p>
-
-        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
-          <pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Coletar logs
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Coletar logs
 → classificar gravidade
 → preservar evidências
 → identificar causa provável
@@ -390,136 +352,123 @@ Salve a proposta em docs/playbooks/&lt;nome&gt;.md e me mostre o conteúdo.</pre
 → validar
 → aplicar correção
 → registrar aprendizado</pre>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
-          <p class="text-neutral-300">Reiniciar o serviço costuma resolver o sintoma e destruir a evidência. Se você precisa reiniciar para restabelecer o serviço, capture antes: logs, estado, métricas, dump. Sem isso, o mesmo incidente volta e você recomeça do zero.</p>
-        </div>
-
-        <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center"><span class="mr-2">🔁</span> O passo mais esquecido: registrar aprendizado</h3>
-          <p class="text-neutral-300 text-sm">Todo incidente resolvido deve terminar com uma decisão: isso vira <strong>teste</strong>, vira <strong>rule</strong>, vira <strong>gate</strong> ou vira <strong>alerta</strong>? Incidente que termina só com o serviço no ar volta a acontecer.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Preservar</p><p class="text-xs text-neutral-400">Antes de agir</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Mitigar</p><p class="text-xs text-neutral-400">Não é corrigir</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Gravidade</p><p class="text-xs text-neutral-400">Define a resposta</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Aprendizado</p><p class="text-xs text-neutral-400">Vira teste ou gate</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- TOPICO 6 -->
-      <section id="topico-6" data-inema-topic="modulo-5-1#topico-6" class="mb-16">
-        <div class="flex items-center space-x-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
-          <h2 class="text-2xl font-bold">♻️ Mantenha os playbooks vivos</h2>
-        </div>
-
-        <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t6-p1">
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+<p class="text-neutral-300">Reiniciar o serviço costuma resolver o sintoma e destruir a evidência. Se você precisa reiniciar para restabelecer o serviço, capture antes: logs, estado, métricas, dump. Sem isso, o mesmo incidente volta e você recomeça do zero.</p>
+</div>
+<div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center"><span class="mr-2">🔁</span> O passo mais esquecido: registrar aprendizado</h3>
+<p class="text-neutral-300 text-sm">Todo incidente resolvido deve terminar com uma decisão: isso vira <strong>teste</strong>, vira <strong>rule</strong>, vira <strong>gate</strong> ou vira <strong>alerta</strong>? Incidente que termina só com o serviço no ar volta a acontecer.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Preservar</p><p class="text-xs text-neutral-400">Antes de agir</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Mitigar</p><p class="text-xs text-neutral-400">Não é corrigir</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Gravidade</p><p class="text-xs text-neutral-400">Define a resposta</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Aprendizado</p><p class="text-xs text-neutral-400">Vira teste ou gate</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-5-1#topico-6" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">♻️ Mantenha os playbooks vivos</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-1-t6-p1">
           Playbook desatualizado é pior que playbook ausente: o agente segue um procedimento que já não descreve o
           sistema — com toda a confiança do mundo.
         </p>
-
-        <div class="space-y-6 mb-6">
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
-            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-              <h4 class="font-semibold text-white mb-2">Falhou na prática? atualize na hora</h4>
-              <p class="text-neutral-300 text-sm">O melhor momento de corrigir um playbook é logo depois de ele ter falhado — enquanto você lembra exatamente onde travou.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
-            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-              <h4 class="font-semibold text-white mb-2">Versionado no repositório</h4>
-              <p class="text-neutral-300 text-sm">Em <span class="font-mono text-xs">/docs/playbooks/</span>, revisado como código. Mudança de playbook é mudança de processo e merece revisão.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
-            <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-teal-500/30">
-              <h4 class="font-semibold text-white mb-2">Poucos e bons</h4>
-              <p class="text-neutral-300 text-sm">Cinco playbooks usados valem mais que trinta arquivados. Se um deles não foi consultado em seis meses, apague ou funda com outro.</p>
-            </div>
-          </div>
-        </div>
-
-        <div data-inema-check="modulo-5-1#q1" class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6">
-          <p class="font-medium mb-4">Checagem rápida: qual é o melhor ponto de partida para escrever o primeiro playbook do time?</p>
-          <div class="inema-check-options space-y-2">
-            <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Um modelo genérico de boas práticas encontrado na internet.</button>
-            <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">O que o time já faz na tarefa mais frequente — incluindo os passos que costumam faltar.</button>
-            <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">O processo ideal que vocês gostariam de ter daqui a um ano.</button>
-          </div>
-          <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Atualize</p><p class="text-xs text-neutral-400">Quando falhar</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Versionado</p><p class="text-xs text-neutral-400">Revisado como código</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Poucos</p><p class="text-xs text-neutral-400">E realmente usados</p></div>
-          <div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Morto</p><p class="text-xs text-neutral-400">Apague sem dó</p></div>
-        </div>
-
-        <div class="flex justify-start items-center gap-3 mt-6">
-          <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors">
-            <span class="inema-read-icon" aria-hidden="true">○</span><span class="inema-read-label">Marcar como lido</span>
-          </button>
-          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm">
-            <span aria-hidden="true">?</span><span>Tenho dúvida</span>
-          </button>
-        </div>
-      </section>
-
-      <section class="mb-12">
-        <div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
-          <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
-          <div class="space-y-4 mb-8">
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Playbook é sequência</strong><span class="text-neutral-400"> - entrada, passos, verificação, registro.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Funcionalidade</strong><span class="text-neutral-400"> - confirmar escopo e mapear impacto antes de implementar.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Bug</strong><span class="text-neutral-400"> - reproduzir, teste que falha, correção, regressão.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Modernização</strong><span class="text-neutral-400"> - caracterizar, fronteira, adaptador, paralelo, gradual.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Incidente</strong><span class="text-neutral-400"> - preservar evidência antes de mexer; terminar registrando aprendizado.</span></div></div>
-            <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Playbook vivo</strong><span class="text-neutral-400"> - nasce do que o time já faz e é atualizado quando falha.</span></div></div>
-          </div>
-          <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-            <h3 class="font-semibold text-teal-400 mb-2">Próximo Módulo:</h3>
-            <p class="text-neutral-300">5.2 - Skills e Rules: empacotar capacidades e fixar limites permanentes.</p>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
-            <a href="modulo-5-2.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">Próximo Módulo →</a>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <footer class="border-t border-dark-600 py-8 mt-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
-      <p class="mt-2">
-        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
-        <span class="text-neutral-600 mx-1">-</span>
-        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="../../assets/curso.js"></script>
-  <script src="../../assets/learn.js"></script>
-  <script>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Falhou na prática? atualize na hora</h4>
+<p class="text-neutral-300 text-sm">O melhor momento de corrigir um playbook é logo depois de ele ter falhado — enquanto você lembra exatamente onde travou.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Versionado no repositório</h4>
+<p class="text-neutral-300 text-sm">Em <span class="font-mono text-xs">/docs/playbooks/</span>, revisado como código. Mudança de playbook é mudança de processo e merece revisão.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-teal-500/30">
+<h4 class="font-semibold text-white mb-2">Poucos e bons</h4>
+<p class="text-neutral-300 text-sm">Cinco playbooks usados valem mais que trinta arquivados. Se um deles não foi consultado em seis meses, apague ou funda com outro.</p>
+</div>
+</div>
+</div>
+<div class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-5-1#q1">
+<p class="font-medium mb-4">Checagem rápida: qual é o melhor ponto de partida para escrever o primeiro playbook do time?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Um modelo genérico de boas práticas encontrado na internet.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">O que o time já faz na tarefa mais frequente — incluindo os passos que costumam faltar.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">O processo ideal que vocês gostariam de ter daqui a um ano.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Atualize</p><p class="text-xs text-neutral-400">Quando falhar</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Versionado</p><p class="text-xs text-neutral-400">Revisado como código</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Poucos</p><p class="text-xs text-neutral-400">E realmente usados</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Morto</p><p class="text-xs text-neutral-400">Apague sem dó</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Marcar como lido</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button">
+<span aria-hidden="true">?</span><span>Tenho dúvida</span>
+</button>
+</div>
+</section>
+<section class="mb-12">
+<div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Playbook é sequência</strong><span class="text-neutral-400"> - entrada, passos, verificação, registro.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Funcionalidade</strong><span class="text-neutral-400"> - confirmar escopo e mapear impacto antes de implementar.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Bug</strong><span class="text-neutral-400"> - reproduzir, teste que falha, correção, regressão.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Modernização</strong><span class="text-neutral-400"> - caracterizar, fronteira, adaptador, paralelo, gradual.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Incidente</strong><span class="text-neutral-400"> - preservar evidência antes de mexer; terminar registrando aprendizado.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Playbook vivo</strong><span class="text-neutral-400"> - nasce do que o time já faz e é atualizado quando falha.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-teal-400 mb-2">Próximo Módulo:</h3>
+<p class="text-neutral-300">5.2 - Skills e Rules: empacotar capacidades e fixar limites permanentes.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para Trilha</a>
+<a class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors" href="modulo-5-2.html">Próximo Módulo →</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../assets/curso.js"></script>
+<script src="../../assets/learn.js"></script>
+<script>
     if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
     window.addEventListener('DOMContentLoaded', function () {
       if (window.INEMA && INEMA.registerCheck) {

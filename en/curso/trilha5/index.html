@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Track 5 · Playbooks, Skills, and Governance | AI Software Engineering</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha5/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha5/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha5/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha5/" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha5/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Skip to content</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">AI Software Engineering</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Foundations</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flow &amp; Quality</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Architecture</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10" href="index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governance</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Practice</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>My journey</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Switch between light and dark themes" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="5">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">TRACK 5</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🛡️ Playbooks, Skills, Rules, and Governance</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Turn what you learned into a reusable process: procedures for recurring tasks, packaged capabilities, permanent rules that limit arbitrary decisions, and the five levels of autonomy.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">3</div><div class="text-xs text-neutral-400">Modules</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">18</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">~2h30</div><div class="text-xs text-neutral-400">Duration</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Advanced</div><div class="text-xs text-neutral-400">Level</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Track 5 progress" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:5" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 of 18</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="conteudo">
+<div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+<svg aria-label="Ladder of five autonomy levels, from assistance to critical autonomy, with increasing controls at each step" class="w-full h-auto" role="img" viewbox="0 0 1000 240">
+<defs>
+<lineargradient id="t5h-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2dd4bf"></stop><stop offset="1" stop-color="#14b8a6"></stop></lineargradient>
+<filter height="180%" id="t5h-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t5h-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#14b8a6" opacity="0.12" r="1.3"></circle></pattern>
+</defs>
+<rect fill="url(#t5h-grid)" height="240" width="1000" x="0" y="0"></rect>
+<path d="M40,208 L960,40" fill="none" opacity="0.4" stroke="#2dd4bf" stroke-dasharray="9 9" stroke-width="1.8"></path>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#0c1f1c" height="44" rx="11" stroke="#2dd4bf" stroke-width="2" width="176" x="30" y="176"></rect><text fill="#99f6e4" text-anchor="middle" x="118" y="196">1 · assistance</text><text fill="#5eead4" font-size="11" font-weight="400" text-anchor="middle" x="118" y="212">only suggests</text>
+<rect fill="#0c1f1c" height="44" rx="11" stroke="#2dd4bf" stroke-width="2" width="176" x="222" y="140"></rect><text fill="#99f6e4" text-anchor="middle" x="310" y="160">2 · supervised</text><text fill="#5eead4" font-size="11" font-weight="400" text-anchor="middle" x="310" y="176">approves each action</text>
+<rect fill="#0c1f1c" height="44" rx="11" stroke="#2dd4bf" stroke-width="2" width="176" x="414" y="104"></rect><text fill="#99f6e4" text-anchor="middle" x="502" y="124">3 · controlled</text><text fill="#5eead4" font-size="11" font-weight="400" text-anchor="middle" x="502" y="140">passes through gates</text>
+<rect fill="#0e1b26" height="44" rx="11" stroke="#38bdf8" stroke-width="2" width="176" x="606" y="68"></rect><text fill="#bfe6ff" text-anchor="middle" x="694" y="88">4 · operational</text><text fill="#9ad6ff" font-size="11" font-weight="400" text-anchor="middle" x="694" y="104">complete workflow, with rules</text>
+</g>
+<g filter="url(#t5h-glow)"><rect fill="#2a0f16" height="44" rx="11" stroke="#f87171" stroke-width="2" width="172" x="798" y="32"></rect></g>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" text-anchor="middle" x="884" y="52">5 · critical</text>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="884" y="68">do not adopt without extreme rigor</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-teal-400">How to read:</strong> the ladder climbs in autonomy, but each rung is reachable only with the control
+        from the previous rung in place. The top is red on purpose: level 5 isn’t the course goal — it’s the limit that
+        most organizations shouldn’t cross.
+      </p>
+</div>
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Learning path map</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all" href="#modulo-5-1">
+<div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">📘 Playbooks</h3>
+<p class="text-xs text-neutral-400">Same task, same path</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all" href="#modulo-5-2">
+<div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">🧩 Skills and Rules</h3>
+<p class="text-xs text-neutral-400">Capacity and limit</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all" href="#modulo-5-3">
+<div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">🛡️ Governance</h3>
+<p class="text-xs text-neutral-400">Five levels of autonomy</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Detailed content</h2>
+<!-- MODULO 5.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="5-1" data-inema-track="5" id="modulo-5-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">📘 Playbooks and reusable processes</h3>
+<p class="text-neutral-400 text-sm">Procedures for recurring tasks: new features, bug fixes, legacy modernization, PR review, refactoring, dependencies, database migration, incidents, and validation before deploy.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t51-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">📘</span>
+<div><span class="font-medium">Understand what a playbook is</span><span class="text-neutral-500 text-sm ml-2">- A sequence, not advice</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t51-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">A reusable procedure for a recurring task, written as a sequence of steps with inputs, outputs, and a completion criterion.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">The playbook is what makes results repeatable across people and agents—and where the team’s knowledge stops depending on whoever is on call.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Ordered steps &gt; generic principles · One playbook per recurring task · It evolves with feedback from practice.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t51-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">✨</span>
+<div><span class="font-medium">New feature playbook</span><span class="text-neutral-500 text-sm ml-2">- From spec to PR</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t51-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Read the specification → confirm scope → map impact → create a plan → implement the smallest change → create tests → run quality gates → review → document → prepare a pull request.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">It’s the standard path for new work. Writing this down eliminates the quality variation between Monday and Friday.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Confirm scope before coding · Mapping impact reveals what breaks · Documentation is part of done.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t51-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🐞</span>
+<div><span class="font-medium">Bug fix playbook</span><span class="text-neutral-500 text-sm ml-2">- Reproduce before fixing</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t51-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Reproduce the error → record evidence → identify the cause → create a failing test → implement the fix → run regression tests → review the impact → document.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">The order matters: without reproduction, you fix what you imagine; without a test that fails first, there’s no proof the bug is gone.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Reproduction is the first step · A test that fails beforehand = proof · Regression testing closes the loop.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t51-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🏚️</span>
+<div><span class="font-medium">Modernization playbook</span><span class="text-neutral-500 text-sm ml-2">- Boundary, adapter, parallel</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t51-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Map dependencies → create characterization tests → define boundary → create adapter → migrate a small module → run in parallel → compare results → release gradually.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">This is Track 4 condensed into a procedure—the format in which it’s actually used day to day.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">One module at a time · Compare before switching · Gradual rollout keeps rollback available.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t51-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🚨</span>
+<div><span class="font-medium">Incident playbook</span><span class="text-neutral-500 text-sm ml-2">- Evidence before making changes</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t51-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Collect logs → classify severity → preserve evidence → identify the likely cause → create a mitigation → validate → apply the fix → record what you learned.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Under pressure, no one improvises well. The playbook keeps the first reaction from erasing the evidence of what happened.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Preserve before acting · Mitigation ≠ correction · Recorded learnings become a rule or gate.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t51-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">♻️</span>
+<div><span class="font-medium">Keep the playbooks up to date</span><span class="text-neutral-500 text-sm ml-2">- Or become museum pieces</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t51-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The practice of reviewing the playbook whenever it fails in practice—and keeping it in the repository, versioned like code.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">A playbook that isn’t used grows stale and gets in the way: the agent follows a procedure that no longer describes the system.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Did it fail in practice? Update it · Versioned in the repository · Few and good &gt; many and dead.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-5-1')">View in Modal</button>
+<a class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors" href="modulo-5-1.html">View Full</a>
+</div>
+</div>
+<!-- MODULO 5.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="5-2" data-inema-track="5" id="modulo-5-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🧩 Skills and Rules</h3>
+<p class="text-neutral-400 text-sm">Skills as reusable capabilities (analyzing a repository, generating a spec, creating a plan, implementing, reviewing, testing) and rules as permanent behavioral boundaries.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t52-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span>
+<div><span class="font-medium">Understand what a skill is</span><span class="text-neutral-500 text-sm ml-2">- Packaged capability</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t52-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">A reusable capability that guides the agent through a specific task: analyzing a repository, generating a specification, creating a plan, reproducing a bug, generating tests, reviewing architecture or security, or preparing a PR.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">A skill is the playbook in a format the agent can consume directly — so you no longer have to paste the same prompt every week.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Skill ≈ executable playbook · One task per skill · Reuse reduces variation in quality.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t52-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🧱</span>
+<div><span class="font-medium">Structure a skill</span><span class="text-neutral-500 text-sm ml-2">- Ten fields are enough</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t52-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Objective, when to use it, inputs, tools, steps, acceptance criteria, prohibited actions, failure handling, output format, and required checks.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">"When to use" and "prohibited actions" are the fields that separate a useful skill from a saved prompt — the first helps the agent choose correctly, the second prevents harm.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">When to use &gt; what it does · Output format makes the skill composable · Required verification closes the loop.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t52-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🗂️</span>
+<div><span class="font-medium">Choose which skills to create first</span><span class="text-neutral-500 text-sm ml-2">- Frequency × variation</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t52-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The prioritization criterion: start with the tasks you repeat often and that currently produce inconsistent quality.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">A skill for a rare task is maintenance with no return. A skill for a weekly task pays for itself in the first week.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Repetition justifies packaging · More variation = greater benefit · Start with 3 to 5 skills, not 30.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t52-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">📏</span>
+<div><span class="font-medium">Understand what rules are</span><span class="text-neutral-500 text-sm ml-2">- Permanent limit</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t52-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Permanent or conditional rules that limit agent behavior—never change tests to hide a failure, never insert secrets, don’t deploy without approval, don’t refactor outside the scope.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Rules reduce arbitrary decisions. They don’t depend on you remembering to write the same prohibition in every task.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Skill = capability, rule = boundary · Rules apply to every task · Few and clear &gt; many and ignored.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t52-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🔐</span>
+<div><span class="font-medium">Write security and compatibility rules</span><span class="text-neutral-500 text-sm ml-2">- The non-negotiables</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t52-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The hard core: don’t expose secrets, preserve public APIs, don’t remove security logs, don’t modify the production database directly, and produce evidence of the tests.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">These are the rules whose violation is costly and hard to reverse—they deserve to be written down and, when possible, turned into gates.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Critical rules also become checks · Public APIs are contracts · Evidence is required, not a courtesy.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t52-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🎚️</span>
+<div><span class="font-medium">Use rules to limit autonomy</span><span class="text-neutral-500 text-sm ml-2">- Attempts, cost, destruction</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t52-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Rules that set attempt limits, cost caps, approval requirements before destructive actions, and a ban on refactoring outside the scope.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">It’s where governance meets the loop: the rule is the written, permanent version of the limits you configured in Track 2.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Written limits apply to every agent · Destructive actions require a human · A rule without verification depends on obedience.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-5-2')">View in Modal</button>
+<a class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors" href="modulo-5-2.html">View Full</a>
+</div>
+</div>
+<!-- MODULO 5.3 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="5-3" data-inema-track="5" id="modulo-5-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🛡️ Governance and Autonomy Levels</h3>
+<p class="text-neutral-400 text-sm">Agent identity, permissions, auditing, cost controls, accessible data, security policy—and the five autonomy levels, from assistant to critical.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t53-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🛡️</span>
+<div><span class="font-medium">Define what AI governance means</span><span class="text-neutral-500 text-sm ml-2">- How AI can operate here</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t53-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The set of controls that defines how AI can operate within the company: identity, permissions, responsibilities, auditing, logs, costs, environments, data, prohibited actions, and incident handling.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Without governance, adoption happens haphazardly—and the organization discovers its rules after the first incident.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Governance enables, it doesn’t just prohibit · Written controls &gt; implicit norms · It needs to fit into the workflow.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t53-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🪪</span>
+<div><span class="font-medium">Give the agent an identity and permissions</span><span class="text-neutral-500 text-sm ml-2">- It’s a user</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t53-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Dedicated credentials, minimum access scope, declared responsibilities, and an audit trail for each action.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">An agent running with someone's personal credentials makes auditing and accountability impossible—and grants access that no one reviewed.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Always use a distinct identity · Least privilege · Every action traceable to whoever authorized it.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t53-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">💰</span>
+<div><span class="font-medium">Control cost, data, and environments</span><span class="text-neutral-500 text-sm ml-2">- What it can see and spend</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t53-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Spending limits per team and task, authorized execution environments, which data may enter the context, and the retention policy.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Personal data or secrets in a third party’s context are a privacy incident, not a technical detail—and uncapped costs turn into a surprise when the monthly bill comes.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Sensitive data never goes into the context · Authorized environment is a short list · Cost per task is a management metric.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t53-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🪜</span>
+<div><span class="font-medium">Learn about the five levels of autonomy</span><span class="text-neutral-500 text-sm ml-2">- From suggester to critic</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t53-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">Level 1 assistance (only suggests) · 2 supervised execution (each important action approved) · 3 controlled execution (bounded tasks with quality gates) · 4 limited operational autonomy (complete workflows within rules and environments) · 5 critical autonomy.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Level 5 shouldn’t be adopted without extremely rigorous controls. Knowing where you are prevents confusing conversations about “whether to use AI.”</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">The level applies to a type of task, not a company · Moving up a level requires the previous level’s controls · Level 5 is a limit, not a goal.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t53-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">📈</span>
+<div><span class="font-medium">Level up with evidence</span><span class="text-neutral-500 text-sm ml-2">- Metrics, not enthusiasm</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t53-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">The process of giving a type of task more autonomy based on metrics: approval rate without corrections, incidents caused, cost per task, and review time.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">Autonomy granted in a burst of enthusiasm is taken back at the first scare — and then the team also loses what was already working.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">Measure before promoting · Bounded pilot · Reverting is also a valid decision.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t53-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧾</span>
+<div><span class="font-medium">Put together the governance checklist</span><span class="text-neutral-500 text-sm ml-2">- One page that decides</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t53-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-teal-400 font-semibold">What it is:</span><p class="text-neutral-300 text-sm">A short document that answers: who the agent is, what it can access, what it can do on its own, what requires approval, how much it can spend, what gets recorded, and who is accountable.</p></div>
+<div><span class="text-teal-400 font-semibold">Why learn:</span><p class="text-neutral-300 text-sm">It’s the artifact that makes it possible to scale AI use to other teams without repeating the entire discussion each time.</p></div>
+<div><span class="text-teal-400 font-semibold">Key concepts:</span><p class="text-neutral-300 text-sm">One page, not a manual · Periodic review · Without an owner, governance doesn’t exist.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-5-3')">View in Modal</button>
+<a class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors" href="modulo-5-3.html">View Full</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-12">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha4/index.html">← Track 4: Architecture</a>
+<a class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors" href="../trilha6/index.html">Track 6: Practical Exercise →</a>
+</div>
+</main>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-5-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.1</span><span class="font-semibold">Playbooks and reusable processes</span></div>
+<button aria-label="Close" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-5-1.html" title="Module 5.1"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-5-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.2</span><span class="font-semibold">Skills and Rules</span></div>
+<button aria-label="Close" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-5-2.html" title="Module 5.2"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-5-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.3</span><span class="font-semibold">Governance and autonomy levels</span></div>
+<button aria-label="Close" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-5-3.html" title="Module 5.3"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Advanced AI Software Engineering Workshop — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>

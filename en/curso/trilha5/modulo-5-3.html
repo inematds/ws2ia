@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Module 5.3 · Governance and Autonomy Levels | AI Software Engineering</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha5/modulo-5-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha5/modulo-5-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha5/modulo-5-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha5/modulo-5-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-5-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha5/modulo-5-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Skip to content</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">AI Software Engineering</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Foundations</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flow &amp; Quality</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Architecture</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10" href="index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governance</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Practice</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>My journey</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Switch between light and dark themes" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-teal-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-teal-400" href="index.html">Track 5</a><span>/</span>
+<span class="text-teal-400">Module 5.3</span>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="5-3" data-inema-track="5">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MODULE 5.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🛡️ Governance and Autonomy Levels</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Governance is the set of controls that defines how AI can operate within the company—and the five levels of
+        autonomy provide a shared language for deciding how much freedom each type of task gets.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">50</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Advanced</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Management</div><div class="text-xs text-neutral-400">Type</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Module 5.3 progress" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:5-3" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 of 6</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+<nav aria-label="Page index" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
+<p class="text-sm text-neutral-400 mb-2">Section <span class="inema-toc-pos">1</span> from <span class="inema-toc-total">6</span></p>
+<ul class="space-y-1 text-sm">
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-1">1. What governance is</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-2">2. Identity</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-3">3. Cost and data</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-4">4. Five levels</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-5">5. Ship with evidence</a></li>
+<li><a class="inema-toc-link hover:text-teal-400" href="#topico-6">6. Checklist</a></li>
+</ul>
+</nav>
+<main class="inema-prose" id="conteudo">
+<!-- TOPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-5-3#topico-1" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🛡️ Define AI Governance</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-3-t1-p1">
+          Governance brings together agent identity, permissions, responsibilities, auditing, logs, cost controls,
+          approved environments, accessible data, prohibited actions, human approval, security policy, information
+          retention, and incident handling.
+        </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> New here?</h3>
+<p class="text-neutral-300 text-sm">
+<strong>Governance</strong> it isn’t bureaucracy: it’s the set of decisions that lets you say "yes" safely. Without it, each
+            team decides on its own what AI can access — and the organization discovers its rules after the first incident.
+            <strong>Audit</strong> is being able to answer, after the fact, who did what, when, and with what authorization.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Governance that works</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Fits on one page and is read by the people who will use it</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Says what's allowed, not just what's forbidden</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>It’s verifiable: the control exists in the system, not just in the text</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Has an owner and a date of last review</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Governance in name only</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A 40-page document no one has opened</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Generic prohibitions that the team works around</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A rule with no corresponding technical control</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Written by someone who has never used an agent</span></li>
+</ul>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Enables</p><p class="text-xs text-neutral-400">Doesn’t just prohibit</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Verifiable</p><p class="text-xs text-neutral-400">Control in the system</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Short</p><p class="text-xs text-neutral-400">The one that’s read is the one that matters</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">With an owner</p><p class="text-xs text-neutral-400">And a review date</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-5-3#topico-2" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">🪪 Give the agent an identity and permissions</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-3-t2-p1">
+          An agent running with someone's personal credentials makes auditing and accountability impossible—and grants
+          access that no one reviewed. <strong class="text-teal-400">The agent is a system user</strong>, and it must
+          have its own identity, minimal scope, and audit trail.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3">Action log <span class="text-xs text-neutral-500 font-normal">(illustrative recreation, not an actual screenshot)</span></h3>
+<div class="rounded-lg border border-dark-600 overflow-hidden">
+<div class="flex items-center gap-2 px-3 py-2 bg-dark-700 border-b border-dark-600">
+<span class="w-2.5 h-2.5 rounded-full bg-red-400"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+<span class="text-xs text-neutral-400 ml-2 font-mono">audit · agent-ci-bot</span>
+</div>
+<div class="p-4 font-mono text-xs text-neutral-300 space-y-1 bg-dark-900/60">
+<p><span class="text-teal-400">10:02</span> agente-ci-bot · read 14 files · repo: pagamentos</p>
+<p><span class="text-teal-400">10:03</span> agente-ci-bot · ran “npm test” · output attached</p>
+<p><span class="text-teal-400">10:05</span> agente-ci-bot · opened PR #4821 · 3 files</p>
+<p><span class="text-yellow-400">10:06</span> agente-ci-bot · DENIED: access to secrets/ (out of scope)</p>
+<p><span class="text-teal-400">10:31</span> maria.souza · approved PR #4821 · cost: 0,42 USD</p>
+</div>
+</div>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-teal-400">How to read:</strong> the yellow line is the most important — the denied attempt shows that the scope is real. And the last line closes the loop: an identified person approved it, with the cost recorded.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Identity</p><p class="text-xs text-neutral-400">Never your own</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Minimum scope</p><p class="text-xs text-neutral-400">Default is deny</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Visible denial</p><p class="text-xs text-neutral-400">Prove there’s a limit</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Traceable</p><p class="text-xs text-neutral-400">Even the person who authorized it</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-5-3#topico-3" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">💰 Manage cost, data, and environments</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-3-t3-p1">
+          Three controls that are often remembered too late: how much you can spend, what data can enter the
+          context, and which environments the agent can run in.
+        </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Capped, visible cost</h4>
+<p class="text-neutral-300 text-sm">Set limits per task and per team, with an alert before they’re exceeded. Track the cost per completed task — it’s the metric that supports or sinks the investment at the next budget meeting.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-red-500/30">
+<h4 class="font-semibold text-white mb-2">Data: what never goes into the context</h4>
+<p class="text-neutral-300 text-sm">Personal data, secrets, regulated information. This is a privacy and compliance issue, not a technical detail—and the response needs to be written down before anyone needs it in a hurry.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Authorized environments</h4>
+<p class="text-neutral-300 text-sm">A short, explicit list of where the agent can run. Production is excluded by default, and adding it to this list is a recorded decision, not a side effect of configuration.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Limit</p><p class="text-xs text-neutral-400">By task and team</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Cost/task</p><p class="text-xs text-neutral-400">Management metric</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Sensitive data</p><p class="text-xs text-neutral-400">Outside the context</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Production</p><p class="text-xs text-neutral-400">Out by default</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-5-3#topico-4" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">🪜 Learn the five levels of autonomy</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-3-t4-p1">
+          This scale is the shared language that replaces vague discussions about “whether to use AI.” The right question
+          is: <strong class="text-teal-400">for what kind of task, at what level?</strong>
+</p>
+<div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+<svg aria-label="The five levels of autonomy, with the required control at each step" class="w-full h-auto" role="img" viewbox="0 0 1000 250">
+<defs>
+<lineargradient id="m53-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2dd4bf"></stop><stop offset="1" stop-color="#14b8a6"></stop></lineargradient>
+<filter height="180%" id="m53-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m53-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#14b8a6" opacity="0.12" r="1.3"></circle></pattern>
+</defs>
+<rect fill="url(#m53-grid)" height="250" width="1000" x="0" y="0"></rect>
+<path d="M40,220 L940,44" fill="none" opacity="0.4" stroke="#2dd4bf" stroke-dasharray="9 9" stroke-width="1.8"></path>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#0c1f1c" height="48" rx="11" stroke="#2dd4bf" stroke-width="2" width="200" x="24" y="186"></rect>
+<text fill="#99f6e4" text-anchor="middle" x="124" y="208">1 · assistance</text>
+<text fill="#5eead4" font-size="11" font-weight="400" text-anchor="middle" x="124" y="226">control: standard review</text>
+<rect fill="#0c1f1c" height="48" rx="11" stroke="#2dd4bf" stroke-width="2" width="200" x="240" y="150"></rect>
+<text fill="#99f6e4" text-anchor="middle" x="340" y="172">2 · supervised</text>
+<text fill="#5eead4" font-size="11" font-weight="400" text-anchor="middle" x="340" y="190">control: approval per action</text>
+<rect fill="#0c1f1c" height="48" rx="11" stroke="#2dd4bf" stroke-width="2" width="200" x="456" y="114"></rect>
+<text fill="#99f6e4" text-anchor="middle" x="556" y="136">3 · controlled</text>
+<text fill="#5eead4" font-size="11" font-weight="400" text-anchor="middle" x="556" y="154">control: quality gates</text>
+<rect fill="#0e1b26" height="48" rx="11" stroke="#38bdf8" stroke-width="2" width="200" x="672" y="78"></rect>
+<text fill="#bfe6ff" text-anchor="middle" x="772" y="100">4 · limited operational</text>
+<text fill="#9ad6ff" font-size="11" font-weight="400" text-anchor="middle" x="772" y="118">control: rules + sandbox + audit</text>
+</g>
+<g filter="url(#m53-glow)"><rect fill="#2a0f16" height="48" rx="11" stroke="#f87171" stroke-width="2" width="206" x="770" y="24"></rect></g>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" text-anchor="middle" x="873" y="46">5 · critical autonomy</text>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="873" y="64">do not adopt without extreme rigor</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-teal-400">How to read:</strong> each step brings the control that supports it. You don’t "choose" level 4—
+            you reach it once you have gates, rules, a sandbox, and auditing in place. Level 5 appears in red because it’s a limit,
+            not a goal.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">By task</p><p class="text-xs text-neutral-400">Not by company</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Control first</p><p class="text-xs text-neutral-400">Then the level</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Level 5</p><p class="text-xs text-neutral-400">Limit, not target</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Plain language</p><p class="text-xs text-neutral-400">Ends vague debates</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-5-3#topico-5" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">📈 Level up with evidence</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-3-t5-p1">
+          Autonomy granted in a burst of enthusiasm is taken back at the first scare — and then the team loses even what was already working.
+          Promote a type of task based on the numbers.
+        </p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> What to measure before promoting</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• <strong>Approval without correction:</strong> how many deliverables passed review without rework?</li>
+<li>• <strong>Attributable incidents:</strong> how many production issues came from this workflow?</li>
+<li>• <strong>Review time:</strong> did it go down or up since the agent joined?</li>
+<li>• <strong>Cost per task delivered:</strong> is it stable, going up, or going down?</li>
+<li>• <strong>Correct stop rate:</strong> when it didn't know, did it stop and ask?</li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Practical tip</h3>
+<p class="text-neutral-300">Promote in a limited pilot: one repository, one task type, for one month, with metrics agreed on before starting. And make it clear that moving down a level is a normal decision—not a failure of the team or the technology.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Measure before</p><p class="text-xs text-neutral-400">To promote</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Pilot</p><p class="text-xs text-neutral-400">Limited in scope and short</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Correct stop</p><p class="text-xs text-neutral-400">Underrated metric</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Downgrade</p><p class="text-xs text-neutral-400">Valid decision</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-5-3#topico-6" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">🧾 Build the governance checklist</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m5-3-t6-p1">
+          One page that answers seven questions. It’s the artifact that lets you bring AI use to other teams without
+          repeating the entire discussion every time.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Copyable exercise — your team’s checklist</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-teal-400">Objective:</strong> move beyond theory with a document ready to share. Fill it out and take it to the person responsible for the system.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4"># Governança de agentes — &lt;time / sistema&gt;
+Dono: &lt;nome&gt; · Última revisão: &lt;data&gt;
+
+1. QUEM é o agente?      &lt;identidade, onde as credenciais vivem&gt;
+2. O QUE pode acessar?   &lt;repos, ambientes, dados — e o que NUNCA entra no contexto&gt;
+3. O QUE faz sozinho?    &lt;lista curta: tarefas reversíveis e verificáveis&gt;
+4. O QUE exige aprovação?&lt;deploy, migração, secrets, infra, dados de produção&gt;
+5. QUANTO pode gastar?   &lt;teto por tarefa e por mês; quem é avisado no estouro&gt;
+6. O QUE é registrado?   &lt;ações, comandos, custo, aprovações — e por quanto tempo&gt;
+7. QUEM responde?        &lt;pela mudança entregue e pelo incidente causado&gt;
+
+Nível de autonomia atual, por tipo de tarefa:
+- correção de CI ......... nível &lt;N&gt;
+- feature pequena ........ nível &lt;N&gt;
+- migração de banco ...... nível &lt;N&gt;</pre>
+<p class="text-neutral-300 text-sm"><strong class="text-teal-400">How to verify:</strong> show the page to someone outside the team and ask them to answer: "can the agent modify the production database?" If they can’t find the answer in thirty seconds, the document isn’t ready yet.</p>
+</div>
+<div class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-5-3#q1">
+<p class="font-medium mb-4">Quick check: your team wants to raise automatic CI fixes from level 3 to level 4. What justifies it?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">The team is satisfied with the results, and the model has improved a lot.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Pilot metrics: approval without corrections, zero attributable incidents, stable cost, and proper stops.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">The competition is already operating at this level.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Seven questions</p><p class="text-xs text-neutral-400">One page</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Level by task</p><p class="text-xs text-neutral-400">Explicit on the page</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Discoverable</p><p class="text-xs text-neutral-400">In 30 seconds</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-teal-400 text-sm font-semibold mb-1">Owner</p><p class="text-xs text-neutral-400">Without it, it doesn’t exist</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 hover:bg-teal-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<section class="mb-12">
+<div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Governance enables</strong><span class="text-neutral-400"> - it is what lets you say “yes” safely.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">An agent is a user</strong><span class="text-neutral-400"> - distinct identity, minimal scope, auditability.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Cost, data, and environments</strong><span class="text-neutral-400"> - limit, what never enters the context, production excluded by default.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Five levels</strong><span class="text-neutral-400"> - by task type; each level requires the previous level's control.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Promotion with metrics</strong><span class="text-neutral-400"> - bounded pilot; downgrading is a valid decision.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">One-page checklist</strong><span class="text-neutral-400"> - seven questions, one owner, one date.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-teal-400 mb-2">Next track:</h3>
+<p class="text-neutral-300">Track 6 - Practical exercise: now you run the complete workflow in a real repository.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track</a>
+<a class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors" href="../trilha6/index.html">Track 6: Practice →</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Advanced AI Software Engineering Workshop — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-5-3#q1', {
+          answer: 1,
+          explain: {
+            0: 'Satisfação é percepção. Promoção de autonomia precisa de número, senão volta atrás no primeiro susto.',
+            1: 'Isso. Piloto delimitado com métricas combinadas antes de começar — inclusive a taxa de parada correta.',
+            2: 'O que a concorrência faz não diz nada sobre os controles que VOCÊ tem instalados.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

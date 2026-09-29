@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Ruta 4 · Arquitectura en la era de la IA | Ing. de Software con IA</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha4/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha4/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha4/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha4/" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha4/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="./" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Saltar al contenido</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Ing. de Software con IA</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness y ciclo</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flujo y calidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10" href="index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitectura</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Gobernanza</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Práctica</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>Mi recorrido</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Alternar el tema claro y oscuro" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">TRILHA 4</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🏛️ Arquitectura en la era de la IA</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Modernizar sistemas heredados sin aumentar el riesgo, hacer que el repositorio también sea comprensible para los agentes y contener las dos
+        plagas del desarrollo asistido: el overengineering y el volumen de deuda técnica.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">3</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">18</div><div class="text-xs text-neutral-400">Temas</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">~2h30</div><div class="text-xs text-neutral-400">Duración</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Avanzado</div><div class="text-xs text-neutral-400">Nivel</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Progreso de la ruta 4" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:4" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 18</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="conteudo">
+<div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+<svg aria-label="Comparación entre reescribir todo de una vez, con alto riesgo, y migrar gradualmente por límites con pruebas de caracterización" class="w-full h-auto" role="img" viewbox="0 0 1000 230">
+<defs>
+<lineargradient id="t4h-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fbbf24"></stop><stop offset="1" stop-color="#f59e0b"></stop></lineargradient>
+<filter height="180%" id="t4h-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t4h-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#f59e0b" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t4h-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fbbf24"></path></marker>
+<marker id="t4h-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#t4h-grid)" height="230" width="1000" x="0" y="0"></rect>
+<path d="M500,16 L500,214" opacity="0.5" stroke="#9ca3af" stroke-dasharray="9 9" stroke-width="1.6"></path>
+<text fill="#f87171" font-family="Inter,sans-serif" font-size="14" font-weight="600" x="40" y="36">✗ reescribir todo de una vez</text>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="14" font-weight="600" x="540" y="36">✓ migración gradual por frontera</text>
+<rect fill="#1f1604" height="120" rx="14" stroke="#fbbf24" stroke-width="2" width="180" x="40" y="60"></rect>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="15" font-weight="600" text-anchor="middle" x="130" y="112">sistema heredado</text>
+<text fill="#fcd9a0" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="130" y="134">reglas no escritas</text>
+<path d="M232,120 L300,120" fill="none" marker-end="url(#t4h-ah)" opacity="0.7" stroke="#f87171" stroke-width="2"></path>
+<rect fill="#2a0f16" height="120" rx="14" stroke="#f87171" stroke-width="2" width="152" x="312" y="60"></rect>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="15" font-weight="600" text-anchor="middle" x="388" y="112">nuevo sistema</text>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="388" y="134">sin las reglas</text>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="540" y="60"></rect><text fill="#bfe6ff" text-anchor="middle" x="615" y="82">inventario</text>
+<rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="540" y="104"></rect><text fill="#bfe6ff" text-anchor="middle" x="615" y="126">caracterización</text>
+<rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="540" y="148"></rect><text fill="#bfe6ff" text-anchor="middle" x="615" y="170">frontera</text>
+</g>
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<path d="M690,77 C740,77 750,120 780,120" marker-end="url(#t4h-ahc)"></path>
+<path d="M690,121 L780,121" marker-end="url(#t4h-ahc)"></path>
+<path d="M690,165 C740,165 750,122 780,122" marker-end="url(#t4h-ahc)"></path>
+</g>
+<g filter="url(#t4h-glow)"><rect fill="#1f1604" height="60" rx="14" stroke="url(#t4h-grad)" stroke-width="2" width="190" x="780" y="92"></rect></g>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="15" font-weight="600" text-anchor="middle" x="875" y="118">migra un módulo</text>
+<text fill="#fcd9a0" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="875" y="138">compara lo antiguo × lo nuevo</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-amber-400">Cómo leer:</strong> a la izquierda, la flecha única: la reescritura que pierde las reglas que nadie
+        documentó. A la derecha, el camino de la ruta: primero descubrir y fijar el comportamiento actual (cian), después migrar una parte
+        y comparar. La IA debe reducir el riesgo, no ampliarlo.
+      </p>
+</div>
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa de la ruta</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-1">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🏚️ Legado sin sobresaltos</h3>
+<p class="text-xs text-neutral-400">Caracterizar antes de tocar</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-2">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🗺️ Legible para agentes</h3>
+<p class="text-xs text-neutral-400">AGENTS.md es un mapa, no una enciclopedia</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-3">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🪓 Sobreingeniería y deuda</h3>
+<p class="text-xs text-neutral-400">El cambio más pequeño posible</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Contenido detallado</h2>
+<!-- MODULO 4.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="4-1" data-inema-track="4" id="modulo-4-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🏚️ Modernización segura de sistemas heredados</h3>
+<p class="text-neutral-400 text-sm">Mapeo de dependencias, reglas de negocio ocultas, pruebas de caracterización, integraciones ocultas, aislamiento de límites y migración gradual con comparación.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t41-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🗺️</span>
+<div><span class="font-medium">Mapea dependencias e inventario</span><span class="text-neutral-500 text-sm ml-2">- Saber el tamaño de la bestia</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t41-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">El relevamiento de lo que existe: módulos, integraciones, jobs, bases de datos, quién llama a quién y qué ya es código muerto.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">La IA es excelente en esto: leer mucho código y resumir su estructura es donde más rinde. Y sin el mapa no sabes dónde es seguro recortar.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Inventario antes del plan · El código muerto es el recorte más barato · Quién llama a quién define la frontera posible.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t41-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🔎</span>
+<div><span class="font-medium">Identifica las reglas de negocio ocultas</span><span class="text-neutral-500 text-sm ml-2">- Lo que nadie documentó</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t41-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La extracción de las reglas reales que solo viven en el código: excepciones históricas, casos especiales de clientes, redondeos, plazos y comportamientos regulatorios.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Son las que fallan en la reescritura. Y son invisibles para quien solo mira la documentación, que casi siempre describe el sistema que se pretendía tener.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">El código es la verdad · Las excepciones históricas suelen tener responsable · Una regla descubierta se convierte en prueba, no en comentario.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t41-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🧪</span>
+<div><span class="font-medium">Escribe pruebas de caracterización</span><span class="text-neutral-500 text-sm ml-2">- Fija el comportamiento actual</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t41-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Pruebas que registran lo que hace el sistema hoy —incluso lo que parece incorrecto— para que cualquier cambio de comportamiento aparezca de inmediato.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es la red de seguridad que hace posible la modernización. Sin ella, «refactoricé y todo funciona» es una frase sin fundamento.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Caracterizar ≠ validar · Un bug conocido también es comportamiento · La IA genera estas pruebas en volumen y es muy buena en eso.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t41-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🕵️</span>
+<div><span class="font-medium">Descubre integraciones ocultas</span><span class="text-neutral-500 text-sm ml-2">- Alguien depende de esto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t41-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La búsqueda de consumidores no documentados: scripts, hojas de cálculo, jobs de otro equipo e informes que leen directamente tu base de datos.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es la principal causa de incidentes después de una migración: desactivaste algo que «nadie usaba» y alguien sí usaba.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">El log de acceso revela quién lo consume · Desactívalo por etapas (avisar, depreciar, eliminar) · El silencio no demuestra que ya no se use.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t41-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🧱</span>
+<div><span class="font-medium">Aísla las fronteras y crea adaptadores</span><span class="text-neutral-500 text-sm ml-2">- Preparar la transición antes del cambio</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t41-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La creación de un punto de unión entre lo viejo y lo nuevo: un adaptador que permite cambiar la implementación sin modificar a quienes la consumen.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Sin un límite definido, la migración se convierte en una reescritura: cada parte arrastra a otra y el alcance se desborda.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">El adaptador desacopla el cronograma · Una buena frontera es la que tiene pocos consumidores · Estrangulamiento gradual &gt; big bang.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t41-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">⚖️</span>
+<div><span class="font-medium">Ejecútalos en paralelo y compara</span><span class="text-neutral-500 text-sm ml-2">- Antiguo × nuevo, con datos reales</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t41-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Ejecutar ambas implementaciones en paralelo con la misma entrada y registrar las diferencias antes de cambiar por completo.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es la prueba más sólida de que lo nuevo hace lo mismo que lo anterior, incluso en los casos que nadie recordó probar.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">La divergencia es información, no un error · Liberación gradual por porcentaje · La IA reduce el riesgo, no lo amplía.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-1')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-1.html">Ver completo</a>
+</div>
+</div>
+<!-- MODULO 4.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="4-2" data-inema-track="4" id="modulo-4-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🗺️ Arquitectura legible para agentes</h3>
+<p class="text-neutral-400 text-sm">Estructura predecible, límites claros entre módulos, documentación cerca del código, contratos explícitos, comandos estandarizados, AGENTS.md, skills, playbooks y fuentes únicas de verdad.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t42-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">📁</span>
+<div><span class="font-medium">Adopta una estructura predecible</span><span class="text-neutral-500 text-sm ml-2">- Fácil de encontrar sin explicaciones</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t42-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Una organización en la que el nombre del directorio y del archivo permite prever dónde está algo, tanto para las personas nuevas como para los agentes.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Un repositorio predecible reduce el contexto que el agente necesita cargar y la cantidad de suposiciones que hace.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Convención &gt; configuración · Un nombre consistente es infraestructura · Una estructura predecible ayuda por igual a las personas y a las máquinas.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t42-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🚧</span>
+<div><span class="font-medium">Deja explícitos los límites entre módulos</span><span class="text-neutral-500 text-sm ml-2">- Límite que se puede verificar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t42-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Fronteras declaradas entre dominios, con reglas de importación que se pueden verificar automáticamente.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Un agente respeta los límites que puede ver. Un límite que solo existe en la mente del arquitecto se cruzará.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Regla verificable &gt; regla acordada · La importación es la evidencia · La frontera también limita el alcance de la tarea.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t42-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">📚</span>
+<div><span class="font-medium">Mantén la documentación junto al código</span><span class="text-neutral-500 text-sm ml-2">- La wiki externa envejece</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t42-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Documentación versionada en el repositorio: arquitectura, dominios, decisiones y playbooks, en la misma revisión del código que describen.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">La doc en el repositorio se incluye en la revisión y en el contexto del agente. La doc fuera de él se convierte en folclore en tres meses.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">La documentación es parte del diff · El registro de decisiones explica el porqué · La documentación desactualizada es peor que no tener documentación.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t42-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⌨️</span>
+<div><span class="font-medium">Estandariza los comandos y las pruebas locales rápidas</span><span class="text-neutral-500 text-sm ml-2">- Un comando por intención</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t42-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Un único comando documentado para instalar, probar, ejecutar lint, compilar y validar, que funciona igual en la máquina de todos y en CI.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es lo que permite al agente cerrar el ciclo por sí solo. Sin un comando estándar, inventa uno, y lo inventa mal.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">La prueba local rápida es infraestructura del agente · El mismo comando local y en CI · Script &gt; instrucción en prosa.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t42-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">📄</span>
+<div><span class="font-medium">Escribe el AGENTS.md como mapa</span><span class="text-neutral-500 text-sm ml-2">- No es una enciclopedia</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t42-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Un archivo con una visión general, los comandos principales, las reglas del proyecto, dónde está la documentación, las limitaciones, los criterios de calidad, las acciones prohibidas y las referencias a skills y playbooks.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">No debe concentrar todo el conocimiento del proyecto — debe funcionar como un mapa. Ni siquiera las personas leen un AGENTS.md de 900 líneas.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">El mapa orienta, no lo describe todo · Las acciones prohibidas se destacan · Se revisa como código.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t42-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🎯</span>
+<div><span class="font-medium">Garantiza fuentes únicas de verdad</span><span class="text-neutral-500 text-sm ml-2">- Dos versiones = ninguna</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t42-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Un único lugar canónico para cada información —comandos, contratos, convenciones— sin copias divergentes dispersas.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Ante dos fuentes en conflicto, el agente elige una y tú descubres cuál durante la revisión, en el peor momento.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Pocas fuentes en conflicto · Referenciar &gt; duplicar · La verdad duplicada siempre diverge.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-2')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-2.html">Ver completo</a>
+</div>
+</div>
+<!-- MODULO 4.3 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="4-3" data-inema-track="4" id="modulo-4-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🪓 Sobreingeniería y deuda técnica generada por IA</h3>
+<p class="text-neutral-400 text-sm">El cambio más pequeño posible, las abstracciones prematuras, las dependencias innecesarias, la duplicación semántica, las pruebas superficiales y el código que pasa las pruebas, pero viola la intención.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t43-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🪓</span>
+<div><span class="font-medium">Exige el cambio más pequeño posible</span><span class="text-neutral-500 text-sm ml-2">- La regla práctica del módulo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t43-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La instrucción estándar: implementa el cambio más pequeño que satisfaga los criterios de aceptación; no crees nuevas abstracciones, dependencias ni capas sin una necesidad comprobada.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">La IA tiende a producir soluciones aparentemente completas incluso cuando bastaría con una más pequeña, y el costo aparece en el mantenimiento.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Preservar la estructura existente · Justificar cada componente nuevo · Un diff más pequeño es más fácil de revisar.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t43-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🏗️</span>
+<div><span class="font-medium">Evita las abstracciones prematuras</span><span class="text-neutral-500 text-sm ml-2">- Framework interno no solicitado</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t43-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Capas, interfaces y "frameworks internos" creados para casos hipotéticos que nadie pidió y que quizá nunca lleguen.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Una abstracción equivocada es más cara que la duplicación: hay que deshacerla antes de cualquier cambio futuro.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Abstrae después del segundo (o tercer) uso real · Un caso hipotético no es un requisito · Simple y extensible: compara los dos.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t43-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">📦</span>
+<div><span class="font-medium">Controla las dependencias y los archivos modificados</span><span class="text-neutral-500 text-sm ml-2">- Límites que revelan el alcance</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t43-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Prohibir nuevas dependencias sin aprobación y limitar la cantidad de archivos modificados por tarea.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Toda dependencia es una superficie de ataque, un costo de actualización y un riesgo de abandono. Además, un diff demasiado grande no se revisa: se acepta.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Una dependencia tiene un costo permanente · Un límite de archivos denuncia que el alcance se excedió · La refactorización fuera del alcance queda para otro PR.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t43-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">👯</span>
+<div><span class="font-medium">Combate la duplicación semántica</span><span class="text-neutral-500 text-sm ml-2">- Lo mismo, con otro nombre</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t43-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Dos o más implementaciones del mismo concepto, escritas de formas diferentes — invisibles para la búsqueda textual, detectables por un agente que lee el repositorio.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es la forma de deuda que más genera la IA, porque cada tarea empieza sin recordar lo que ya existe.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">"¿Ya existe algo así?" antes de crear · La inconsistencia entre módulos confunde al siguiente agente · Consolidar es un trabajo recurrente.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t43-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🧪</span>
+<div><span class="font-medium">Desconfía de las pruebas superficiales</span><span class="text-neutral-500 text-sm ml-2">- Cobertura sin aserción</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t43-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Pruebas que ejecutan el código sin afirmar un comportamiento relevante: cubren el camino feliz, aumentan la métrica y no detectan defectos.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Ofrecen la peor combinación posible: sensación de seguridad sin ninguna protección — y bloquean las refactorizaciones porque ponen a prueba la implementación.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Una buena prueba falla cuando cambia el comportamiento · Error y casos límite &gt; camino feliz · Una prueba que solo se ejecuta es deuda, no un activo.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t43-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🎭</span>
+<div><span class="font-medium">Detecta el código que viola la intención</span><span class="text-neutral-500 text-sm ml-2">- Pasa la prueba y está mal</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t43-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La solución que satisface al verificador sin resolver el problema: un caso especial incorporado para que pase la prueba, una excepción ignorada, un caché que oculta el error.</p></div>
+<div><span class="text-amber-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es el defecto más peligroso del desarrollo con IA, porque atraviesa todos los gates automáticos con luz verde.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Leer el diff, no solo el resultado · La revisión de intención es humana · Cuando una métrica se convierte en objetivo, deja de ser una buena métrica.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-3')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-3.html">Ver completo</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-12">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha3/index.html">← Ruta 3: Flujo &amp; Calidad</a>
+<a class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors" href="../trilha5/index.html">Ruta 5: Gobernanza →</a>
+</div>
+</main>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.1</span><span class="font-semibold">Modernización segura de sistemas heredados</span></div>
+<button aria-label="Cerrar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-1.html" title="Módulo 4.1"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.2</span><span class="font-semibold">Arquitectura legible para agentes</span></div>
+<button aria-label="Cerrar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-2.html" title="Módulo 4.2"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.3</span><span class="font-semibold">Sobreingeniería y deuda técnica</span></div>
+<button aria-label="Cerrar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-3.html" title="Módulo 4.3"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Workshop Avanzado de Ingeniería de Software con IA — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>

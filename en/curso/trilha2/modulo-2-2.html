@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Module 2.2 · Loop Engineering | AI Software Engineering</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha2/modulo-2-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha2/modulo-2-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha2/modulo-2-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha2/modulo-2-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-2-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha2/modulo-2-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Skip to content</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">AI Software Engineering</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Foundations</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flow &amp; Quality</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Architecture</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governance</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Practice</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>My journey</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Switch between light and dark themes" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-blue-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-blue-400" href="index.html">Track 2</a><span>/</span>
+<span class="text-blue-400">Module 2.2</span>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="2-2" data-inema-track="2">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MODULE 2.2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🔄 Loop Engineering</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Loop Engineering is the design of execution and correction cycles. It doesn’t mean telling AI to keep going until it works —
+        it means creating a controlled, measurable, and verifiable sequence that knows when to stop.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">55</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Core</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Practical</div><div class="text-xs text-neutral-400">Type</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Module 2.2 progress" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:2-2" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 of 6</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+<nav aria-label="Page index" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
+<p class="text-sm text-neutral-400 mb-2">Section <span class="inema-toc-pos">1</span> from <span class="inema-toc-total">6</span></p>
+<ul class="space-y-1 text-sm">
+<li><a class="inema-toc-link hover:text-blue-400" href="#topico-1">1. The cycle</a></li>
+<li><a class="inema-toc-link hover:text-blue-400" href="#topico-2">2. Objective and state</a></li>
+<li><a class="inema-toc-link hover:text-blue-400" href="#topico-3">3. Stop condition</a></li>
+<li><a class="inema-toc-link hover:text-blue-400" href="#topico-4">4. Attempts and cost</a></li>
+<li><a class="inema-toc-link hover:text-blue-400" href="#topico-5">5. Rollback and fallback</a></li>
+<li><a class="inema-toc-link hover:text-blue-400" href="#topico-6">6. Human approval</a></li>
+</ul>
+</nav>
+<main class="inema-prose" id="conteudo">
+<!-- TOPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-2-2#topico-1" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🔄 Design the execution cycle</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t1-p1">
+          An agent works in a loop: observe → understand → plan → execute → test → evaluate → fix → repeat. What separates an engineering loop from a loop of hope is the <strong class="text-blue-400">evaluate</strong>:
+          that's where you decide whether the next iteration makes sense.
+        </p>
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+<svg aria-label="A circular cycle of observing, planning, executing, and testing, with three outcomes: success, running out of attempts, and stopping to ask for help" class="w-full h-auto" role="img" viewbox="0 0 1000 260">
+<defs>
+<lineargradient id="m22-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<filter height="180%" id="m22-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m22-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m22-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"></path></marker>
+<marker id="m22-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m22-grid)" height="260" width="1000" x="0" y="0"></rect>
+<g fill="none" opacity="0.55" stroke="#60a5fa" stroke-width="1.8">
+<path d="M196,70 L268,70" marker-end="url(#m22-ah)"></path>
+<path d="M420,70 L492,70" marker-end="url(#m22-ah)"></path>
+<path d="M580,96 L580,140" marker-end="url(#m22-ah)"></path>
+<path d="M492,166 C300,166 180,166 130,166 L130,96" marker-end="url(#m22-ah)"></path>
+</g>
+<text fill="#bfdbfe" font-family="Inter,sans-serif" font-size="12.5" x="300" y="196">failed → fix and repeat (with a limit)</text>
+<g font-family="Inter,sans-serif" font-size="13.5" font-weight="600">
+<rect fill="#0e1622" height="48" rx="12" stroke="#60a5fa" stroke-width="2" width="136" x="60" y="46"></rect><text fill="#bfdbfe" text-anchor="middle" x="128" y="76">observe</text>
+<rect fill="#0e1622" height="48" rx="12" stroke="#60a5fa" stroke-width="2" width="152" x="268" y="46"></rect><text fill="#bfdbfe" text-anchor="middle" x="344" y="76">plan</text>
+<rect fill="#0e1622" height="48" rx="12" stroke="#60a5fa" stroke-width="2" width="176" x="492" y="46"></rect><text fill="#bfdbfe" text-anchor="middle" x="580" y="76">run</text>
+<rect fill="#0e1b26" height="48" rx="12" stroke="#38bdf8" stroke-width="2" width="176" x="492" y="142"></rect><text fill="#bfe6ff" text-anchor="middle" x="580" y="172">test and evaluate</text>
+</g>
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<path d="M668,152 L740,120" marker-end="url(#m22-ahc)"></path>
+<path d="M668,166 L740,166" marker-end="url(#m22-ahc)"></path>
+<path d="M668,180 L740,212" marker-end="url(#m22-ahc)"></path>
+</g>
+<g filter="url(#m22-glow)"><rect fill="#0e1622" height="44" rx="11" stroke="url(#m22-grad)" stroke-width="2" width="220" x="740" y="96"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="850" y="124">success · delivery</text>
+<rect fill="#0e1b26" height="40" rx="11" stroke="#38bdf8" stroke-width="2" width="220" x="740" y="146"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13.5" font-weight="600" text-anchor="middle" x="850" y="172">limit reached · stop</text>
+<rect fill="#0e1b26" height="40" rx="11" stroke="#38bdf8" stroke-width="2" width="220" x="740" y="192"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13.5" font-weight="600" text-anchor="middle" x="850" y="218">no progress · ask</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-blue-400">How to read:</strong> the circle on the left is the loop; the three boxes on the right are the
+            <em>only</em> ways to exit it. If your loop today only has the first one (success), it has no way out when things go
+            wrong — and that's exactly when it burns through your budget all night long.
+          </p>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🆕</span> New here?</h3>
+<p class="text-neutral-300 text-sm">
+<strong>Loop</strong> here, it’s the automatic cycle the agent runs on its own between one instruction from you and the next.
+            <strong>Stop condition</strong> is the rule that closes the cycle. <strong>Rollback</strong> is undoing what was done;
+            <strong>fallback</strong> is following an alternative path when the main one fails. They’re different things: one goes back, the other works around the failure.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Evaluate</p><p class="text-xs text-neutral-400">The step that almost disappears</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">New signal</p><p class="text-xs text-neutral-400">Each iteration needs a</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Three outputs</p><p class="text-xs text-neutral-400">Success, limit, abandonment</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Measurable</p><p class="text-xs text-neutral-400">A blind loop means blind costs</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-2-2#topico-2" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">🎯 Establish a verifiable goal and persistent state</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t2-p1">
+          The agent needs to know what it must achieve—in terms that a command can answer. And the system needs to record what has already been done, so an interruption doesn’t erase everything.
+        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ An objective that closes the loop</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"<span class="font-mono text-xs">npm test</span> returns 0 and test X, which currently fails, passes."</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"The linter reports no new issues."</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"No files outside <span class="font-mono text-xs">src/x/</span> appears in the diff."</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ An objective that never closes</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Make the module more robust."</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Keep improving until it’s good."</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Fix all the problems you find."</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3">Minimum state worth recording between runs</h3>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">tentativa: 2 de 3
+hipótese atual: chave de idempotência não considera o valor
+já tentado: (1) índice único simples — falhou, mesma duplicidade
+arquivos tocados: src/pagamentos/idempotencia.ts, tests/idempotencia.test.ts
+último resultado: 128 passaram, 1 falhou</pre>
+<p class="text-neutral-400 text-sm mt-3">With this written down, anyone (or the agent itself after an interruption) can pick up where things left off without repeating what already failed.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">The command decides</p><p class="text-xs text-neutral-400">Not the impression</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Hypothesis</p><p class="text-xs text-neutral-400">Each iteration has a</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Already tried</p><p class="text-xs text-neutral-400">Avoids repetition</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Resumable</p><p class="text-xs text-neutral-400">Interruption doesn't reset progress</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-2-2#topico-3" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🛑 Define the Stop Conditions</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t3-p1">
+          Every loop needs to know when to end. There are three outcomes — and the third, stopping for lack of progress, is the one almost nobody implements.
+        </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">1</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Success</h4>
+<p class="text-neutral-300 text-sm">The verifiable objective has been met, and the evidence is recorded (actual command output). The loop ends and hands off for review.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">2</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Limit reached</h4>
+<p class="text-neutral-300 text-sm">Attempts, time, or cost exceeded the limit. The loop stops, preserves the state, and reports what it tried—the partial work isn’t lost.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">3</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-blue-500/30">
+<h4 class="font-semibold text-white mb-2">No progress (the forgotten output)</h4>
+<p class="text-neutral-300 text-sm">Two consecutive attempts with the same failure, or the diff started growing without the test advancing. The loop stops and asks—a valid outcome, not a failure.</p>
+</div>
+</div>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Attention</h3>
+<p class="text-neutral-300">A cornered agent tends to “fix” the failure the wrong way: by relaxing the assertion, marking the test as skipped, or silently catching the exception. If the loop can edit tests, it can redefine its own success criteria—explicitly prohibit this.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Success</p><p class="text-xs text-neutral-400">With attached evidence</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Limit</p><p class="text-xs text-neutral-400">Preserves the partial result</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Stop and ask</p><p class="text-xs text-neutral-400">It’s a valid result</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Untouchable test</p><p class="text-xs text-neutral-400">Otherwise, the criterion disappears</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-2-2#topico-4" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">💸 Manage attempts, time, and cost</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t4-p1">
+          An attempt limit prevents the agent from repeating the same action. A cost cap controls consumption of
+          tokens, time, and resources. Together, they turn an open-ended risk into a predictable value per task.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Copyable exercise — bug-fix loop with a limit</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-blue-400">Objective:</strong> run a real correction cycle with a stopping condition and no test edits. Use a real bug from your repository.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Bug: &lt;descreva o comportamento errado&gt;
+Como reproduzir: &lt;passos ou comando&gt;
+
+Siga EXATAMENTE este loop, sem pular etapas:
+1. reproduza o erro e cole a saída real;
+2. localize a causa e escreva a hipótese em uma frase;
+3. escreva um teste NOVO que falha por causa desse bug (não altere testes existentes);
+4. implemente a MENOR correção que faz esse teste passar;
+5. rode &lt;comando de teste&gt; e cole a saída real completa;
+6. me mostre o diff.
+
+Limites (obrigatórios):
+- no máximo 3 tentativas de correção;
+- se a mesma falha aparecer 2 vezes seguidas, PARE e me diga o que tentou;
+- não altere nem remova nenhum teste existente;
+- não adicione dependências;
+- no máximo 5 arquivos alterados.
+
+Se qualquer limite for atingido, pare e relate o estado — não continue.</pre>
+<p class="text-neutral-300 text-sm"><strong class="text-blue-400">How to verify:</strong> check three things in the result—(1) there’s a new test that failed before; (2) no existing test was modified (<span class="font-mono text-xs">git diff --stat</span> in the test files); (3) the pasted output is real, not a summary. If the agent stopped at the limit, the exercise still worked: the loop worked.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Same failure twice</p><p class="text-xs text-neutral-400">Change the strategy</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Smallest fix</p><p class="text-xs text-neutral-400">Keeps the diff reviewable</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Actual output</p><p class="text-xs text-neutral-400">A summary is not evidence</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Cost per task</p><p class="text-xs text-neutral-400">Becomes a predictable number</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-2-2#topico-5" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">↩️ Prepare rollback and fallback</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t5-p1">
+          Rollback lets you return to the previous state. Fallback defines an alternative when the primary path doesn’t
+          work. <strong class="text-blue-400">If there’s no rollback, there shouldn’t be any autonomy.</strong>
+</p>
+<div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🧯</span> Reversibility by action type</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Easy to undo:</strong> commit on a branch, new file, discarded container. It can be autonomous.</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Expensive to undo:</strong> database migration, public API contract change. Requires a written rollback plan <em>before</em>.</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Impossible to undo:</strong> email sent, payment processed, data deleted without a backup. Always a human.</span></li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Practical tip</h3>
+<p class="text-neutral-300">Before authorizing any autonomous loop, answer: "If this goes wrong at 3 a.m., what exact command undoes it?" If you can’t answer in one line, the loop isn’t ready to run on its own.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Rollback</p><p class="text-xs text-neutral-400">Return to the previous state</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Fallback</p><p class="text-xs text-neutral-400">Works around the path</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Migration</p><p class="text-xs text-neutral-400">Reversible, or it doesn’t go</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Autonomy</p><p class="text-xs text-neutral-400">Limited by reversibility</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-2-2#topico-6" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">🙋 Add Human Approval at the Right Point</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t6-p1">
+          Human approval stops the loop before critical actions. Put it everywhere, and it becomes an automatic rubber stamp;
+          put it in the right place—immediately before the irreversible action—and it’s the last real control you have.
+        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Approval that works</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Few, and always before something irreversible</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>With evidence attached: diff, test output, rollback plan</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>With an easy "no": rejecting must take less effort than approving</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Recorded: who approved it, when, and on what basis</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Decorative approval</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>One at each step—nobody reads past the fifth</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Without evidence: “approve?” with a summary from the agent itself</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>After the fact ("I already applied it—can you confirm?")</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>For trivial, reversible changes that could be automated</span></li>
+</ul>
+</div>
+</div>
+<div class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-2-2#q1">
+<p class="font-medium mb-4">Quick check: the loop tried the same fix twice and failed the same way both times. What should happen?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Try a few more times—models are probabilistic; it’ll work eventually.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Stop, preserve the state, and report what has already been tried.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Loosen the test to unblock and move on.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Before the damage</p><p class="text-xs text-neutral-400">Never afterward</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">With evidence</p><p class="text-xs text-neutral-400">Not based on trust</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Few</p><p class="text-xs text-neutral-400">Many become rubber stamps</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-blue-400 text-sm font-semibold mb-1">Recorded</p><p class="text-xs text-neutral-400">Who, when, why</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<section class="mb-12">
+<div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">The cycle includes an evaluation step</strong><span class="text-neutral-400"> - without it, repeating is just a waste.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Objective is a command</strong><span class="text-neutral-400"> - and the state records the hypothesis, attempts, and result.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Three outputs</strong><span class="text-neutral-400"> - success, limit, and “no progress, ask.”</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Limits make costs predictable</strong><span class="text-neutral-400"> - attempts, time, files.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Rollback before autonomy</strong><span class="text-neutral-400"> - anything that can't be undone must not run on its own.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Evidence-based approval</strong><span class="text-neutral-400"> - few, serious, and before anything irreversible.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-blue-400 mb-2">Next track:</h3>
+<p class="text-neutral-300">Track 3 - Workflow &amp; Quality: automations, AI code review, and quality gates.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="../trilha3/index.html">Track 3 →</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Advanced AI Software Engineering Workshop — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-2-2#q1', {
+          answer: 1,
+          explain: {
+            0: 'Repetir sem mudar a hipótese é o padrão que queima orçamento sem produzir progresso.',
+            1: 'Isso. Duas falhas iguais significam hipótese errada: pare, preserve o estado e traga o humano.',
+            2: 'Nunca. Afrouxar o teste redefine o critério de sucesso e esconde o bug — é a pior saída possível.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

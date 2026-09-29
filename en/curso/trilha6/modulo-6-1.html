@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Module 6.1 · Exercise: Spec, Harness, and Loop | AI Software Engineering</title>
+<script src="../../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "ws2ia",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos AI First", "modules": [
+        { "id": "1-1", "title": "Onde realmente esta a IA na engenharia", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Spec-Driven Development", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" }
+      ]},
+      { "n": "2", "title": "Harness & Loop", "modules": [
+        { "id": "2-1", "title": "Harness Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Loop Engineering", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" }
+      ]},
+      { "n": "3", "title": "Fluxo & Qualidade", "modules": [
+        { "id": "3-1", "title": "Automacoes no desenvolvimento", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Code Review com IA", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Quality Gates", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" }
+      ]},
+      { "n": "4", "title": "Arquitetura", "modules": [
+        { "id": "4-1", "title": "Modernizacao segura de sistemas legados", "topics": 6, "href": "curso/trilha4/modulo-4-1.html" },
+        { "id": "4-2", "title": "Arquitetura legivel para agentes", "topics": 6, "href": "curso/trilha4/modulo-4-2.html" },
+        { "id": "4-3", "title": "Overengineering e divida tecnica de IA", "topics": 6, "href": "curso/trilha4/modulo-4-3.html" }
+      ]},
+      { "n": "5", "title": "Governanca", "modules": [
+        { "id": "5-1", "title": "Playbooks e processos reutilizaveis", "topics": 6, "href": "curso/trilha5/modulo-5-1.html" },
+        { "id": "5-2", "title": "Skills e Rules", "topics": 6, "href": "curso/trilha5/modulo-5-2.html" },
+        { "id": "5-3", "title": "Governanca e niveis de autonomia", "topics": 6, "href": "curso/trilha5/modulo-5-3.html" }
+      ]},
+      { "n": "6", "title": "Pratica", "modules": [
+        { "id": "6-1", "title": "Exercicio pratico: spec, harness e loop", "topics": 6, "href": "curso/trilha6/modulo-6-1.html" },
+        { "id": "6-2", "title": "Exercicio pratico: execucao, gates e entrega", "topics": 6, "href": "curso/trilha6/modulo-6-2.html" }
+      ]}
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/curso.css" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha6/modulo-6-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha6/modulo-6-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha6/modulo-6-1.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha6/modulo-6-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-6-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha6/modulo-6-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Skip to content</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">AI Software Engineering</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Foundations</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Flow &amp; Quality</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Architecture</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governance</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-rose-400 bg-rose-500/10" href="index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Practice</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>My journey</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Switch between light and dark themes" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-rose-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-rose-400" href="index.html">Track 6</a><span>/</span>
+<span class="text-rose-400">Module 6.1</span>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-rose-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-module="6-1" data-inema-track="6">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-rose-500/20 text-rose-400 text-xs font-semibold rounded-full mb-4">MODULE 6.1 · PRACTICE</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🧱 Exercise: Spec, Harness, and Loop</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Steps 1 through 4 of the final project. By the end of this module, you’ll have a real specification, a configured harness, and
+        a defined loop— <strong class="text-rose-400">without writing a single line of production code</strong>.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">6</div><div class="text-xs text-neutral-400">Steps</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">75</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">Applied</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-rose-400">Hands-on</div><div class="text-xs text-neutral-400">Type</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Module 6.1 progress" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:6-1" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 of 6</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
+<nav aria-label="Page index" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
+<p class="text-sm text-neutral-400 mb-2">Step <span class="inema-toc-pos">1</span> from <span class="inema-toc-total">6</span></p>
+<ul class="space-y-1 text-sm">
+<li><a class="inema-toc-link hover:text-rose-400" href="#topico-1">1. Choose the problem</a></li>
+<li><a class="inema-toc-link hover:text-rose-400" href="#topico-2">2. Write the spec</a></li>
+<li><a class="inema-toc-link hover:text-rose-400" href="#topico-3">3. Configure the harness</a></li>
+<li><a class="inema-toc-link hover:text-rose-400" href="#topico-4">4. Define the loop</a></li>
+<li><a class="inema-toc-link hover:text-rose-400" href="#topico-5">5. Record</a></li>
+<li><a class="inema-toc-link hover:text-rose-400" href="#topico-6">6. Checkpoint</a></li>
+</ul>
+</nav>
+<main class="inema-prose" id="conteudo">
+<!-- TOPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-6-1#topico-1" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🎯 Step 1 — Choose the problem</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m6-1-t1-p1">
+          Select a feature, bug, or legacy module from your repository. Choosing the wrong one is the number one cause of
+          an exercise that doesn’t get finished—and you want to finish, because the value is in <em>see the cycle complete</em>.
+        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Good choices</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>A reproducible bug nobody has had time to fix</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>A missing validation in an endpoint</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>A new field in a response, with compatibility preserved</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Error handling that currently returns a generic message</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Choices that stall the exercise</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Refactor the payments module"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Anything that requires a database migration</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A change to a public contract consumed by other teams</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Repository with no tests (start by creating one)</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Do it now — prepare the groundwork</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-rose-400">Objective:</strong> isolated environment and clean starting point.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">git checkout -b exercicio/&lt;nome-curto-da-tarefa&gt;
+mkdir -p docs/exercicio
+&lt;comando de teste do seu projeto&gt;   # precisa passar ANTES de começar</pre>
+<p class="text-neutral-300 text-sm"><strong class="text-rose-400">How to verify:</strong> the suite is green and you’re on a new branch. If the suite already fails before you start, fix that first — otherwise you won’t be able to tell what the agent broke.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Small</p><p class="text-xs text-neutral-400">3 to 5 files</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Verifiable</p><p class="text-xs text-neutral-400">Prove it with a test</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Reversible</p><p class="text-xs text-neutral-400">No migration</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Green first</p><p class="text-xs text-neutral-400">Clean baseline</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:bg-rose-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-6-1#topico-2" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">📐 Step 2 — Write the specification</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m6-1-t2-p1">
+          Use the agent to draft and you to decide. The deliverable for this stage is
+          <span class="font-mono text-sm">docs/exercicio/spec.md</span> — and, above all, the list of questions it
+          would have answered on its own.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Do it now — draft the spec</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-rose-400">Objective:</strong> a spec with verifiable criteria and no hidden assumptions.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Você vai escrever uma ESPECIFICAÇÃO. Não altere nenhum arquivo de código.
+
+Tarefa: &lt;descreva em uma frase&gt;
+Leia antes de responder: &lt;caminhos relevantes do repositório&gt;
+
+Produza docs/exercicio/spec.md com estas seções, nesta ordem:
+problema · objetivo · escopo · fora do escopo · entradas · saídas ·
+contratos · condições de erro · restrições · critérios de aceitação ·
+testes · definição de pronto
+
+Regras:
+- cada critério de aceitação precisa ser verificável com sim ou não;
+- liste explicitamente arquivos e comportamentos que NÃO devem mudar;
+- inclua pelo menos 3 condições de erro (timeout, entrada inválida, duplicidade);
+- termine com a seção "PERGUNTAS": tudo que você teve que supor.</pre>
+<p class="text-neutral-300 text-sm mb-3"><strong class="text-rose-400">How to verify:</strong> answer each item in QUESTIONS yourself and edit the spec. Count how many there were—that number is the first measure of the exercise. Then ask:</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">Review docs/exercicio/spec.md like a critic: which acceptance criteria
+are still NOT objectively verifiable? Rewrite only those.</pre>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Practical tip</h3>
+<p class="text-neutral-300">If the QUESTIONS section is empty, be suspicious: either the task is trivial, or the agent silently filled in the gaps. Ask explicitly: “list five decisions you made without consulting me.”</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Drafts</p><p class="text-xs text-neutral-400">It; you decide</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">QUESTIONS</p><p class="text-xs text-neutral-400">The most valuable part</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">3 errors</p><p class="text-xs text-neutral-400">At a minimum</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Versioned</p><p class="text-xs text-neutral-400">In the repository</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:bg-rose-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-6-1#topico-3" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">⚙️ Step 3 — Configure the harness</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m6-1-t3-p1">
+          Define tools, context, permissions, and limits. The output of this stage is a
+          <span class="font-mono text-sm">AGENTS.md</span> that the agent reads before acting—and an isolated environment where
+          mistakes are cheap.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Do it now — exercise AGENTS.md</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-rose-400">Objective:</strong> move the rules out of your head and into a file. Adjust what’s between <span class="font-mono text-xs">&lt; &gt;</span>.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4"># AGENTS.md
+
+## Comandos
+- testar: &lt;comando&gt;          - lint: &lt;comando&gt;
+- build:  &lt;comando&gt;          - rodar local: &lt;comando&gt;
+
+## Contexto desta tarefa
+- especificação: docs/exercicio/spec.md  (fonte da verdade)
+- arquivos relevantes: &lt;liste 3 a 8&gt;
+- exemplo de padrão a seguir: &lt;arquivo que você considera bem escrito&gt;
+
+## Pode (sem perguntar)
+- ler qualquer arquivo · rodar testes, lint e build
+- editar arquivos em &lt;pastas permitidas&gt;
+- commitar na branch atual
+
+## Não pode (exige minha aprovação explícita)
+- alterar ou remover testes existentes
+- adicionar dependências
+- tocar em &lt;pastas proibidas&gt;, CI/CD, secrets ou infraestrutura
+- push na branch principal · qualquer deploy · qualquer migração
+
+## Limites
+- máximo &lt;5&gt; arquivos alterados
+- máximo &lt;3&gt; tentativas de correção
+- mesma falha 2x seguidas → parar e me relatar
+
+## Definição de pronto
+- todos os critérios de aceitação da spec atendidos
+- &lt;comando de teste&gt; verde, com a saída REAL colada
+- nenhum arquivo fora do escopo alterado</pre>
+<p class="text-neutral-300 text-sm"><strong class="text-rose-400">How to verify:</strong> open a new session and ask: “read AGENTS.md and the spec, then tell me in a list what you are NOT allowed to do in this task and how you’ll know when you’re done.” If the answer differs from what you wrote, the file is ambiguous — fix it before continuing.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Written</p><p class="text-xs text-neutral-400">Not in chat</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Prohibitions</p><p class="text-xs text-neutral-400">Explicit</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Limits</p><p class="text-xs text-neutral-400">Files and attempts</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Echo test</p><p class="text-xs text-neutral-400">Does it repeat correctly?</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:bg-rose-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-6-1#topico-4" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">🔄 Step 4 — Define the loop</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m6-1-t4-p1">
+          Write the cycle before running it. A loop defined on paper is the difference between a work session and a
+          session of "try again" until you're exhausted.
+        </p>
+<div class="rounded-2xl border border-rose-500/30 bg-dark-900/40 p-3 sm:p-4 mb-4 overflow-hidden">
+<svg aria-label="Exercise loop: approved plan, implementation, tests; repeat with fixes, limited to three attempts, with an option to hand off for human approval" class="w-full h-auto" role="img" viewbox="0 0 1000 220">
+<defs>
+<lineargradient id="m61-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fb7185"></stop><stop offset="1" stop-color="#f43f5e"></stop></lineargradient>
+<filter height="180%" id="m61-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m61-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#f43f5e" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m61-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fb7185"></path></marker>
+<marker id="m61-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m61-grid)" height="220" width="1000" x="0" y="0"></rect>
+<g fill="none" opacity="0.55" stroke="#fb7185" stroke-width="1.8">
+<path d="M232,60 L268,60" marker-end="url(#m61-ah)"></path>
+<path d="M500,60 L536,60" marker-end="url(#m61-ah)"></path>
+<path d="M640,84 L640,120 L140,120 L140,84" marker-end="url(#m61-ah)"></path>
+</g>
+<text fill="#fecdd3" font-family="Inter,sans-serif" font-size="12.5" text-anchor="middle" x="390" y="140">failed? fix it — no more than 3 times, without touching the tests</text>
+<g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+<rect fill="#2a0f16" height="44" rx="11" stroke="#fb7185" stroke-width="2" width="192" x="40" y="38"></rect><text fill="#fecdd3" text-anchor="middle" x="136" y="65">plan approved</text>
+<rect fill="#2a0f16" height="44" rx="11" stroke="#fb7185" stroke-width="2" width="232" x="268" y="38"></rect><text fill="#fecdd3" text-anchor="middle" x="384" y="65">smallest implementation</text>
+<rect fill="#0e1b26" height="44" rx="11" stroke="#38bdf8" stroke-width="2" width="208" x="536" y="38"></rect><text fill="#bfe6ff" text-anchor="middle" x="640" y="65">tests + evidence</text>
+</g>
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<path d="M744,52 L800,40" marker-end="url(#m61-ahc)"></path>
+<path d="M744,70 L800,110" marker-end="url(#m61-ahc)"></path>
+</g>
+<g filter="url(#m61-glow)"><rect fill="#2a0f16" height="42" rx="11" stroke="url(#m61-grad)" stroke-width="2" width="176" x="800" y="20"></rect></g>
+<text fill="#fb7185" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="888" y="46">green → review</text>
+<rect fill="#0e1b26" height="42" rx="11" stroke="#38bdf8" stroke-width="2" width="176" x="800" y="90"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13.5" font-weight="600" text-anchor="middle" x="888" y="116">stuck → call me</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-rose-400">How to read:</strong> is the loop from trail 2 applied to your case. The two outcomes on the right are the
+            only permitted ones — notice that “keep trying indefinitely” isn’t in the diagram. If, during execution, you feel
+            like letting it run a little longer, read this figure again.
+          </p>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3 flex items-center"><span class="mr-2">🧪</span> Do it now — write the loop</h3>
+<p class="text-neutral-300 text-sm mb-2"><strong class="text-rose-400">Objective:</strong> record in <span class="font-mono text-xs">docs/exercicio/loop.md</span> before executing.</p>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto mb-4">Objetivo verificável: &lt;comando&gt; retorna 0 e os critérios da spec estão atendidos.
+
+Ciclo:
+1. o agente apresenta o plano (máx. 10 linhas) e ESPERA aprovação;
+2. implementa a menor mudança;
+3. roda &lt;comando de teste&gt; e cola a saída real;
+4. se falhar: descreve a hipótese, corrige e volta ao passo 3.
+
+Saídas permitidas:
+- SUCESSO: testes verdes + critérios atendidos → segue para revisão (módulo 6.2)
+- TETO: 3 tentativas ou 5 arquivos alterados → para e relata
+- SEM PROGRESSO: mesma falha 2x → para, relata o que tentou e o que descartou
+
+Proibido durante o loop: alterar testes, adicionar dependência, sair do escopo.</pre>
+<p class="text-neutral-300 text-sm"><strong class="text-rose-400">How to verify:</strong> read the three outcomes aloud. If you can't say right now which command proves the "SUCCESS" outcome, go back to step 2: the criterion is not yet verifiable.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Plan first</p><p class="text-xs text-neutral-400">With approval</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Three outputs</p><p class="text-xs text-neutral-400">And only them</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Tests</p><p class="text-xs text-neutral-400">Protected area</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Written beforehand</p><p class="text-xs text-neutral-400">Not in the heat of the moment</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:bg-rose-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-6-1#topico-5" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🧾 Prepare the exercise log</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m6-1-t5-p1">
+          Without a record, the exercise becomes an impression (“I thought it went well”). With a record, it becomes the case you
+          take to the team—and the basis for deciding the module 5.3 autonomy level.
+        </p>
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-semibold mb-3">Create <span class="font-mono text-sm">docs/exercicio/registro.md</span></h3>
+<pre class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 border border-dark-600 text-neutral-300 overflow-x-auto">tarefa: &lt;uma linha&gt;
+perguntas que a spec revelou: &lt;n&gt;
+tempo de preparação (etapas 1-4): &lt;min&gt;
+tempo de execução (etapas 5-8): &lt;min&gt;
+tentativas do loop: &lt;n&gt;   custo aproximado: &lt;valor&gt;
+intervenções minhas (o que eu precisei corrigir):
+- &lt;...&gt;
+suposições que o agente fez sem avisar:
+- &lt;...&gt;
+gates que faltaram no repositório:
+- &lt;...&gt;
+o que vira rule / gate / item do AGENTS.md na próxima vez:
+- &lt;...&gt;</pre>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Practical tip</h3>
+<p class="text-neutral-300">Take notes while you work, not afterward. The intervention that seems obvious in the moment fades from memory in two hours—and it’s exactly the one that becomes the best rule in your AGENTS.md.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Take notes while</p><p class="text-xs text-neutral-400">Not afterward</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Intervention</p><p class="text-xs text-neutral-400">It’s data, not a failure</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Cost</p><p class="text-xs text-neutral-400">Sign in to the account</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Becomes a rule</p><p class="text-xs text-neutral-400">On your next task</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:bg-rose-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<!-- TOPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-6-1#topico-6" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">✅ Preparation checkpoint</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m6-1-t6-p1">
+          Move on to module 6.2 only when every item is checked. Each item missing here becomes costly rework there—or, worse, a result that passes the tests but is wrong.
+        </p>
+<div class="bg-gradient-to-br from-rose-900/30 to-dark-800 rounded-xl border border-rose-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-rose-400 mb-4 flex items-center"><span class="mr-2">📋</span> Before releasing the agent</h3>
+<div class="space-y-2 text-neutral-300 text-sm">
+<p>☐ New branch created and test suite passing on the baseline</p>
+<p>☐ Task fits in 3 to 5 files and is reversible</p>
+<p>☐ <span class="font-mono text-xs">docs/exercicio/spec.md</span> written, with all verifiable criteria</p>
+<p>☐ QUESTIONS section answered by you and incorporated into the spec</p>
+<p>☐ Explicit negative scope (files and behaviors that must remain untouched)</p>
+<p>☐ <span class="font-mono text-xs">AGENTS.md</span> with commands, permissions, prohibitions, and limits</p>
+<p>☐ Echo test completed: the agent correctly repeated what it must not do</p>
+<p>☐ <span class="font-mono text-xs">docs/exercicio/loop.md</span> with a verifiable objective and three outputs</p>
+<p>☐ <span class="font-mono text-xs">docs/exercicio/registro.md</span> created, with the preparation already documented</p>
+</div>
+</div>
+<div class="inema-check mt-8 mb-6 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-6-1#q1">
+<p class="font-medium mb-4">Quick check: you finished the spec and are in a hurry. What MUST be in place before you release the agent?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">A detailed prompt describing everything it should do.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Criteria verifiable by command, written negative scope, and an attempt limit.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">The most capable model available and plenty of repository context.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">All ✓</p><p class="text-xs text-neutral-400">Before moving on</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Zero code</p><p class="text-xs text-neutral-400">So far</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Good preparation</p><p class="text-xs text-neutral-400">Quick run</p></div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-4"><p class="text-rose-400 text-sm font-semibold mb-1">Missing item</p><p class="text-xs text-neutral-400">It gets expensive later</p></div>
+</div>
+<div class="flex justify-start items-center gap-3 mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:bg-rose-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-read-icon">○</span><span class="inema-read-label">Mark as read</span>
+</button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button">
+<span aria-hidden="true">?</span><span>I have a question</span>
+</button>
+</div>
+</section>
+<section class="mb-12">
+<div class="bg-gradient-to-br from-rose-900/40 via-dark-800 to-dark-800 rounded-xl border border-rose-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> What you produced in this module</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-rose-400 mt-1">✓</span><div><strong class="text-white">Isolated branch</strong><span class="text-neutral-400"> - with the green suite as the baseline.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-rose-400 mt-1">✓</span><div><strong class="text-white">spec.md</strong><span class="text-neutral-400"> - verifiable criteria, negative scope, and answered QUESTIONS.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-rose-400 mt-1">✓</span><div><strong class="text-white">AGENTS.md</strong><span class="text-neutral-400"> - commands, permissions, prohibitions, limits, and definition of done.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-rose-400 mt-1">✓</span><div><strong class="text-white">loop.md</strong><span class="text-neutral-400"> - verifiable objective and the three permitted outcomes.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-rose-400 mt-1">✓</span><div><strong class="text-white">registro.md</strong><span class="text-neutral-400"> - where you measure your own practice.</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-rose-400 mt-1">✓</span><div><strong class="text-white">Not a single line of production code</strong><span class="text-neutral-400"> - and that's exactly the point.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-rose-400 mb-2">Next Module:</h3>
+<p class="text-neutral-300">6.2 - Execution, quality gates, independent review, and delivery with evidence.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track</a>
+<a class="flex-1 text-center px-6 py-3 bg-rose-600 text-white rounded-lg font-semibold hover:bg-rose-500 transition-colors" href="modulo-6-2.html">Next Module →</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Advanced AI Software Engineering Workshop — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../../assets/curso.js"></script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.INEMA && INEMA.registerCheck) {
+        INEMA.registerCheck('modulo-6-1#q1', {
+          answer: 1,
+          explain: {
+            0: 'Prompt detalhado ajuda uma vez. Sem critério verificável e sem limite, você não sabe quando parar nem quando terminou.',
+            1: 'Isso. São os três itens que fazem o loop terminar sozinho e o resultado ser revisável.',
+            2: 'Modelo e contexto ajudam na margem. O que decide é a verificação e a fronteira que você definiu.'
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+
+<html class="dark" lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="ws2ia">
-  <title>Trilha 3 · Fluxo &amp; Qualidade | Eng. de Software com IA</title>
-
-  <script src="../../assets/boot.js"></script>
-
-  <script type="application/json" data-inema-manifest>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ws2ia" name="inema-course"/>
+<title>Trilha 3 · Fluxo &amp; Qualidade | Eng. de Software com IA</title>
+<script src="../../assets/boot.js"></script>
+<script data-inema-manifest="" type="application/json">
   {
     "course": "ws2ia",
     "tracks": [
@@ -42,502 +41,464 @@
     ]
   }
   </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/curso.css">
-  <link rel="stylesheet" href="../../assets/learn.css">
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-
-  <a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
-
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-          <span class="text-neutral-600">-</span>
-          <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium">PRO</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
-          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
-          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
-          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
-          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
-          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm">
-            <span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" aria-hidden="true"></span>
-          </button>
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" aria-label="Alternar tema claro/escuro">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="3">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">TRILHA 3</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔁 Fluxo &amp; Qualidade</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/curso.css" rel="stylesheet"/>
+<link href="../../assets/learn.css" rel="stylesheet"/>
+<link href="https://inematds.github.io/ws2ia/curso/trilha3/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ws2ia/en/curso/trilha3/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ws2ia/es/curso/trilha3/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha3/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha3/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip sr-only focus:not-sr-only" href="#conteudo">Pular para o conteúdo</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🤖</span><span class="font-bold text-lg hidden sm:inline">Eng. de Software com IA</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200 text-sm font-medium" href="https://inema.pro" target="_blank">PRO</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Harness &amp; Loop</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Fluxo &amp; Qualidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Arquitetura</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors" href="../trilha5/index.html"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Governança</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" href="../trilha6/index.html"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Prática</span></a>
+<button class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>Minha jornada</span><span aria-hidden="true" class="inema-journey-badge hidden"></span>
+</button>
+<button aria-label="Alternar tema claro/escuro" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="3">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">TRILHA 3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🔁 Fluxo &amp; Qualidade</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
         Como os agentes se conectam aos acontecimentos reais da engenharia (issues, CI, PRs, incidentes), como a revisão
         de código com IA funciona sem virar carimbo, e quais portões decidem se uma mudança pode avançar.
       </p>
-
-      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">3</div><div class="text-xs text-neutral-400">Módulos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">18</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~2h30</div><div class="text-xs text-neutral-400">Duração</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
-      </div>
-
-      <div class="mt-6 max-w-2xl">
-        <div data-inema-meter="trilha:3" class="inema-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da trilha 3">
-          <span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 18</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main id="conteudo" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-    <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
-      <svg viewBox="0 0 1000 240" class="w-full h-auto" role="img" aria-label="Um evento é classificado, aciona agentes em paralelo, e o resultado passa por revisão e quality gates antes da decisão de entregar">
-        <defs>
-          <linearGradient id="t3h-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
-          <filter id="t3h-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <pattern id="t3h-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#a855f7" opacity="0.12"/></pattern>
-          <marker id="t3h-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"/></marker>
-          <marker id="t3h-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
-        </defs>
-        <rect x="0" y="0" width="1000" height="240" fill="url(#t3h-grid)"/>
-        <g fill="none" stroke="#c084fc" stroke-width="1.8" opacity="0.5">
-          <path d="M196,120 C280,120 300,54 380,54" marker-end="url(#t3h-ah)"/>
-          <path d="M196,120 L380,120" marker-end="url(#t3h-ah)"/>
-          <path d="M196,120 C280,120 300,186 380,186" marker-end="url(#t3h-ah)"/>
-        </g>
-        <g fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.5">
-          <path d="M556,54  C640,54 660,120 700,120" marker-end="url(#t3h-ahc)"/>
-          <path d="M556,120 L700,120" marker-end="url(#t3h-ahc)"/>
-          <path d="M556,186 C640,186 660,120 700,120" marker-end="url(#t3h-ahc)"/>
-        </g>
-        <g filter="url(#t3h-glow)"><rect x="30" y="90" width="166" height="60" rx="14" fill="#1a1230" stroke="url(#t3h-grad)" stroke-width="2"/></g>
-        <text x="113" y="116" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="17">Evento</text>
-        <text x="113" y="136" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12">issue · CI · PR · incidente</text>
-        <g font-family="Inter,sans-serif" font-size="13" font-weight="600">
-          <g class="wf-a"><rect x="380" y="36" width="176" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="468" y="58" text-anchor="middle" fill="#bfe6ff">agente implementador</text></g>
-          <g class="wf-a"><rect x="380" y="102" width="176" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="468" y="124" text-anchor="middle" fill="#bfe6ff">testes determinísticos</text></g>
-          <g class="wf-a"><rect x="380" y="168" width="176" height="34" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="468" y="190" text-anchor="middle" fill="#bfe6ff">agente revisor</text></g>
-        </g>
-        <rect x="700" y="90" width="270" height="60" rx="14" fill="#1a1230" stroke="#c084fc" stroke-width="2"/>
-        <text x="835" y="116" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="17">Quality Gates</text>
-        <text x="835" y="136" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12">passou em todos? então avança</text>
-      </svg>
-      <p class="text-sm text-neutral-400 mt-3">
-        <strong class="text-purple-400">Como ler:</strong> um evento real dispara o fluxo (módulo 3.1). No meio, em ciano, quem implementa
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">3</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">18</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~2h30</div><div class="text-xs text-neutral-400">Duração</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Core</div><div class="text-xs text-neutral-400">Nível</div></div>
+</div>
+<div class="mt-6 max-w-2xl">
+<div aria-label="Progresso da trilha 3" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:3" role="progressbar">
+<span class="inema-meter-pct">0%</span><span class="inema-meter-count">0 de 18</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="conteudo">
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+<svg aria-label="Um evento é classificado, aciona agentes em paralelo, e o resultado passa por revisão e quality gates antes da decisão de entregar" class="w-full h-auto" role="img" viewbox="0 0 1000 240">
+<defs>
+<lineargradient id="t3h-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="t3h-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t3h-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t3h-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"></path></marker>
+<marker id="t3h-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#t3h-grid)" height="240" width="1000" x="0" y="0"></rect>
+<g fill="none" opacity="0.5" stroke="#c084fc" stroke-width="1.8">
+<path d="M196,120 C280,120 300,54 380,54" marker-end="url(#t3h-ah)"></path>
+<path d="M196,120 L380,120" marker-end="url(#t3h-ah)"></path>
+<path d="M196,120 C280,120 300,186 380,186" marker-end="url(#t3h-ah)"></path>
+</g>
+<g fill="none" opacity="0.5" stroke="#38bdf8" stroke-width="1.8">
+<path d="M556,54  C640,54 660,120 700,120" marker-end="url(#t3h-ahc)"></path>
+<path d="M556,120 L700,120" marker-end="url(#t3h-ahc)"></path>
+<path d="M556,186 C640,186 660,120 700,120" marker-end="url(#t3h-ahc)"></path>
+</g>
+<g filter="url(#t3h-glow)"><rect fill="#1a1230" height="60" rx="14" stroke="url(#t3h-grad)" stroke-width="2" width="166" x="30" y="90"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="17" font-weight="600" text-anchor="middle" x="113" y="116">Evento</text>
+<text fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="113" y="136">issue · CI · PR · incidente</text>
+<g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="176" x="380" y="36"></rect><text fill="#bfe6ff" text-anchor="middle" x="468" y="58">agente implementador</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="176" x="380" y="102"></rect><text fill="#bfe6ff" text-anchor="middle" x="468" y="124">testes determinísticos</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="176" x="380" y="168"></rect><text fill="#bfe6ff" text-anchor="middle" x="468" y="190">agente revisor</text></g>
+</g>
+<rect fill="#1a1230" height="60" rx="14" stroke="#c084fc" stroke-width="2" width="270" x="700" y="90"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="17" font-weight="600" text-anchor="middle" x="835" y="116">Quality Gates</text>
+<text fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="835" y="136">passou em todos? então avança</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-3">
+<strong class="text-purple-400">Como ler:</strong> um evento real dispara o fluxo (módulo 3.1). No meio, em ciano, quem implementa
         e quem revisa são <em>separados</em> de propósito (3.2). À direita, os gates só deixam passar o que cumpriu todas as condições (3.3).
       </p>
-    </div>
-
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a href="#modulo-3-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
-          <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
-          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">⚡ Automações</h3>
-          <p class="text-xs text-neutral-400">Evento aciona agente</p>
-        </a>
-        <a href="#modulo-3-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
-          <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
-          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🔍 Code Review com IA</h3>
-          <p class="text-xs text-neutral-400">Quem faz não revisa</p>
-        </a>
-        <a href="#modulo-3-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
-          <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
-          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🚦 Quality Gates</h3>
-          <p class="text-xs text-neutral-400">Regra em texto vira teste</p>
-        </a>
-      </div>
-    </section>
-
-    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
-
-    <!-- MODULO 3.1 -->
-    <div id="modulo-3-1" data-inema-module="3-1" data-inema-track="3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
-        <h3 class="text-2xl font-bold mb-2">⚡ Automações no desenvolvimento</h3>
-        <p class="text-neutral-400 text-sm">Eventos que acionam agentes, integração com issues, repositórios e pipelines, correção de falhas de CI, atualização de dependências, análise de incidentes e documentação.</p>
-      </div>
-
-      <div class="divide-y divide-dark-600">
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t31-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <span class="text-lg">⚡</span>
-            <div><span class="font-medium">Mapeie os eventos que acionam agentes</span><span class="text-neutral-500 text-sm ml-2">- O gatilho é o começo</span></div>
-          </button>
-          <div id="t31-1" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Os acontecimentos reais do processo que podem disparar trabalho automático: issue aprovada, falha de CI, dependência vulnerável, PR aberto, queda de cobertura, alteração de API, incidente, erro em produção.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automação sem evento claro vira robô rodando à toa. O gatilho define o valor: quanto mais previsível o evento, mais confiável a automação.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Evento → classificação → agente → validação → decisão → entrega · Nem todo evento merece automação.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t31-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <span class="text-lg">🔗</span>
-            <div><span class="font-medium">Integre com issues, repositórios e pipelines</span><span class="text-neutral-500 text-sm ml-2">- Onde o trabalho já vive</span></div>
-          </button>
-          <div id="t31-2" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Conectar o agente às ferramentas onde o processo acontece — rastreador de issues, repositório, CI/CD — em vez de criar um fluxo paralelo em algum chat.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automação que vive fora do fluxo do time morre em duas semanas. Dentro do PR, ela é vista, revisada e cobrada.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">O PR é a superfície de revisão · Rastreabilidade evento→mudança · Identidade própria do agente nos sistemas.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t31-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <span class="text-lg">🔧</span>
-            <div><span class="font-medium">Automatize a correção de falhas de CI</span><span class="text-neutral-500 text-sm ml-2">- O caso de entrada clássico</span></div>
-          </button>
-          <div id="t31-3" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma falha de pipeline inicia uma investigação automática: o agente lê o log, reproduz localmente, propõe correção e abre um PR com evidência.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o caso ideal para começar: o gatilho é objetivo, o verificador já existe (o próprio CI) e o resultado é reversível.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Verificador pronto = automação segura · Proposta em PR, nunca push direto · Falha intermitente exige diagnóstico, não retry cego.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t31-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <span class="text-lg">📦</span>
-            <div><span class="font-medium">Trate dependências e vulnerabilidades</span><span class="text-neutral-500 text-sm ml-2">- Atualizar com evidência</span></div>
-          </button>
-          <div id="t31-4" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma dependência vulnerável gera uma proposta de atualização, com o agente lendo o changelog, ajustando o código quebrado e provando com testes.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É trabalho recorrente, chato e bem definido — exatamente o perfil que compensa automatizar primeiro.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Breaking change exige leitura do changelog · Atualização sem teste é aposta · Uma dependência por PR.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t31-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <span class="text-lg">🚨</span>
-            <div><span class="font-medium">Use agentes na análise de incidentes</span><span class="text-neutral-500 text-sm ml-2">- Diagnóstico, não conserto</span></div>
-          </button>
-          <div id="t31-5" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um incidente gera diagnóstico inicial automático: coleta de logs, correlação temporal, mudanças recentes suspeitas e hipóteses ordenadas.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Nos primeiros minutos de um incidente, o gargalo é reunir informação. Aí a IA ajuda muito — e aplicar correção sozinha é onde ela atrapalha.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Diagnosticar é seguro; mitigar em produção não · Preservar evidência antes de mexer · Hipótese ordenada acelera o humano.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t31-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <span class="text-lg">⚖️</span>
-            <div><span class="font-medium">Decida o que automatizar e o que aprovar</span><span class="text-neutral-500 text-sm ml-2">- Reversível vs irreversível</span></div>
-          </button>
-          <div id="t31-6" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O critério de corte: automatiza-se o que é frequente, verificável e reversível; exige-se aprovação no que toca produção, banco, infraestrutura, permissões e segurança.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem esse corte explícito, a automação cresce até tocar algo que ninguém queria que ela tocasse — geralmente num fim de semana.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Nem toda tarefa deve ser autônoma · Frequência × risco decide · Automação também precisa de dono.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-3-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-3-1.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-
-    <!-- MODULO 3.2 -->
-    <div id="modulo-3-2" data-inema-module="3-2" data-inema-track="3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
-        <h3 class="text-2xl font-bold mb-2">🔍 Code Review com IA</h3>
-        <p class="text-neutral-400 text-sm">Revisão assistida por agentes: análise de diffs e contexto do repositório, separação entre implementador e revisor, revisão arquitetural, segurança e os limites da revisão automática.</p>
-      </div>
-
-      <div class="divide-y divide-dark-600">
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t32-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <span class="text-lg">🔍</span>
-            <div><span class="font-medium">Revise além do diff</span><span class="text-neutral-500 text-sm ml-2">- Contexto do repositório inteiro</span></div>
-          </button>
-          <div id="t32-1" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um agente revisor pode explorar arquivos relacionados, verificar contratos, analisar testes, encontrar duplicações e comparar com os padrões do repositório — não só olhar as linhas alteradas.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Os defeitos caros raramente estão na linha alterada; estão na interação dela com o resto do sistema.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Diff é o começo, não o escopo · Duplicação semântica só aparece com busca · Padrão do repo é critério.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t32-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <span class="text-lg">👥</span>
-            <div><span class="font-medium">Separe implementador e revisor</span><span class="text-neutral-500 text-sm ml-2">- Não repita a mesma suposição</span></div>
-          </button>
-          <div id="t32-2" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O fluxo recomendado: agente implementador → testes determinísticos → agente revisor independente → análise de segurança → quality gates → revisão humana.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O agente que revisa não deve depender das conclusões do que implementou — a separação reduz o risco de ambos repetirem a mesma suposição incorreta.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Independência &gt; capacidade · Revisor recebe spec + diff, não o raciocínio do autor · Contexto limpo por revisão.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t32-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <span class="text-lg">🏛️</span>
-            <div><span class="font-medium">Faça revisão arquitetural</span><span class="text-neutral-500 text-sm ml-2">- Coerência com o sistema</span></div>
-          </button>
-          <div id="t32-3" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A checagem de que a mudança respeita fronteiras de módulo, não cria dependência indevida, não duplica capacidade existente e não fura camadas.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o tipo de defeito que nenhum teste pega e que custa caro seis meses depois.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Violação de fronteira é achado de revisão · Duplicação semântica &gt; duplicação textual · Regra arquitetural pode virar teste.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t32-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <span class="text-lg">🔐</span>
-            <div><span class="font-medium">Cubra segurança, desempenho e manutenção</span><span class="text-neutral-500 text-sm ml-2">- As três dimensões silenciosas</span></div>
-          </button>
-          <div id="t32-4" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A revisão explícita de falhas de segurança, impacto de desempenho e custo de manutenção futura — cada uma com sua lista própria.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um revisor genérico ("revise este PR") encontra estilo. Um revisor com lente definida encontra o que dói.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Uma lente por passagem · Segredo exposto e injeção são bloqueio, não sugestão · Manutenção é custo futuro real.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t32-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <span class="text-lg">🚧</span>
-            <div><span class="font-medium">Conheça os limites da revisão automática</span><span class="text-neutral-500 text-sm ml-2">- Ruído mata revisão</span></div>
-          </button>
-          <div id="t32-5" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O que o revisor automático não vê: intenção de negócio, contexto histórico, acordos não escritos — além da tendência a gerar comentários de baixo valor em volume.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Revisor que comenta trinta ninharias por PR treina o time a ignorar revisão — inclusive a boa.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Precisão &gt; recall na revisão · Achado sem severidade é ruído · Falso positivo tem custo de confiança.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t32-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <span class="text-lg">🧑‍⚖️</span>
-            <div><span class="font-medium">Preserve o papel da revisão humana</span><span class="text-neutral-500 text-sm ml-2">- Quem responde pela decisão</span></div>
-          </button>
-          <div id="t32-6" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A revisão humana focada no que só ela decide: intenção, prioridade, risco de negócio e aceitação da consequência.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A IA filtra e prepara; a responsabilidade continua com quem aprova. Isso não é formalidade — é o que mantém alguém pensando no problema.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Responsabilidade não se delega · Humano revisa intenção, máquina revisa forma · PR pequeno é revisável de verdade.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-3-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-3-2.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-
-    <!-- MODULO 3.3 -->
-    <div id="modulo-3-3" data-inema-module="3-3" data-inema-track="3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
-        <h3 class="text-2xl font-bold mb-2">🚦 Quality Gates</h3>
-        <p class="text-neutral-400 text-sm">As condições obrigatórias antes de uma mudança avançar: build, lint, testes, cobertura, análise estática, segurança, compatibilidade, desempenho e aprovação.</p>
-      </div>
-
-      <div class="divide-y divide-dark-600">
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t33-1" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <span class="text-lg">🚦</span>
-            <div><span class="font-medium">Transforme regra escrita em verificação</span><span class="text-neutral-500 text-sm ml-2">- Texto é útil, teste é confiável</span></div>
-          </button>
-          <div id="t33-1" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O princípio central: uma regra escrita em texto é útil; a mesma regra transformada em teste automático é muito mais confiável.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Com IA gerando volume, regras que dependem de alguém lembrar param de funcionar na primeira semana movimentada.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Gate = condição obrigatória, não recomendação · Automático &gt; disciplina · O código só avança se passar.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t33-2" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <span class="text-lg">🏗️</span>
-            <div><span class="font-medium">Monte a base: build, lint e testes</span><span class="text-neutral-500 text-sm ml-2">- Rápidos e determinísticos</span></div>
-          </button>
-          <div id="t33-2" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Os três primeiros portões: compila, segue o padrão, e os testes unitários e de integração passam.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São os gates que o agente consegue usar sozinho dentro do loop — quanto mais rápidos, mais útil o ciclo de correção automática.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Teste lento não entra no loop · Teste instável destrói confiança · Lint automático elimina discussão de estilo.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t33-3" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <span class="text-lg">📜</span>
-            <div><span class="font-medium">Adicione testes de contrato e cobertura</span><span class="text-neutral-500 text-sm ml-2">- Compatibilidade virou gate</span></div>
-          </button>
-          <div id="t33-3" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Testes que fixam o contrato com quem consome sua API, mais um piso mínimo de cobertura que bloqueia queda.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando o volume de mudanças cresce, o contrato é a primeira vítima silenciosa — e quem descobre é o cliente.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cobertura é piso, não meta · Contrato preservado é requisito · Queda de cobertura bloqueia o merge.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t33-4" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <span class="text-lg">🛡️</span>
-            <div><span class="font-medium">Inclua análise estática e segurança</span><span class="text-neutral-500 text-sm ml-2">- Segredo exposto é bloqueio</span></div>
-          </button>
-          <div id="t33-4" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Verificação automática de vulnerabilidades críticas, segredos comitados, dependências com CVE e padrões perigosos de código.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São achados objetivos e de alto custo — o tipo perfeito de regra para virar bloqueio automático, sem depender de revisor atento.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Nenhum segredo no repositório, nunca · Vulnerabilidade crítica bloqueia · Ruído de scanner precisa ser calibrado.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t33-5" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <span class="text-lg">⚡</span>
-            <div><span class="font-medium">Controle desempenho e reversibilidade</span><span class="text-neutral-500 text-sm ml-2">- Migração precisa voltar</span></div>
-          </button>
-          <div id="t33-5" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gates de desempenho dentro de um limite acordado e a exigência de que toda migração tenha caminho de rollback testado.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Degradação entra devagar, mudança por mudança; e migração irreversível é o item que transforma um erro pequeno em incidente longo.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Orçamento de desempenho explícito · Migração reversível é gate · Rollback não testado não existe.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" aria-expanded="false" aria-controls="t33-6" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <span class="text-lg">✅</span>
-            <div><span class="font-medium">Defina o critério para liberar a mudança</span><span class="text-neutral-500 text-sm ml-2">- Todos os gates, sem exceção</span></div>
-          </button>
-          <div id="t33-6" class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O pipeline completo: build → lint → testes → cobertura → análise estática → segurança → revisão → aprovação → deploy. O código só avança quando todos os gates obrigatórios são atendidos.</p></div>
-              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Gate que pode ser pulado "só desta vez" não é gate — é sugestão. E a exceção vira regra em duas semanas.</p></div>
-              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Obrigatório significa obrigatório · Exceção registrada e com prazo · O gate protege o time, não atrapalha.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-3-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-3-3.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-
-    <div class="flex flex-col sm:flex-row gap-4 mt-12">
-      <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 2: Harness &amp; Loop</a>
-      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 4: Arquitetura →</a>
-    </div>
-  </main>
-
-  <div id="modal-3-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
-    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
-      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
-        <div class="flex items-center space-x-3"><span class="text-purple-400 font-bold">3.1</span><span class="font-semibold">Automações no desenvolvimento</span></div>
-        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
-      </div>
-      <iframe src="modulo-3-1.html" title="Módulo 3.1" class="flex-1 w-full rounded-b-xl"></iframe>
-    </div>
-  </div>
-  <div id="modal-3-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
-    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
-      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
-        <div class="flex items-center space-x-3"><span class="text-purple-400 font-bold">3.2</span><span class="font-semibold">Code Review com IA</span></div>
-        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
-      </div>
-      <iframe src="modulo-3-2.html" title="Módulo 3.2" class="flex-1 w-full rounded-b-xl"></iframe>
-    </div>
-  </div>
-  <div id="modal-3-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
-    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
-      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
-        <div class="flex items-center space-x-3"><span class="text-purple-400 font-bold">3.3</span><span class="font-semibold">Quality Gates</span></div>
-        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none" aria-label="Fechar">&times;</button>
-      </div>
-      <iframe src="modulo-3-3.html" title="Módulo 3.3" class="flex-1 w-full rounded-b-xl"></iframe>
-    </div>
-  </div>
-
-  <footer class="border-t border-dark-600 py-8 mt-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
-      <p class="mt-2">
-        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
-        <span class="text-neutral-600 mx-1">-</span>
-        <a href="https://inema.pro" target="_blank" class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200">PRO</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="../../assets/curso.js"></script>
-  <script src="../../assets/learn.js"></script>
-  <script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</div>
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-1">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">⚡ Automações</h3>
+<p class="text-xs text-neutral-400">Evento aciona agente</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-2">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🔍 Code Review com IA</h3>
+<p class="text-xs text-neutral-400">Quem faz não revisa</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-3">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🚦 Quality Gates</h3>
+<p class="text-xs text-neutral-400">Regra em texto vira teste</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+<!-- MODULO 3.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="3-1" data-inema-track="3" id="modulo-3-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">⚡ Automações no desenvolvimento</h3>
+<p class="text-neutral-400 text-sm">Eventos que acionam agentes, integração com issues, repositórios e pipelines, correção de falhas de CI, atualização de dependências, análise de incidentes e documentação.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t31-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">⚡</span>
+<div><span class="font-medium">Mapeie os eventos que acionam agentes</span><span class="text-neutral-500 text-sm ml-2">- O gatilho é o começo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t31-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Os acontecimentos reais do processo que podem disparar trabalho automático: issue aprovada, falha de CI, dependência vulnerável, PR aberto, queda de cobertura, alteração de API, incidente, erro em produção.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automação sem evento claro vira robô rodando à toa. O gatilho define o valor: quanto mais previsível o evento, mais confiável a automação.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Evento → classificação → agente → validação → decisão → entrega · Nem todo evento merece automação.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t31-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🔗</span>
+<div><span class="font-medium">Integre com issues, repositórios e pipelines</span><span class="text-neutral-500 text-sm ml-2">- Onde o trabalho já vive</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t31-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Conectar o agente às ferramentas onde o processo acontece — rastreador de issues, repositório, CI/CD — em vez de criar um fluxo paralelo em algum chat.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automação que vive fora do fluxo do time morre em duas semanas. Dentro do PR, ela é vista, revisada e cobrada.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">O PR é a superfície de revisão · Rastreabilidade evento→mudança · Identidade própria do agente nos sistemas.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t31-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🔧</span>
+<div><span class="font-medium">Automatize a correção de falhas de CI</span><span class="text-neutral-500 text-sm ml-2">- O caso de entrada clássico</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t31-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma falha de pipeline inicia uma investigação automática: o agente lê o log, reproduz localmente, propõe correção e abre um PR com evidência.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o caso ideal para começar: o gatilho é objetivo, o verificador já existe (o próprio CI) e o resultado é reversível.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Verificador pronto = automação segura · Proposta em PR, nunca push direto · Falha intermitente exige diagnóstico, não retry cego.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t31-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">📦</span>
+<div><span class="font-medium">Trate dependências e vulnerabilidades</span><span class="text-neutral-500 text-sm ml-2">- Atualizar com evidência</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t31-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma dependência vulnerável gera uma proposta de atualização, com o agente lendo o changelog, ajustando o código quebrado e provando com testes.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É trabalho recorrente, chato e bem definido — exatamente o perfil que compensa automatizar primeiro.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Breaking change exige leitura do changelog · Atualização sem teste é aposta · Uma dependência por PR.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t31-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🚨</span>
+<div><span class="font-medium">Use agentes na análise de incidentes</span><span class="text-neutral-500 text-sm ml-2">- Diagnóstico, não conserto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t31-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um incidente gera diagnóstico inicial automático: coleta de logs, correlação temporal, mudanças recentes suspeitas e hipóteses ordenadas.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Nos primeiros minutos de um incidente, o gargalo é reunir informação. Aí a IA ajuda muito — e aplicar correção sozinha é onde ela atrapalha.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Diagnosticar é seguro; mitigar em produção não · Preservar evidência antes de mexer · Hipótese ordenada acelera o humano.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t31-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">⚖️</span>
+<div><span class="font-medium">Decida o que automatizar e o que aprovar</span><span class="text-neutral-500 text-sm ml-2">- Reversível vs irreversível</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t31-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O critério de corte: automatiza-se o que é frequente, verificável e reversível; exige-se aprovação no que toca produção, banco, infraestrutura, permissões e segurança.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem esse corte explícito, a automação cresce até tocar algo que ninguém queria que ela tocasse — geralmente num fim de semana.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Nem toda tarefa deve ser autônoma · Frequência × risco decide · Automação também precisa de dono.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-1')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-1.html">Ver Completo</a>
+</div>
+</div>
+<!-- MODULO 3.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="3-2" data-inema-track="3" id="modulo-3-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🔍 Code Review com IA</h3>
+<p class="text-neutral-400 text-sm">Revisão assistida por agentes: análise de diffs e contexto do repositório, separação entre implementador e revisor, revisão arquitetural, segurança e os limites da revisão automática.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t32-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🔍</span>
+<div><span class="font-medium">Revise além do diff</span><span class="text-neutral-500 text-sm ml-2">- Contexto do repositório inteiro</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t32-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um agente revisor pode explorar arquivos relacionados, verificar contratos, analisar testes, encontrar duplicações e comparar com os padrões do repositório — não só olhar as linhas alteradas.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Os defeitos caros raramente estão na linha alterada; estão na interação dela com o resto do sistema.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Diff é o começo, não o escopo · Duplicação semântica só aparece com busca · Padrão do repo é critério.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t32-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">👥</span>
+<div><span class="font-medium">Separe implementador e revisor</span><span class="text-neutral-500 text-sm ml-2">- Não repita a mesma suposição</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t32-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O fluxo recomendado: agente implementador → testes determinísticos → agente revisor independente → análise de segurança → quality gates → revisão humana.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O agente que revisa não deve depender das conclusões do que implementou — a separação reduz o risco de ambos repetirem a mesma suposição incorreta.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Independência &gt; capacidade · Revisor recebe spec + diff, não o raciocínio do autor · Contexto limpo por revisão.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t32-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🏛️</span>
+<div><span class="font-medium">Faça revisão arquitetural</span><span class="text-neutral-500 text-sm ml-2">- Coerência com o sistema</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t32-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A checagem de que a mudança respeita fronteiras de módulo, não cria dependência indevida, não duplica capacidade existente e não fura camadas.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o tipo de defeito que nenhum teste pega e que custa caro seis meses depois.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Violação de fronteira é achado de revisão · Duplicação semântica &gt; duplicação textual · Regra arquitetural pode virar teste.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t32-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🔐</span>
+<div><span class="font-medium">Cubra segurança, desempenho e manutenção</span><span class="text-neutral-500 text-sm ml-2">- As três dimensões silenciosas</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t32-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A revisão explícita de falhas de segurança, impacto de desempenho e custo de manutenção futura — cada uma com sua lista própria.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um revisor genérico ("revise este PR") encontra estilo. Um revisor com lente definida encontra o que dói.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Uma lente por passagem · Segredo exposto e injeção são bloqueio, não sugestão · Manutenção é custo futuro real.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t32-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🚧</span>
+<div><span class="font-medium">Conheça os limites da revisão automática</span><span class="text-neutral-500 text-sm ml-2">- Ruído mata revisão</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t32-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O que o revisor automático não vê: intenção de negócio, contexto histórico, acordos não escritos — além da tendência a gerar comentários de baixo valor em volume.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Revisor que comenta trinta ninharias por PR treina o time a ignorar revisão — inclusive a boa.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Precisão &gt; recall na revisão · Achado sem severidade é ruído · Falso positivo tem custo de confiança.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t32-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧑‍⚖️</span>
+<div><span class="font-medium">Preserve o papel da revisão humana</span><span class="text-neutral-500 text-sm ml-2">- Quem responde pela decisão</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t32-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A revisão humana focada no que só ela decide: intenção, prioridade, risco de negócio e aceitação da consequência.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A IA filtra e prepara; a responsabilidade continua com quem aprova. Isso não é formalidade — é o que mantém alguém pensando no problema.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Responsabilidade não se delega · Humano revisa intenção, máquina revisa forma · PR pequeno é revisável de verdade.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-2')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-2.html">Ver Completo</a>
+</div>
+</div>
+<!-- MODULO 3.3 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="3-3" data-inema-track="3" id="modulo-3-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🚦 Quality Gates</h3>
+<p class="text-neutral-400 text-sm">As condições obrigatórias antes de uma mudança avançar: build, lint, testes, cobertura, análise estática, segurança, compatibilidade, desempenho e aprovação.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t33-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🚦</span>
+<div><span class="font-medium">Transforme regra escrita em verificação</span><span class="text-neutral-500 text-sm ml-2">- Texto é útil, teste é confiável</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t33-1">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O princípio central: uma regra escrita em texto é útil; a mesma regra transformada em teste automático é muito mais confiável.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Com IA gerando volume, regras que dependem de alguém lembrar param de funcionar na primeira semana movimentada.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Gate = condição obrigatória, não recomendação · Automático &gt; disciplina · O código só avança se passar.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t33-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🏗️</span>
+<div><span class="font-medium">Monte a base: build, lint e testes</span><span class="text-neutral-500 text-sm ml-2">- Rápidos e determinísticos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t33-2">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Os três primeiros portões: compila, segue o padrão, e os testes unitários e de integração passam.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São os gates que o agente consegue usar sozinho dentro do loop — quanto mais rápidos, mais útil o ciclo de correção automática.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Teste lento não entra no loop · Teste instável destrói confiança · Lint automático elimina discussão de estilo.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t33-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">📜</span>
+<div><span class="font-medium">Adicione testes de contrato e cobertura</span><span class="text-neutral-500 text-sm ml-2">- Compatibilidade virou gate</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t33-3">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Testes que fixam o contrato com quem consome sua API, mais um piso mínimo de cobertura que bloqueia queda.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando o volume de mudanças cresce, o contrato é a primeira vítima silenciosa — e quem descobre é o cliente.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cobertura é piso, não meta · Contrato preservado é requisito · Queda de cobertura bloqueia o merge.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t33-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🛡️</span>
+<div><span class="font-medium">Inclua análise estática e segurança</span><span class="text-neutral-500 text-sm ml-2">- Segredo exposto é bloqueio</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t33-4">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Verificação automática de vulnerabilidades críticas, segredos comitados, dependências com CVE e padrões perigosos de código.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São achados objetivos e de alto custo — o tipo perfeito de regra para virar bloqueio automático, sem depender de revisor atento.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Nenhum segredo no repositório, nunca · Vulnerabilidade crítica bloqueia · Ruído de scanner precisa ser calibrado.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t33-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">⚡</span>
+<div><span class="font-medium">Controle desempenho e reversibilidade</span><span class="text-neutral-500 text-sm ml-2">- Migração precisa voltar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t33-5">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gates de desempenho dentro de um limite acordado e a exigência de que toda migração tenha caminho de rollback testado.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Degradação entra devagar, mudança por mudança; e migração irreversível é o item que transforma um erro pequeno em incidente longo.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Orçamento de desempenho explícito · Migração reversível é gate · Rollback não testado não existe.</p></div>
+</div>
+</div>
+</div>
+<div class="topic-item">
+<button aria-controls="t33-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">✅</span>
+<div><span class="font-medium">Defina o critério para liberar a mudança</span><span class="text-neutral-500 text-sm ml-2">- Todos os gates, sem exceção</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t33-6">
+<div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O pipeline completo: build → lint → testes → cobertura → análise estática → segurança → revisão → aprovação → deploy. O código só avança quando todos os gates obrigatórios são atendidos.</p></div>
+<div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Gate que pode ser pulado "só desta vez" não é gate — é sugestão. E a exceção vira regra em duas semanas.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Obrigatório significa obrigatório · Exceção registrada e com prazo · O gate protege o time, não atrapalha.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-3')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-3.html">Ver Completo</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-12">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha2/index.html">← Trilha 2: Harness &amp; Loop</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="../trilha4/index.html">Trilha 4: Arquitetura →</a>
+</div>
+</main>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-purple-400 font-bold">3.1</span><span class="font-semibold">Automações no desenvolvimento</span></div>
+<button aria-label="Fechar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-1.html" title="Módulo 3.1"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-purple-400 font-bold">3.2</span><span class="font-semibold">Code Review com IA</span></div>
+<button aria-label="Fechar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-2.html" title="Módulo 3.2"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3"><span class="text-purple-400 font-bold">3.3</span><span class="font-semibold">Quality Gates</span></div>
+<button aria-label="Fechar" class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-3.html" title="Módulo 3.3"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Workshop Avançado de Engenharia de Software com IA — 2026</p>
+<p class="mt-2">
+<a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<span class="text-neutral-600 mx-1">-</span>
+<a class="text-amber-700 hover:text-amber-600 dark:text-slate-300 dark:hover:text-slate-200" href="https://inema.pro" target="_blank">PRO</a>
+</p>
+</div>
+</footer>
+<script src="../../assets/curso.js"></script>
+<script src="../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
 </body>
 </html>
